@@ -1,0 +1,20 @@
+{
+  "name": "Validar SEO en Páginas",
+  "description": "Valida que las páginas Astro tengan configuración SEO correcta",
+  "trigger": {
+    "type": "manual"
+  },
+  "actions": [
+    {
+      "type": "agent_execution",
+      "prompt": "Revisa todas las páginas .astro en src/ui/pages/ y verifica que tengan: 1) Metadatos SEO correctos, 2) Estructura HTML semántica, 3) Alt text en imágenes, 4) Jerarquía de headings apropiada. Reporta cualquier problema encontrado.",
+      "context": [
+        "src/ui/pages/",
+        "src/infrastructure/config/site.config.ts",
+        ".kiro/steering/seo-requirements.md"
+      ]
+    }
+  ],
+  "enabled": true,
+  "showNotification": true
+}

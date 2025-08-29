@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Validar SEO en Páginas",
+  "description": "Valida que las páginas Astro tengan configuración SEO correcta",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/ui/pages/*.astro"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Revisa todas las páginas .astro en src/ui/pages/ y verifica que tengan: 1) Metadatos SEO correctos (title, description, keywords), 2) Estructura HTML semántica (header, nav, main, section, footer), 3) Alt text descriptivo en todas las imágenes, 4) Jerarquía de headings apropiada (H1 único, H2-H6 en orden). Reporta cualquier problema encontrado y sugiere correcciones específicas."
+  }
+}

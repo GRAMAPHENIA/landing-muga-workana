@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Actualizar Versión en Footer",
+  "description": "Actualiza automáticamente la versión mostrada en el footer cuando se modifica CHANGELOG.md",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "CHANGELOG.md"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "El archivo CHANGELOG.md ha sido actualizado. Por favor, verifica que el componente Footer.astro esté leyendo correctamente la nueva versión y actualiza si es necesario. Asegúrate de que la versión mostrada en el footer coincida con la última entrada del CHANGELOG."
+  }
+}

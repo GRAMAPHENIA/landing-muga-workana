@@ -1,0 +1,36 @@
+---
+import '../styles/global.css';
+---
+
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Landing Page Profesional - Astro</title>
+		<meta name="description" content="Una landing page profesional construida con Astro, TypeScript y TailwindCSS" />
+	</head>
+	<body>
+		<main class="min-h-screen bg-gradient-to-br from-primary-50 to-white">
+			<div class="container mx-auto px-4 py-16">
+				<div class="text-center">
+					<h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+						Landing Page <span class="text-primary-600">Profesional</span>
+					</h1>
+					<p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+						Construida con Astro, TypeScript y TailwindCSS siguiendo arquitectura hexagonal
+					</p>
+					<div class="space-x-4">
+						<button class="btn btn-primary">
+							Comenzar
+						</button>
+						<button class="btn btn-outline">
+							Saber más
+						</button>
+					</div>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>

@@ -1,43 +1,86 @@
-# Astro Starter Kit: Minimal
+# Landing Page Profesional con Astro
 
-```sh
-pnpm create astro@latest -- --template minimal
-```
+Una landing page profesional construida con Astro, TypeScript y TailwindCSS siguiendo arquitectura hexagonal y las mejores prácticas de desarrollo.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🚀 Características
 
-## 🚀 Project Structure
+- **Framework**: Astro 4.x con TypeScript
+- **Estilos**: TailwindCSS con configuración personalizada
+- **Arquitectura**: Hexagonal (Clean Architecture)
+- **SEO**: Configuración completa con metadatos, OpenGraph, Twitter Cards
+- **Formularios**: Integración con Formspree
+- **Versionado**: Automático desde CHANGELOG.md
+- **Testing**: Vitest para pruebas unitarias e integración
+- **Calidad**: ESLint + Prettier configurados
 
-Inside of your Astro project, you'll see the following folders and files:
+## 📁 Estructura del Proyecto
 
 ```text
 /
-├── public/
+├── docs/                    # Documentación técnica
+├── public/                  # Assets estáticos
 ├── src/
-│   └── pages/
-│       └── index.astro
+│   ├── domain/             # Entidades y reglas de negocio
+│   │   ├── entities/       # Modelos de datos
+│   │   ├── interfaces/     # Contratos/puertos
+│   │   └── services/       # Lógica de dominio
+│   ├── application/        # Casos de uso
+│   │   ├── usecases/       # Casos de uso específicos
+│   │   └── dto/            # Data Transfer Objects
+│   ├── infrastructure/     # Adaptadores externos
+│   │   ├── api/            # Clientes API (Formspree, etc.)
+│   │   ├── config/         # Configuraciones
+│   │   └── utils/          # Utilidades técnicas
+│   └── ui/                 # Capa de presentación
+│       ├── components/     # Componentes Astro
+│       ├── layouts/        # Layouts de página
+│       ├── pages/          # Páginas Astro
+│       └── styles/         # Estilos globales
+├── CHANGELOG.md            # Historial de cambios
 └── package.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 🧞 Comandos
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Todos los comandos se ejecutan desde la raíz del proyecto usando **pnpm**:
 
-Any static assets, like images, can be placed in the `public/` directory.
+| Comando                | Acción                                              |
+| :--------------------- | :-------------------------------------------------- |
+| `pnpm install`         | Instala las dependencias                            |
+| `pnpm dev`             | Inicia el servidor de desarrollo en `localhost:4321` |
+| `pnpm build`           | Construye el sitio para producción en `./dist/`     |
+| `pnpm preview`         | Previsualiza la construcción localmente             |
+| `pnpm test`            | Ejecuta las pruebas con Vitest                      |
+| `pnpm lint`            | Ejecuta ESLint para revisar el código               |
+| `pnpm format`          | Formatea el código con Prettier                     |
+| `pnpm type-check`      | Verifica los tipos de TypeScript                    |
 
-## 🧞 Commands
+## 🛠️ Instalación
 
-All commands are run from the root of the project, from a terminal:
+1. Clona el repositorio
+2. Instala las dependencias:
+   ```bash
+   pnpm install
+   ```
+3. Inicia el servidor de desarrollo:
+   ```bash
+   pnpm dev
+   ```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+## 📚 Documentación
 
-## 👀 Want to learn more?
+- [Arquitectura](./docs/architecture.md) - Explicación de la arquitectura hexagonal
+- [Componentes](./docs/components.md) - Documentación de componentes reutilizables
+- [Contribución](./docs/contributing.md) - Guía para contribuir al proyecto
+- [Despliegue](./docs/deployment.md) - Instrucciones de despliegue
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 🎯 Próximos Pasos
+
+1. Configurar variables de entorno para Formspree
+2. Personalizar la configuración SEO en `src/infrastructure/config/site.config.ts`
+3. Añadir contenido a las páginas principales
+4. Configurar el dominio en `astro.config.mjs`
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.

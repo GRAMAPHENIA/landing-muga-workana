@@ -1,0 +1,18 @@
+{
+  "enabled": true,
+  "name": "Ejecutar Tests al Guardar",
+  "description": "Ejecuta tests unitarios automáticamente cuando se guarda un archivo de componente",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/**/*.{astro",
+      "ts",
+      "js}"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Ejecuta los tests unitarios del proyecto usando pnpm test con reporte verbose para verificar que los cambios no rompan funcionalidad existente."
+  }
+}
