@@ -1,15 +1,33 @@
 {
-  "extends": "astro/tsconfigs/strict",
+  "extends": "astro/tsconfigs/base",
   "compilerOptions": {
     "baseUrl": ".",
+    "strict": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "types": ["vitest/globals"],
     "paths": {
       "@/*": ["src/*"],
       "@/domain/*": ["src/domain/*"],
       "@/application/*": ["src/application/*"],
       "@/infrastructure/*": ["src/infrastructure/*"],
-      "@/ui/*": ["src/ui/*"]
+      "@/ui/*": ["src/ui/*"],
+      "@/test/*": ["src/test/*"]
     }
   },
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist", "node_modules"]
+  "include": [
+    ".astro/types.d.ts", 
+    "**/*",
+    "src/**/*",
+    "vitest.config.ts"
+  ],
+  "exclude": [
+    "dist", 
+    "node_modules",
+    "coverage"
+  ]
 }

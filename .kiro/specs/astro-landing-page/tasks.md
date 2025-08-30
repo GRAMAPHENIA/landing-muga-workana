@@ -1,37 +1,32 @@
 # Implementation Plan
 
 - [x] 1. Configuración inicial del proyecto y estructura base
-
-
-
-
-
   - Inicializar proyecto con `pnpm create astro@latest` usando TypeScript
   - Configurar TailwindCSS según guía oficial de Astro con pnpm
   - Crear estructura de carpetas para arquitectura hexagonal
   - _Requirements: 1.1, 1.2, 1.3, 2.1_
 
 - [ ] 2. Configuración de herramientas de desarrollo
-- [ ] 2.1 Configurar ESLint y Prettier para TypeScript/Astro
+- [x] 2.1 Configurar ESLint y Prettier para TypeScript/Astro
   - Instalar y configurar ESLint con reglas para Astro y TypeScript
   - Configurar Prettier con reglas específicas para el proyecto
   - Crear scripts de linting en package.json
   - _Requirements: 6.1_
 
-- [ ] 2.2 Configurar Vitest para testing
+- [x] 2.2 Configurar Vitest para testing
   - Instalar Vitest y configurar para entorno Astro
   - Crear archivos de configuración de testing
   - Implementar setup básico para tests unitarios
   - _Requirements: 2.5_
 
-- [ ] 3. Implementar modelos de dominio y configuración central
-- [ ] 3.1 Crear interfaces y tipos TypeScript del dominio
+- [x] 3. Implementar modelos de dominio y configuración central
+- [x] 3.1 Crear interfaces y tipos TypeScript del dominio
   - Implementar interfaces para SEOConfig, SiteConfig, NavigationItem
   - Crear tipos para componentes (ButtonProps, InputProps, CardProps)
   - Definir modelos de formularios y validación
   - _Requirements: 2.3, 3.4, 6.4_
 
-- [ ] 3.2 Implementar configuración central del sitio
+- [x] 3.2 Implementar configuración central del sitio
   - Crear archivo site.config.ts con configuración SEO y metadatos
   - Implementar validación de configuración con Zod
   - Configurar variables de entorno para datos sensibles

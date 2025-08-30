@@ -9,10 +9,7 @@
     {
       "type": "agent_execution",
       "prompt": "El archivo CHANGELOG.md ha sido actualizado. Por favor, verifica que el componente Footer.astro esté leyendo correctamente la nueva versión y actualiza si es necesario.",
-      "context": [
-        "CHANGELOG.md",
-        "src/ui/components/Footer.astro"
-      ]
+      "context": ["CHANGELOG.md", "src/ui/components/Footer.astro"]
     }
   ],
   "enabled": true,

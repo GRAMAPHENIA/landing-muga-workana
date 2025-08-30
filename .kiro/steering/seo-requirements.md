@@ -11,11 +11,11 @@ Cada layout debe incluir:
 
 ```typescript
 interface SEOProps {
-  title: string;           // Título específico de la página
-  description: string;     // Descripción meta (150-160 caracteres)
-  keywords?: string[];     // Keywords relevantes
-  ogImage?: string;        // Imagen OpenGraph específica
-  canonical?: string;      // URL canónica si es diferente
+  title: string; // Título específico de la página
+  description: string; // Descripción meta (150-160 caracteres)
+  keywords?: string[]; // Keywords relevantes
+  ogImage?: string; // Imagen OpenGraph específica
+  canonical?: string; // URL canónica si es diferente
 }
 ```
 
@@ -29,12 +29,14 @@ interface SEOProps {
 ## OpenGraph y Twitter Cards
 
 Configuración automática desde `site.config.ts`:
+
 - `og:title`, `og:description`, `og:image`, `og:url`
 - `twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`
 
 ## Structured Data
 
 Implementar JSON-LD para:
+
 - Organization (datos de la empresa)
 - WebSite (información del sitio)
 - BreadcrumbList (navegación)

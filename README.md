@@ -44,16 +44,16 @@ Una landing page profesional construida con Astro, TypeScript y TailwindCSS sigu
 
 Todos los comandos se ejecutan desde la raíz del proyecto usando **pnpm**:
 
-| Comando                | Acción                                              |
-| :--------------------- | :-------------------------------------------------- |
-| `pnpm install`         | Instala las dependencias                            |
-| `pnpm dev`             | Inicia el servidor de desarrollo en `localhost:4321` |
-| `pnpm build`           | Construye el sitio para producción en `./dist/`     |
-| `pnpm preview`         | Previsualiza la construcción localmente             |
-| `pnpm test`            | Ejecuta las pruebas con Vitest                      |
-| `pnpm lint`            | Ejecuta ESLint para revisar el código               |
-| `pnpm format`          | Formatea el código con Prettier                     |
-| `pnpm type-check`      | Verifica los tipos de TypeScript                    |
+| Comando           | Acción                                               |
+| :---------------- | :--------------------------------------------------- |
+| `pnpm install`    | Instala las dependencias                             |
+| `pnpm dev`        | Inicia el servidor de desarrollo en `localhost:4321` |
+| `pnpm build`      | Construye el sitio para producción en `./dist/`      |
+| `pnpm preview`    | Previsualiza la construcción localmente              |
+| `pnpm test`       | Ejecuta las pruebas con Vitest                       |
+| `pnpm lint`       | Ejecuta ESLint para revisar el código                |
+| `pnpm format`     | Formatea el código con Prettier                      |
+| `pnpm type-check` | Verifica los tipos de TypeScript                     |
 
 ## 🛠️ Instalación
 

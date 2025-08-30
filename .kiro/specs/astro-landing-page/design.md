@@ -49,13 +49,14 @@ src/
 **Rationale**: Todos los componentes se implementan como componentes Astro (.astro) usando HTML nativo para maximizar el rendimiento y seguir las mejores prácticas del framework. Se evitan archivos de barril (index.ts) para mantener imports explícitos y mejorar tree-shaking.
 
 #### Button Component
+
 ```typescript
 interface ButtonProps {
-  variant: 'primary' | 'secondary' | 'outline' | 'ghost';
-  size: 'sm' | 'md' | 'lg';
+  variant: "primary" | "secondary" | "outline" | "ghost";
+  size: "sm" | "md" | "lg";
   disabled?: boolean;
   loading?: boolean;
-  type?: 'button' | 'submit' | 'reset';
+  type?: "button" | "submit" | "reset";
   text: string;
   href?: string;
   className?: string;
@@ -63,9 +64,10 @@ interface ButtonProps {
 ```
 
 #### Input Component
+
 ```typescript
 interface InputProps {
-  type: 'text' | 'email' | 'password' | 'tel' | 'url';
+  type: "text" | "email" | "password" | "tel" | "url";
   name: string;
   label: string;
   placeholder?: string;
@@ -94,9 +96,9 @@ interface CardProps {
   image?: {
     src: string;
     alt: string;
-    loading?: 'lazy' | 'eager';
+    loading?: "lazy" | "eager";
   };
-  variant: 'default' | 'featured' | 'minimal';
+  variant: "default" | "featured" | "minimal";
   className?: string;
   // Slots de Astro para contenido flexible
   slots?: {
@@ -156,18 +158,18 @@ interface SEOConfig {
     title: string;
     description: string;
     image: string;
-    type: 'website';
+    type: "website";
     locale: string;
   };
   twitter: {
-    card: 'summary_large_image';
+    card: "summary_large_image";
     site: string;
     creator: string;
     image: string;
   };
   // Structured data para rich snippets
   structuredData?: {
-    '@type': 'Organization' | 'WebSite';
+    "@type": "Organization" | "WebSite";
     name: string;
     url: string;
     logo?: string;
@@ -182,7 +184,7 @@ interface SEOConfig {
 ```typescript
 interface VersionConfig {
   changelogPath: string;
-  displayFormat: 'full' | 'short' | 'semantic';
+  displayFormat: "full" | "short" | "semantic";
   showInFooter: boolean;
   fallbackVersion: string;
 }
@@ -244,6 +246,7 @@ interface PerformanceConfig {
 ```
 
 #### Version Management
+
 ```typescript
 interface VersionInfo {
   version: string;
@@ -254,7 +257,7 @@ interface VersionInfo {
 interface ChangelogEntry {
   version: string;
   date: string;
-  type: 'added' | 'changed' | 'deprecated' | 'removed' | 'fixed' | 'security';
+  type: "added" | "changed" | "deprecated" | "removed" | "fixed" | "security";
   description: string;
 }
 ```
@@ -275,7 +278,7 @@ interface FormValidation {
 }
 
 interface ValidationRule {
-  type: 'required' | 'email' | 'minLength' | 'maxLength';
+  type: "required" | "email" | "minLength" | "maxLength";
   value?: number;
   message: string;
 }
@@ -288,24 +291,30 @@ interface ValidationRule {
 ```typescript
 // Domain Errors
 class ValidationError extends Error {
-  constructor(public field: string, message: string) {
+  constructor(
+    public field: string,
+    message: string,
+  ) {
     super(message);
-    this.name = 'ValidationError';
+    this.name = "ValidationError";
   }
 }
 
 class ConfigurationError extends Error {
   constructor(message: string) {
     super(message);
-    this.name = 'ConfigurationError';
+    this.name = "ConfigurationError";
   }
 }
 
 // Infrastructure Errors
 class FormSubmissionError extends Error {
-  constructor(message: string, public statusCode?: number) {
+  constructor(
+    message: string,
+    public statusCode?: number,
+  ) {
     super(message);
-    this.name = 'FormSubmissionError';
+    this.name = "FormSubmissionError";
   }
 }
 ```
@@ -322,17 +331,20 @@ class FormSubmissionError extends Error {
 ### Testing Pyramid
 
 #### Unit Tests
+
 - **Domain Logic**: Validación de entidades y servicios de dominio
 - **Components**: Testing de props, rendering y comportamiento
 - **Utilities**: Funciones puras y helpers
 - **Configuration**: Validación de configuraciones
 
 #### Integration Tests
+
 - **Form Submission**: Testing completo del flujo de formularios
 - **SEO Generation**: Verificación de metadatos generados
 - **Component Integration**: Testing de componentes compuestos
 
 #### E2E Tests
+
 - **User Journeys**: Navegación completa del sitio
 - **Form Workflows**: Envío exitoso y manejo de errores
 - **SEO Validation**: Verificación de metadatos en páginas renderizadas
@@ -343,13 +355,11 @@ class FormSubmissionError extends Error {
 // Vitest configuration for Astro
 export default defineConfig({
   test: {
-    environment: 'jsdom',
-    setupFiles: ['./src/test/setup.ts'],
+    environment: "jsdom",
+    setupFiles: ["./src/test/setup.ts"],
     globals: true,
   },
-  plugins: [
-    astro(),
-  ],
+  plugins: [astro()],
 });
 ```
 
