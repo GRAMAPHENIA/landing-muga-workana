@@ -1,0 +1,193 @@
+---
+/**
+ * Página de ejemplo para demostrar el uso del componente ContactForm
+ * Requirement: 6.2 - Integración con Formspree
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { siteConfig } from '../../infrastructure/config/site.config';
+
+const pageTitle = 'Contacto - Ejemplo';
+const pageDescription = 'Página de ejemplo que demuestra el uso del componente ContactForm con Formspree';
+---
+
+<BaseLayout 
+  title={pageTitle}
+  description={pageDescription}
+>
+  <main class="min-h-screen bg-gray-50 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Hero Section -->
+      <div class="text-center mb-16">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">
+          Ejemplos de Formulario de Contacto
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Diferentes variantes del componente ContactForm integrado con Formspree
+        </p>
+      </div>
+
+      <!-- Formulario por defecto -->
+      <section class="mb-16">
+        <div class="bg-white rounded-lg shadow-lg p-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">
+            Formulario Estándar
+          </h2>
+          <ContactForm />
+        </div>
+      </section>
+
+      <!-- Formulario compacto -->
+      <section class="mb-16">
+        <div class="bg-white rounded-lg shadow-lg p-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">
+            Formulario Compacto
+          </h2>
+          <ContactForm
+            variant="compact"
+            title="Contacto Rápido"
+            subtitle="Formulario optimizado para espacios reducidos"
+            showPhone={true}
+            submitButtonText="Enviar consulta"
+          />
+        </div>
+      </section>
+
+      <!-- Formulario con campos adicionales -->
+      <section class="mb-16">
+        <div class="bg-white rounded-lg shadow-lg p-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">
+            Formulario Completo
+          </h2>
+          <ContactForm
+            title="Formulario de Contacto Empresarial"
+            subtitle="Incluye campos adicionales para empresas"
+            showPhone={true}
+            showCompany={true}
+            submitButtonText="Enviar solicitud"
+            className="max-w-4xl"
+          />
+        </div>
+      </section>
+
+      <!-- Formulario inline (sin título) -->
+      <section class="mb-16">
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg shadow-lg p-8">
+          <div class="text-center mb-8">
+            <h2 class="text-2xl font-bold text-white mb-4">
+              ¿Tienes alguna pregunta?
+            </h2>
+            <p class="text-blue-100">
+              Contáctanos y te responderemos en menos de 24 horas
+            </p>
+          </div>
+          
+          <div class="bg-white rounded-lg p-6">
+            <ContactForm
+              variant="inline"
+              submitButtonText="Contactar ahora"
+              className="max-w-2xl"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Información adicional -->
+      <section class="bg-white rounded-lg shadow-lg p-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">
+          Características del Componente
+        </h2>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">
+              Funcionalidades
+            </h3>
+            <ul class="space-y-2 text-gray-600">
+              <li class="flex items-start">
+                <span class="text-green-500 mr-2">✓</span>
+                Validación HTML5 + JavaScript client-side
+              </li>
+              <li class="flex items-start">
+                <span class="text-green-500 mr-2">✓</span>
+                Integración nativa con Formspree
+              </li>
+              <li class="flex items-start">
+                <span class="text-green-500 mr-2">✓</span>
+                Manejo de estados (loading, success, error)
+              </li>
+              <li class="flex items-start">
+                <span class="text-green-500 mr-2">✓</span>
+                Campos opcionales configurables
+              </li>
+              <li class="flex items-start">
+                <span class="text-green-500 mr-2">✓</span>
+                Múltiples variantes de diseño
+              </li>
+              <li class="flex items-start">
+                <span class="text-green-500 mr-2">✓</span>
+                Accesibilidad completa (ARIA)
+              </li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">
+              Configuración
+            </h3>
+            <div class="bg-gray-50 rounded-lg p-4">
+              <p class="text-sm text-gray-600 mb-2">
+                <strong>Endpoint:</strong> {siteConfig.forms.formspree.endpoint || 'No configurado'}
+              </p>
+              <p class="text-sm text-gray-600 mb-2">
+                <strong>Timeout:</strong> {siteConfig.forms.formspree.timeout}ms
+              </p>
+              <p class="text-sm text-gray-600 mb-2">
+                <strong>Validación:</strong> {siteConfig.forms.formspree.enableValidation ? 'Habilitada' : 'Deshabilitada'}
+              </p>
+              <p class="text-sm text-gray-500 mt-4">
+                Configura tu endpoint de Formspree en las variables de entorno
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  /* Estilos adicionales para la página de ejemplo */
+  .gradient-bg {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  
+  /* Animación suave para las secciones */
+  section {
+    animation: fadeInUp 0.6s ease-out;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Hover effects para las tarjetas */
+  section > div {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  section > div:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+</style>

@@ -76,15 +76,15 @@
   - Mostrar versión de forma discreta
   - _Requirements: 4.1, 4.2, 7.4_
 
-- [ ] 6. Implementar sistema de formularios con Formspree
-- [ ] 6.1 Crear componente ContactForm
+- [x] 6. Implementar sistema de formularios con Formspree
+- [x] 6.1 Crear componente ContactForm
   - Implementar formulario HTML nativo con validación JavaScript client-side
   - Integrar con Formspree usando fetch API para envío de formularios
   - Añadir manejo de estados (loading, success, error) con JavaScript vanilla
   - Implementar validación TypeScript para campos del formulario
   - _Requirements: 6.2, 6.4_
 
-- [ ] 6.2 Implementar servicios de formulario en capa de aplicación
+- [x] 6.2 Implementar servicios de formulario en capa de aplicación
   - Crear casos de uso para envío de formularios
   - Implementar adaptadores para Formspree en infraestructura
   - Añadir manejo de errores y retry logic

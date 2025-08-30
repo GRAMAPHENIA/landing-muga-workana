@@ -1,0 +1,601 @@
+---
+/**
+ * Componente ContactForm - Formulario de contacto con integración Formspree
+ * Requirement: 6.2 - Integración con Formspree usando fetch API
+ * Requirement: 6.4 - Componentes reutilizables con props tipadas
+ */
+
+import type { ContactForm, FormState } from '../../domain/interfaces/forms.interface';
+import { siteConfig } from '../../infrastructure/config/site.config';
+import Button from './Button.astro';
+import Input from './Input.astro';
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  className?: string;
+  showPhone?: boolean;
+  showCompany?: boolean;
+  submitButtonText?: string;
+  variant?: 'default' | 'compact' | 'inline';
+}
+
+const {
+  title = 'Contáctanos',
+  subtitle = 'Envíanos un mensaje y te responderemos pronto',
+  className = '',
+  showPhone = false,
+  showCompany = false,
+  submitButtonText = 'Enviar mensaje',
+  variant = 'default'
+} = Astro.props;
+
+const formConfig = siteConfig.forms.formspree;
+const formId = `contact-form-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class={`contact-form-container ${className}`}>
+  {variant !== 'inline' && (
+    <div class="mb-8 text-center">
+      <h2 class="text-3xl font-bold text-gray-900 mb-4">{title}</h2>
+      <p class="text-lg text-gray-600">{subtitle}</p>
+    </div>
+  )}
+
+  <form 
+    id={formId}
+    class="contact-form space-y-6"
+    data-formspree-endpoint={formConfig.endpoint}
+    data-success-message={formConfig.successMessage}
+    data-error-message={formConfig.errorMessage}
+    data-timeout={formConfig.timeout}
+    novalidate
+  >
+    <!-- Estado del formulario -->
+    <div id={`${formId}-status`} class="form-status hidden" role="alert" aria-live="polite">
+      <div class="status-message p-4 rounded-lg border"></div>
+    </div>
+
+    <!-- Campos del formulario -->
+    <div class={variant === 'compact' ? 'grid grid-cols-1 md:grid-cols-2 gap-6' : 'space-y-6'}>
+      <!-- Nombre -->
+      <div class={variant === 'compact' ? 'md:col-span-1' : ''}>
+        <Input
+          type="text"
+          name="name"
+          label="Nombre completo"
+          placeholder="Tu nombre completo"
+          required={true}
+          validation={{
+            minLength: 2,
+            maxLength: 50,
+            customMessage: "El nombre debe tener entre 2 y 50 caracteres"
+          }}
+        />
+      </div>
+
+      <!-- Email -->
+      <div class={variant === 'compact' ? 'md:col-span-1' : ''}>
+        <Input
+          type="email"
+          name="email"
+          label="Correo electrónico"
+          placeholder="tu@email.com"
+          required={true}
+          validation={{
+            pattern: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+            customMessage: "Por favor, introduce un email válido"
+          }}
+        />
+      </div>
+
+      <!-- Teléfono (opcional) -->
+      {showPhone && (
+        <div class={variant === 'compact' ? 'md:col-span-1' : ''}>
+          <Input
+            type="tel"
+            name="phone"
+            label="Teléfono"
+            placeholder="+34 600 000 000"
+            required={false}
+            validation={{
+              pattern: "^[+]?[0-9\\s\\-\\(\\)]{9,}$",
+              customMessage: "Por favor, introduce un teléfono válido"
+            }}
+          />
+        </div>
+      )}
+
+      <!-- Empresa (opcional) -->
+      {showCompany && (
+        <div class={variant === 'compact' ? 'md:col-span-1' : ''}>
+          <Input
+            type="text"
+            name="company"
+            label="Empresa"
+            placeholder="Tu empresa"
+            required={false}
+            validation={{
+              maxLength: 100,
+              customMessage: "El nombre de la empresa no puede exceder 100 caracteres"
+            }}
+          />
+        </div>
+      )}
+
+      <!-- Asunto -->
+      <div class={variant === 'compact' ? 'md:col-span-2' : ''}>
+        <Input
+          type="text"
+          name="subject"
+          label="Asunto"
+          placeholder="¿En qué podemos ayudarte?"
+          required={true}
+          validation={{
+            minLength: 5,
+            maxLength: 100,
+            customMessage: "El asunto debe tener entre 5 y 100 caracteres"
+          }}
+        />
+      </div>
+
+      <!-- Mensaje -->
+      <div class={variant === 'compact' ? 'md:col-span-2' : ''}>
+        <label for={`${formId}-message`} class="block text-sm font-medium text-gray-700 mb-2">
+          Mensaje *
+        </label>
+        <textarea
+          id={`${formId}-message`}
+          name="message"
+          rows="6"
+          required
+          placeholder="Cuéntanos más detalles sobre tu consulta..."
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-vertical"
+          data-validation-rules='{"required": true, "minLength": 10, "maxLength": 1000}'
+          data-validation-message="El mensaje debe tener entre 10 y 1000 caracteres"
+        ></textarea>
+        <div class="field-error hidden text-sm text-red-600 mt-1" role="alert"></div>
+      </div>
+    </div>
+
+    <!-- Botón de envío -->
+    <div class="flex justify-center">
+      <Button
+        type="submit"
+        variant="primary"
+        size="lg"
+        text={submitButtonText}
+        className="submit-button min-w-[200px]"
+        loading={false}
+      />
+    </div>
+
+    <!-- Información adicional -->
+    <div class="text-center text-sm text-gray-500">
+      <p>Al enviar este formulario, aceptas nuestros términos de privacidad.</p>
+    </div>
+  </form>
+</div>
+
+<script>
+/**
+ * Script para manejo del formulario de contacto
+ * Implementa validación client-side y envío con Formspree
+ */
+
+interface ContactFormData {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  phone?: string;
+  company?: string;
+}
+
+interface ValidationRule {
+  required?: boolean;
+  minLength?: number;
+  maxLength?: number;
+  pattern?: string;
+}
+
+interface FormState {
+  isSubmitting: boolean;
+  isSuccess: boolean;
+  isError: boolean;
+  errorMessage?: string;
+  successMessage?: string;
+}
+
+class ContactFormHandler {
+  private form: HTMLFormElement;
+  private statusElement: HTMLElement;
+  private submitButton: HTMLButtonElement;
+  private state: FormState;
+  private config: {
+    endpoint: string;
+    successMessage: string;
+    errorMessage: string;
+    timeout: number;
+  };
+
+  constructor(form: HTMLFormElement) {
+    this.form = form;
+    this.statusElement = form.querySelector('.form-status') as HTMLElement;
+    this.submitButton = form.querySelector('.submit-button') as HTMLButtonElement;
+    
+    // Obtener configuración del formulario
+    this.config = {
+      endpoint: form.dataset.formspreeEndpoint || '',
+      successMessage: form.dataset.successMessage || '¡Mensaje enviado correctamente!',
+      errorMessage: form.dataset.errorMessage || 'Error al enviar el mensaje',
+      timeout: parseInt(form.dataset.timeout || '10000')
+    };
+
+    this.state = {
+      isSubmitting: false,
+      isSuccess: false,
+      isError: false
+    };
+
+    this.init();
+  }
+
+  private init(): void {
+    // Configurar validación en tiempo real
+    this.setupRealTimeValidation();
+    
+    // Configurar envío del formulario
+    this.form.addEventListener('submit', this.handleSubmit.bind(this));
+    
+    // Configurar reset del estado al cambiar campos
+    this.form.addEventListener('input', this.handleInput.bind(this));
+  }
+
+  private setupRealTimeValidation(): void {
+    const inputs = this.form.querySelectorAll('input, textarea');
+    
+    inputs.forEach(input => {
+      const element = input as HTMLInputElement | HTMLTextAreaElement;
+      
+      // Validar al perder el foco
+      element.addEventListener('blur', () => this.validateField(element));
+      
+      // Limpiar errores al escribir
+      element.addEventListener('input', () => this.clearFieldError(element));
+    });
+  }
+
+  private validateField(element: HTMLInputElement | HTMLTextAreaElement): boolean {
+    const rules = this.getValidationRules(element);
+    const value = element.value.trim();
+    const errorElement = element.parentElement?.querySelector('.field-error') as HTMLElement;
+
+    // Limpiar error previo
+    this.clearFieldError(element);
+
+    // Validar requerido
+    if (rules.required && !value) {
+      this.showFieldError(element, 'Este campo es requerido');
+      return false;
+    }
+
+    // Validar longitud mínima
+    if (rules.minLength && value.length < rules.minLength) {
+      this.showFieldError(element, `Mínimo ${rules.minLength} caracteres`);
+      return false;
+    }
+
+    // Validar longitud máxima
+    if (rules.maxLength && value.length > rules.maxLength) {
+      this.showFieldError(element, `Máximo ${rules.maxLength} caracteres`);
+      return false;
+    }
+
+    // Validar patrón
+    if (rules.pattern && value && !new RegExp(rules.pattern).test(value)) {
+      const customMessage = element.dataset.validationMessage;
+      this.showFieldError(element, customMessage || 'Formato inválido');
+      return false;
+    }
+
+    return true;
+  }
+
+  private getValidationRules(element: HTMLInputElement | HTMLTextAreaElement): ValidationRule {
+    const rulesData = element.dataset.validationRules;
+    if (rulesData) {
+      try {
+        return JSON.parse(rulesData);
+      } catch (e) {
+        console.warn('Error parsing validation rules:', e);
+      }
+    }
+
+    // Reglas por defecto basadas en atributos HTML
+    return {
+      required: element.hasAttribute('required'),
+      minLength: element.getAttribute('minlength') ? parseInt(element.getAttribute('minlength')!) : undefined,
+      maxLength: element.getAttribute('maxlength') ? parseInt(element.getAttribute('maxlength')!) : undefined,
+      pattern: element.getAttribute('pattern') || undefined
+    };
+  }
+
+  private showFieldError(element: HTMLInputElement | HTMLTextAreaElement, message: string): void {
+    const errorElement = element.parentElement?.querySelector('.field-error') as HTMLElement;
+    if (errorElement) {
+      errorElement.textContent = message;
+      errorElement.classList.remove('hidden');
+    }
+    
+    element.classList.add('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
+    element.classList.remove('border-gray-300', 'focus:ring-blue-500', 'focus:border-blue-500');
+  }
+
+  private clearFieldError(element: HTMLInputElement | HTMLTextAreaElement): void {
+    const errorElement = element.parentElement?.querySelector('.field-error') as HTMLElement;
+    if (errorElement) {
+      errorElement.classList.add('hidden');
+    }
+    
+    element.classList.remove('border-red-500', 'focus:ring-red-500', 'focus:border-red-500');
+    element.classList.add('border-gray-300', 'focus:ring-blue-500', 'focus:border-blue-500');
+  }
+
+  private validateForm(): boolean {
+    const inputs = this.form.querySelectorAll('input, textarea');
+    let isValid = true;
+
+    inputs.forEach(input => {
+      const element = input as HTMLInputElement | HTMLTextAreaElement;
+      if (!this.validateField(element)) {
+        isValid = false;
+      }
+    });
+
+    return isValid;
+  }
+
+  private async handleSubmit(event: Event): Promise<void> {
+    event.preventDefault();
+
+    // Validar formulario
+    if (!this.validateForm()) {
+      this.showStatus('error', 'Por favor, corrige los errores antes de enviar');
+      return;
+    }
+
+    // Verificar endpoint
+    if (!this.config.endpoint) {
+      this.showStatus('error', 'Configuración de formulario incompleta');
+      return;
+    }
+
+    this.setState({ isSubmitting: true });
+
+    try {
+      const formData = this.getFormData();
+      const result = await this.submitToFormspree(formData);
+
+      if (result.success) {
+        this.setState({ 
+          isSubmitting: false, 
+          isSuccess: true,
+          successMessage: this.config.successMessage
+        });
+        this.form.reset();
+      } else {
+        throw new Error(result.message || this.config.errorMessage);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      this.setState({ 
+        isSubmitting: false, 
+        isError: true,
+        errorMessage: error instanceof Error ? error.message : this.config.errorMessage
+      });
+    }
+  }
+
+  private getFormData(): ContactFormData {
+    const formData = new FormData(this.form);
+    
+    return {
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      subject: formData.get('subject') as string,
+      message: formData.get('message') as string,
+      phone: formData.get('phone') as string || undefined,
+      company: formData.get('company') as string || undefined,
+    };
+  }
+
+  private async submitToFormspree(data: ContactFormData): Promise<{ success: boolean; message?: string }> {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), this.config.timeout);
+
+    try {
+      const response = await fetch(this.config.endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(data),
+        signal: controller.signal
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || `Error ${response.status}: ${response.statusText}`);
+      }
+
+      return { success: true };
+    } catch (error) {
+      clearTimeout(timeoutId);
+      
+      if (error instanceof Error) {
+        if (error.name === 'AbortError') {
+          throw new Error('Tiempo de espera agotado. Inténtalo de nuevo.');
+        }
+        throw error;
+      }
+      
+      throw new Error('Error de conexión');
+    }
+  }
+
+  private setState(newState: Partial<FormState>): void {
+    this.state = { ...this.state, ...newState };
+    this.updateUI();
+  }
+
+  private updateUI(): void {
+    // Actualizar botón de envío
+    if (this.submitButton) {
+      if (this.state.isSubmitting) {
+        this.submitButton.disabled = true;
+        this.submitButton.classList.add('opacity-50', 'cursor-not-allowed');
+        
+        // Añadir spinner y cambiar texto
+        const existingSpinner = this.submitButton.querySelector('.loading-spinner');
+        if (!existingSpinner) {
+          const spinner = document.createElement('svg');
+          spinner.className = 'loading-spinner animate-spin -ml-1 mr-2 h-4 w-4';
+          spinner.innerHTML = `
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          `;
+          spinner.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+          spinner.setAttribute('fill', 'none');
+          spinner.setAttribute('viewBox', '0 0 24 24');
+          
+          this.submitButton.insertBefore(spinner, this.submitButton.firstChild);
+        }
+        
+        // Guardar texto original si no existe
+        if (!this.submitButton.dataset.originalText) {
+          this.submitButton.dataset.originalText = this.submitButton.textContent?.trim() || 'Enviar mensaje';
+        }
+        
+        // Cambiar texto (mantener spinner)
+        const textNodes = Array.from(this.submitButton.childNodes).filter(node => node.nodeType === Node.TEXT_NODE);
+        textNodes.forEach(node => {
+          if (node.textContent?.trim()) {
+            node.textContent = 'Enviando...';
+          }
+        });
+        
+      } else {
+        this.submitButton.disabled = false;
+        this.submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
+        
+        // Remover spinner
+        const spinner = this.submitButton.querySelector('.loading-spinner');
+        if (spinner) {
+          spinner.remove();
+        }
+        
+        // Restaurar texto original
+        const originalText = this.submitButton.dataset.originalText || 'Enviar mensaje';
+        const textNodes = Array.from(this.submitButton.childNodes).filter(node => node.nodeType === Node.TEXT_NODE);
+        textNodes.forEach(node => {
+          if (node.textContent?.includes('Enviando')) {
+            node.textContent = originalText;
+          }
+        });
+      }
+    }
+
+    // Mostrar estado
+    if (this.state.isSuccess) {
+      this.showStatus('success', this.state.successMessage || this.config.successMessage);
+    } else if (this.state.isError) {
+      this.showStatus('error', this.state.errorMessage || this.config.errorMessage);
+    }
+  }
+
+  private showStatus(type: 'success' | 'error', message: string): void {
+    if (!this.statusElement) return;
+
+    const messageElement = this.statusElement.querySelector('.status-message') as HTMLElement;
+    
+    if (messageElement) {
+      messageElement.textContent = message;
+      
+      // Limpiar clases previas
+      messageElement.classList.remove(
+        'bg-green-50', 'border-green-200', 'text-green-800',
+        'bg-red-50', 'border-red-200', 'text-red-800'
+      );
+      
+      // Aplicar clases según el tipo
+      if (type === 'success') {
+        messageElement.classList.add('bg-green-50', 'border-green-200', 'text-green-800');
+      } else {
+        messageElement.classList.add('bg-red-50', 'border-red-200', 'text-red-800');
+      }
+    }
+
+    this.statusElement.classList.remove('hidden');
+    
+    // Auto-ocultar después de 5 segundos si es éxito
+    if (type === 'success') {
+      setTimeout(() => {
+        this.statusElement.classList.add('hidden');
+      }, 5000);
+    }
+  }
+
+  private handleInput(): void {
+    // Limpiar estado de error al empezar a escribir
+    if (this.state.isError) {
+      this.setState({ isError: false, errorMessage: undefined });
+      this.statusElement.classList.add('hidden');
+    }
+  }
+}
+
+// Inicializar formularios cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+  const forms = document.querySelectorAll('.contact-form') as NodeListOf<HTMLFormElement>;
+  
+  forms.forEach(form => {
+    new ContactFormHandler(form);
+  });
+});
+</script>
+
+<style>
+  .contact-form-container {
+    @apply max-w-2xl mx-auto;
+  }
+  
+  .contact-form {
+    @apply bg-white;
+  }
+  
+  .field-error {
+    @apply text-sm text-red-600 mt-1;
+  }
+  
+  .form-status {
+    @apply mb-6;
+  }
+  
+  .status-message {
+    @apply p-4 rounded-lg border text-center font-medium;
+  }
+  
+  /* Animaciones suaves */
+  .contact-form input,
+  .contact-form textarea {
+    @apply transition-colors duration-200;
+  }
+  
+  .submit-button {
+    @apply transition-all duration-200;
+  }
+</style>
