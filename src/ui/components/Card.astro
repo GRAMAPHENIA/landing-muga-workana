@@ -1,0 +1,92 @@
+---
+import type { CardProps } from '../../domain/interfaces/CardProps';
+
+interface Props extends CardProps {}
+
+const {
+  title,
+  subtitle,
+  content,
+  image,
+  variant = "default",
+  className = "",
+  slots = { header: true, content: true, footer: true }
+} = Astro.props;
+
+// Clases base de la card
+const baseClasses = "bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden transition-shadow";
+
+// Variantes de la card
+const variantClasses = {
+  default: "hover:shadow-md",
+  featured: "border-blue-200 shadow-md hover:shadow-lg ring-1 ring-blue-100",
+  minimal: "shadow-none border-gray-100 hover:shadow-sm"
+};
+
+// Combinar todas las clases
+const cardClasses = [
+  baseClasses,
+  variantClasses[variant],
+  className
+];
+
+// Clases para el contenido
+const contentPadding = image ? "p-6" : "p-6";
+const titleClasses = variant === "featured" ? "text-xl font-bold text-gray-900" : "text-lg font-semibold text-gray-900";
+const subtitleClasses = "text-sm text-gray-600 mt-1";
+const contentTextClasses = "text-gray-700 mt-3";
+---
+
+<article class:list={cardClasses}>
+  <!-- Imagen (si se proporciona) -->
+  {image && (
+    <div class="aspect-w-16 aspect-h-9 bg-gray-200">
+      <img
+        src={image.src}
+        alt={image.alt}
+        loading={image.loading || "lazy"}
+        class="w-full h-48 object-cover"
+      />
+    </div>
+  )}
+
+  <!-- Header slot o contenido por defecto -->
+  {slots.header && (
+    <div class={contentPadding}>
+      <slot name="header">
+        {title && (
+          <h3 class={titleClasses}>
+            {title}
+          </h3>
+        )}
+        {subtitle && (
+          <p class={subtitleClasses}>
+            {subtitle}
+          </p>
+        )}
+      </slot>
+    </div>
+  )}
+
+  <!-- Content slot o contenido por defecto -->
+  {slots.content && (
+    <div class={!slots.header && !image ? contentPadding : "px-6 pb-6"}>
+      <slot name="content">
+        {content && (
+          <p class={contentTextClasses}>
+            {content}
+          </p>
+        )}
+      </slot>
+    </div>
+  )}
+
+  <!-- Footer slot -->
+  {slots.footer && (
+    <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">
+      <slot name="footer">
+        <!-- Footer por defecto vacío, se usa solo con slot -->
+      </slot>
+    </div>
+  )}
+</article>

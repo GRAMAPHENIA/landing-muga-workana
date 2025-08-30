@@ -6,7 +6,7 @@
   - Crear estructura de carpetas para arquitectura hexagonal
   - _Requirements: 1.1, 1.2, 1.3, 2.1_
 
-- [ ] 2. Configuración de herramientas de desarrollo
+- [x] 2. Configuración de herramientas de desarrollo
 - [x] 2.1 Configurar ESLint y Prettier para TypeScript/Astro
   - Instalar y configurar ESLint con reglas para Astro y TypeScript
   - Configurar Prettier con reglas específicas para el proyecto
@@ -32,44 +32,44 @@
   - Configurar variables de entorno para datos sensibles
   - _Requirements: 3.4, 5.4_
 
-- [ ] 4. Desarrollar sistema de componentes reutilizables
-- [ ] 4.1 Implementar componente Button con variantes tipadas
+- [x] 4. Desarrollar sistema de componentes reutilizables
+- [x] 4.1 Implementar componente Button con variantes tipadas
   - Crear componente Button.astro con props tipadas usando HTML nativo
   - Implementar variantes (primary, secondary, outline, ghost) con Tailwind
   - Añadir estados (loading, disabled) con clases CSS condicionales
   - Escribir tests unitarios para el componente Button
   - _Requirements: 6.4, 7.1_
 
-- [ ] 4.2 Implementar componente Input con validación
+- [x] 4.2 Implementar componente Input con validación
   - Crear componente Input.astro con props tipadas usando HTML nativo
   - Implementar validación HTML5 y JavaScript para campos
   - Añadir estilos responsivos con Tailwind y estados de error
   - Escribir tests unitarios para el componente Input
   - _Requirements: 6.4, 7.2_
 
-- [ ] 4.3 Implementar componente Card reutilizable
+- [x] 4.3 Implementar componente Card reutilizable
   - Crear componente Card.astro con variantes configurables usando HTML semántico
   - Implementar slots de Astro para contenido flexible
   - Añadir props para imagen, título y subtítulo con TypeScript
   - Escribir tests unitarios para el componente Card
   - _Requirements: 6.4, 7.3_
 
-- [ ] 5. Crear sistema de layouts y navegación
-- [ ] 5.1 Implementar Layout base con SEO
+- [x] 5. Crear sistema de layouts y navegación
+- [x] 5.1 Implementar Layout base con SEO
   - Crear BaseLayout.astro con metadatos dinámicos
   - Integrar configuración SEO central
   - Implementar OpenGraph y Twitter Cards
   - Añadir structured data (JSON-LD)
   - _Requirements: 3.1, 3.2, 3.4, 3.5, 7.4_
 
-- [ ] 5.2 Implementar componente Header con navegación
+- [x] 5.2 Implementar componente Header con navegación
   - Crear Header.astro con navegación tipada
   - Implementar menú responsive con Tailwind
   - Añadir logo y enlaces de navegación configurables
   - Escribir tests para funcionalidad de navegación
   - _Requirements: 2.3, 6.3, 7.4_
 
-- [ ] 5.3 Implementar Footer con versionado automático
+- [x] 5.3 Implementar Footer con versionado automático
   - Crear Footer.astro con lectura de CHANGELOG.md
   - Implementar parser para extraer versión actual
   - Añadir enlaces de footer y redes sociales configurables
@@ -104,11 +104,11 @@
   - Añadir configuración específica para SEO
   - _Requirements: 3.2_
 
-- [ ] 7.3 Implementar optimización de imágenes
-  - Configurar optimización de imágenes nativa de Astro
+- [ ] 7.3 Implementar componente Image optimizado
   - Crear componente Image.astro reutilizable con lazy loading HTML nativo
   - Implementar responsive images con srcset y sizes
   - Añadir fallbacks y alt text automático con TypeScript
+  - Integrar con optimización de imágenes nativa de Astro
   - _Requirements: 8.1_
 
 - [ ] 8. Crear páginas principales de la landing page
