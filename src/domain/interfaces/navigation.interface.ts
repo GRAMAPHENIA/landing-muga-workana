@@ -24,7 +24,7 @@ export interface FooterLink {
 }
 
 export interface SocialLink {
-  platform: "twitter" | "facebook" | "linkedin" | "instagram" | "github";
+  platform: 'twitter' | 'facebook' | 'linkedin' | 'instagram' | 'github';
   url: string;
   ariaLabel?: string;
 }

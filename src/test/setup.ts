@@ -4,7 +4,7 @@ import { beforeEach, afterEach, vi } from 'vitest';
 beforeEach(() => {
   // Limpiar todos los mocks antes de cada test
   vi.clearAllMocks();
-  
+
   // Configurar console.error para que no aparezca en los tests
   vi.spyOn(console, 'error').mockImplementation(() => {});
   vi.spyOn(console, 'warn').mockImplementation(() => {});

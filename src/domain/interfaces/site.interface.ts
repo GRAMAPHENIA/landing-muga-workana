@@ -4,7 +4,11 @@
  */
 
 import type { SEOConfig } from './seo.interface';
-import type { NavigationItem, FooterSection, SocialLink } from './navigation.interface';
+import type {
+  NavigationItem,
+  FooterSection,
+  SocialLink,
+} from './navigation.interface';
 import type { FormConfig } from './forms.interface';
 
 export interface SiteConfig {
@@ -26,7 +30,7 @@ export interface FooterConfig {
 
 export interface VersionConfig {
   changelogPath: string;
-  displayFormat: "full" | "short" | "semantic";
+  displayFormat: 'full' | 'short' | 'semantic';
   showInFooter: boolean;
   fallbackVersion: string;
 }
@@ -55,6 +59,6 @@ export interface VersionInfo {
 export interface ChangelogEntry {
   version: string;
   date: string;
-  type: "added" | "changed" | "deprecated" | "removed" | "fixed" | "security";
+  type: 'added' | 'changed' | 'deprecated' | 'removed' | 'fixed' | 'security';
   description: string;
 }

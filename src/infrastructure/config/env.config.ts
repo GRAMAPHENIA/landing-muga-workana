@@ -27,12 +27,17 @@ type EnvVars = z.infer<typeof EnvSchema>;
 export function getEnvVars(): EnvVars {
   const env = {
     SITE_URL: import.meta.env.SITE_URL || process.env.SITE_URL,
-    FORMSPREE_ENDPOINT: import.meta.env.FORMSPREE_ENDPOINT || process.env.FORMSPREE_ENDPOINT,
+    FORMSPREE_ENDPOINT:
+      import.meta.env.FORMSPREE_ENDPOINT || process.env.FORMSPREE_ENDPOINT,
     SITE_TITLE: import.meta.env.SITE_TITLE || process.env.SITE_TITLE,
-    SITE_DESCRIPTION: import.meta.env.SITE_DESCRIPTION || process.env.SITE_DESCRIPTION,
-    GOOGLE_ANALYTICS_ID: import.meta.env.GOOGLE_ANALYTICS_ID || process.env.GOOGLE_ANALYTICS_ID,
-    TWITTER_HANDLE: import.meta.env.TWITTER_HANDLE || process.env.TWITTER_HANDLE,
-    LINKEDIN_COMPANY: import.meta.env.LINKEDIN_COMPANY || process.env.LINKEDIN_COMPANY,
+    SITE_DESCRIPTION:
+      import.meta.env.SITE_DESCRIPTION || process.env.SITE_DESCRIPTION,
+    GOOGLE_ANALYTICS_ID:
+      import.meta.env.GOOGLE_ANALYTICS_ID || process.env.GOOGLE_ANALYTICS_ID,
+    TWITTER_HANDLE:
+      import.meta.env.TWITTER_HANDLE || process.env.TWITTER_HANDLE,
+    LINKEDIN_COMPANY:
+      import.meta.env.LINKEDIN_COMPANY || process.env.LINKEDIN_COMPANY,
     GITHUB_USER: import.meta.env.GITHUB_USER || process.env.GITHUB_USER,
     SITE_AUTHOR: import.meta.env.SITE_AUTHOR || process.env.SITE_AUTHOR,
     SITE_KEYWORDS: import.meta.env.SITE_KEYWORDS || process.env.SITE_KEYWORDS,
@@ -42,8 +47,12 @@ export function getEnvVars(): EnvVars {
     return EnvSchema.parse(env);
   } catch (error) {
     if (error instanceof z.ZodError) {
-      const missingVars = error.errors.map(err => `${err.path.join('.')}: ${err.message}`);
-      throw new Error(`Variables de entorno inválidas:\n${missingVars.join('\n')}`);
+      const missingVars = error.errors.map(
+        err => `${err.path.join('.')}: ${err.message}`
+      );
+      throw new Error(
+        `Variables de entorno inválidas:\n${missingVars.join('\n')}`
+      );
     }
     throw error;
   }

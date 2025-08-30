@@ -3,11 +3,11 @@
  */
 
 // Validación
-export { 
-  ValidationError, 
-  ConfigurationError, 
-  FormSubmissionError, 
-  FormValidator 
+export {
+  ValidationError,
+  ConfigurationError,
+  FormSubmissionError,
+  FormValidator,
 } from './validation.entity';
 
 // SEO

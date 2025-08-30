@@ -5,7 +5,10 @@
 
 import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
 import type { ContactForm } from '../../domain/interfaces/forms.interface';
-import { ContactFormServiceImpl, ContactFormServiceUtils } from '../../application/services/ContactFormService';
+import {
+  ContactFormServiceImpl,
+  ContactFormServiceUtils,
+} from '../../application/services/ContactFormService';
 import { FormspreeAdapterImpl } from '../../infrastructure/adapters/FormspreeAdapter';
 
 // Mock de fetch para las pruebas
@@ -21,10 +24,10 @@ vi.mock('../../infrastructure/config/site.config', () => ({
         successMessage: '¡Mensaje enviado correctamente!',
         errorMessage: 'Error al enviar el mensaje',
         timeout: 5000,
-        enableValidation: true
-      }
-    }
-  }
+        enableValidation: true,
+      },
+    },
+  },
 }));
 
 describe('ContactFormService Integration Tests', () => {
@@ -33,10 +36,10 @@ describe('ContactFormService Integration Tests', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    
+
     // Crear instancia del servicio
     service = new ContactFormServiceImpl();
-    
+
     // Datos de formulario válidos
     validFormData = {
       name: 'Juan Pérez',
@@ -44,7 +47,7 @@ describe('ContactFormService Integration Tests', () => {
       subject: 'Consulta general',
       message: 'Este es un mensaje de prueba con más de 10 caracteres',
       phone: '+34 600 000 000',
-      company: 'Mi Empresa S.L.'
+      company: 'Mi Empresa S.L.',
     };
   });
 
@@ -56,7 +59,7 @@ describe('ContactFormService Integration Tests', () => {
 
     it('debe obtener configuración del formulario', () => {
       const config = service.getFormConfiguration();
-      
+
       expect(config.endpoint).toBe('https://formspree.io/f/test123');
       expect(config.successMessage).toBe('¡Mensaje enviado correctamente!');
       expect(config.errorMessage).toBe('Error al enviar el mensaje');
@@ -77,7 +80,7 @@ describe('ContactFormService Integration Tests', () => {
         ok: true,
         status: 200,
         headers: new Map([['content-type', 'application/json']]),
-        json: async () => ({ ok: true })
+        json: async () => ({ ok: true }),
       });
 
       const result = await service.submitForm(validFormData);
@@ -93,9 +96,9 @@ describe('ContactFormService Integration Tests', () => {
           method: 'POST',
           headers: expect.objectContaining({
             'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            Accept: 'application/json',
           }),
-          body: expect.stringContaining('juan@example.com')
+          body: expect.stringContaining('juan@example.com'),
         })
       );
     });
@@ -105,7 +108,7 @@ describe('ContactFormService Integration Tests', () => {
         ok: true,
         status: 200,
         headers: new Map([['content-type', 'application/json']]),
-        json: async () => ({ ok: true })
+        json: async () => ({ ok: true }),
       });
 
       // Formulario sin campos opcionales
@@ -113,13 +116,13 @@ describe('ContactFormService Integration Tests', () => {
         name: 'Ana García',
         email: 'ana@example.com',
         subject: 'Consulta básica',
-        message: 'Mensaje sin campos opcionales'
+        message: 'Mensaje sin campos opcionales',
       };
 
       const result = await service.submitForm(minimalFormData);
 
       expect(result.success).toBe(true);
-      
+
       // Verificar que el body no incluye campos opcionales
       const callArgs = mockFetch.mock.calls[0];
       const body = JSON.parse(callArgs[1].body);
@@ -134,7 +137,7 @@ describe('ContactFormService Integration Tests', () => {
         name: '', // Nombre vacío
         email: 'email-invalido', // Email inválido
         subject: 'Hi', // Muy corto
-        message: 'Corto' // Muy corto
+        message: 'Corto', // Muy corto
       };
 
       const result = await service.submitForm(invalidFormData);
@@ -142,7 +145,7 @@ describe('ContactFormService Integration Tests', () => {
       expect(result.success).toBe(false);
       expect(result.errors).toBeDefined();
       expect(result.errors!.length).toBeGreaterThan(0);
-      
+
       // Verificar que no se llamó a fetch debido a errores de validación
       expect(mockFetch).not.toHaveBeenCalled();
     });
@@ -162,7 +165,7 @@ describe('ContactFormService Integration Tests', () => {
         status: 400,
         statusText: 'Bad Request',
         headers: new Map([['content-type', 'application/json']]),
-        json: async () => ({ message: 'Invalid form data' })
+        json: async () => ({ message: 'Invalid form data' }),
       });
 
       const result = await service.submitForm(validFormData);
@@ -191,7 +194,7 @@ describe('ContactFormService Integration Tests', () => {
         status: 429,
         statusText: 'Too Many Requests',
         headers: new Map([['content-type', 'application/json']]),
-        json: async () => ({ message: 'Rate limit exceeded' })
+        json: async () => ({ message: 'Rate limit exceeded' }),
       });
 
       const result = await service.submitForm(validFormData);
@@ -210,14 +213,14 @@ describe('ContactFormService Integration Tests', () => {
           status: 500,
           statusText: 'Internal Server Error',
           headers: new Map([['content-type', 'application/json']]),
-          json: async () => ({ message: 'Server error' })
+          json: async () => ({ message: 'Server error' }),
         })
         // Segundo intento es exitoso
         .mockResolvedValueOnce({
           ok: true,
           status: 200,
           headers: new Map([['content-type', 'application/json']]),
-          json: async () => ({ ok: true })
+          json: async () => ({ ok: true }),
         });
 
       const result = await service.submitForm(validFormData);
@@ -232,7 +235,7 @@ describe('ContactFormService Integration Tests', () => {
         status: 400,
         statusText: 'Bad Request',
         headers: new Map([['content-type', 'application/json']]),
-        json: async () => ({ message: 'Bad request' })
+        json: async () => ({ message: 'Bad request' }),
       });
 
       const result = await service.submitForm(validFormData);
@@ -248,7 +251,7 @@ describe('ContactFormService Integration Tests', () => {
         ok: true,
         status: 200,
         headers: new Map([['content-type', 'application/json']]),
-        json: async () => ({ ok: true })
+        json: async () => ({ ok: true }),
       });
 
       const unsafeFormData: ContactForm = {
@@ -256,7 +259,7 @@ describe('ContactFormService Integration Tests', () => {
         email: '  JUAN@EXAMPLE.COM  ',
         subject: 'Consulta con <tags>',
         message: 'Mensaje con   espacios   extra',
-        phone: '  +34-600-000-000  '
+        phone: '  +34-600-000-000  ',
       };
 
       const result = await service.submitForm(unsafeFormData);
@@ -266,7 +269,7 @@ describe('ContactFormService Integration Tests', () => {
       // Verificar que los datos fueron sanitizados
       const callArgs = mockFetch.mock.calls[0];
       const body = JSON.parse(callArgs[1].body);
-      
+
       expect(body.name).toBe('Juan alert("xss")'); // Tags removidos
       expect(body.email).toBe('juan@example.com'); // Lowercase y trimmed
       expect(body.phone).toBe('+34-600-000-000'); // Trimmed
@@ -275,12 +278,15 @@ describe('ContactFormService Integration Tests', () => {
 
   describe('Health checks', () => {
     it('debe realizar health check correctamente', async () => {
-      const healthCheck = await ContactFormServiceUtils.validateServiceHealth(service);
+      const healthCheck =
+        await ContactFormServiceUtils.validateServiceHealth(service);
 
       expect(healthCheck.isHealthy).toBe(true);
       expect(healthCheck.checks).toHaveLength(2); // Configuration + Connectivity
-      
-      const configCheck = healthCheck.checks.find(c => c.name === 'Configuration');
+
+      const configCheck = healthCheck.checks.find(
+        c => c.name === 'Configuration'
+      );
       expect(configCheck?.status).toBe('pass');
     });
 
@@ -300,7 +306,7 @@ describe('ContactFormService Integration Tests', () => {
         ok: true,
         status: 200,
         headers: new Map([['content-type', 'application/json']]),
-        json: async () => ({ ok: true })
+        json: async () => ({ ok: true }),
       });
 
       const connectionOk = await service.testConnection();
@@ -323,12 +329,12 @@ describe('FormspreeAdapter Integration Tests', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-    
+
     adapter = new FormspreeAdapterImpl({
       endpoint: 'https://formspree.io/f/test123',
       timeout: 5000,
       retryAttempts: 3,
-      retryDelay: 100
+      retryDelay: 100,
     });
   });
 
@@ -343,7 +349,7 @@ describe('FormspreeAdapter Integration Tests', () => {
           endpoint: 'https://invalid-url.com',
           timeout: 5000,
           retryAttempts: 3,
-          retryDelay: 100
+          retryDelay: 100,
         });
       }).toThrow();
     });
@@ -355,14 +361,14 @@ describe('FormspreeAdapter Integration Tests', () => {
         ok: true,
         status: 200,
         headers: new Map([['content-type', 'application/json']]),
-        json: async () => ({ ok: true })
+        json: async () => ({ ok: true }),
       });
 
       const formData: ContactForm = {
         name: 'Juan Pérez',
         email: 'juan@example.com',
         subject: 'Test Subject',
-        message: 'Test message'
+        message: 'Test message',
       };
 
       await adapter.submitForm(formData);

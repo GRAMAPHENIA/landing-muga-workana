@@ -1,7 +1,7 @@
 export interface CardImage {
   src: string;
   alt: string;
-  loading?: "lazy" | "eager";
+  loading?: 'lazy' | 'eager';
 }
 
 export interface CardSlots {
@@ -15,7 +15,7 @@ export interface CardProps {
   subtitle?: string;
   content?: string;
   image?: CardImage;
-  variant: "default" | "featured" | "minimal";
+  variant: 'default' | 'featured' | 'minimal';
   className?: string;
   slots?: CardSlots;
 }

@@ -8,8 +8,8 @@ describe('Card Component', () => {
     const result = await container.renderToString(Card, {
       props: {
         title: 'Test Card',
-        content: 'This is test content'
-      }
+        content: 'This is test content',
+      },
     });
 
     expect(result).toContain('Test Card');
@@ -24,8 +24,8 @@ describe('Card Component', () => {
     const result = await container.renderToString(Card, {
       props: {
         title: 'Featured Card',
-        variant: 'featured'
-      }
+        variant: 'featured',
+      },
     });
 
     expect(result).toContain('Featured Card');
@@ -40,8 +40,8 @@ describe('Card Component', () => {
     const result = await container.renderToString(Card, {
       props: {
         title: 'Minimal Card',
-        variant: 'minimal'
-      }
+        variant: 'minimal',
+      },
     });
 
     expect(result).toContain('Minimal Card');
@@ -55,8 +55,8 @@ describe('Card Component', () => {
     const result = await container.renderToString(Card, {
       props: {
         title: 'Main Title',
-        subtitle: 'Subtitle text'
-      }
+        subtitle: 'Subtitle text',
+      },
     });
 
     expect(result).toContain('Main Title');
@@ -72,9 +72,9 @@ describe('Card Component', () => {
         title: 'Card with Image',
         image: {
           src: '/test-image.jpg',
-          alt: 'Test image'
-        }
-      }
+          alt: 'Test image',
+        },
+      },
     });
 
     expect(result).toContain('src="/test-image.jpg"');
@@ -91,9 +91,9 @@ describe('Card Component', () => {
         image: {
           src: '/eager-image.jpg',
           alt: 'Eager image',
-          loading: 'eager'
-        }
-      }
+          loading: 'eager',
+        },
+      },
     });
 
     expect(result).toContain('loading="eager"');
@@ -105,8 +105,8 @@ describe('Card Component', () => {
       props: {
         title: 'Complete Card',
         subtitle: 'Card subtitle',
-        content: 'Card content text'
-      }
+        content: 'Card content text',
+      },
     });
 
     expect(result).toContain('Complete Card');
@@ -119,8 +119,8 @@ describe('Card Component', () => {
     const result = await container.renderToString(Card, {
       props: {
         title: 'Custom Card',
-        className: 'custom-card-class'
-      }
+        className: 'custom-card-class',
+      },
     });
 
     expect(result).toContain('custom-card-class');
@@ -130,8 +130,8 @@ describe('Card Component', () => {
     const container = await AstroContainer.create();
     const result = await container.renderToString(Card, {
       props: {
-        title: 'Semantic Card'
-      }
+        title: 'Semantic Card',
+      },
     });
 
     expect(result).toContain('<article'); // semantic article element
@@ -144,8 +144,8 @@ describe('Card Component', () => {
       props: {
         title: 'No Header Card',
         content: 'Content only',
-        slots: { header: false, content: true, footer: false }
-      }
+        slots: { header: false, content: true, footer: false },
+      },
     });
 
     expect(result).not.toContain('No Header Card'); // title should not render
@@ -158,8 +158,8 @@ describe('Card Component', () => {
       props: {
         title: 'Header Only Card',
         content: 'Hidden content',
-        slots: { header: true, content: false, footer: false }
-      }
+        slots: { header: true, content: false, footer: false },
+      },
     });
 
     expect(result).toContain('Header Only Card');
@@ -171,8 +171,8 @@ describe('Card Component', () => {
     const result = await container.renderToString(Card, {
       props: {
         title: 'Card with Footer',
-        slots: { header: true, content: true, footer: true }
-      }
+        slots: { header: true, content: true, footer: true },
+      },
     });
 
     expect(result).toContain('bg-gray-50'); // footer background

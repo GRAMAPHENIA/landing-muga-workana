@@ -3,14 +3,18 @@
  * Requirement: 6.4 - Componentes reutilizables con props tipadas
  */
 
-import type { FooterSection, SocialLink, NavigationItem } from './navigation.interface';
+import type {
+  FooterSection,
+  SocialLink,
+  NavigationItem,
+} from './navigation.interface';
 
 export interface ButtonProps {
-  variant: "primary" | "secondary" | "outline" | "ghost";
-  size: "sm" | "md" | "lg";
+  variant: 'primary' | 'secondary' | 'outline' | 'ghost';
+  size: 'sm' | 'md' | 'lg';
   disabled?: boolean;
   loading?: boolean;
-  type?: "button" | "submit" | "reset";
+  type?: 'button' | 'submit' | 'reset';
   text: string;
   href?: string;
   className?: string;
@@ -18,7 +22,7 @@ export interface ButtonProps {
 }
 
 export interface InputProps {
-  type: "text" | "email" | "password" | "tel" | "url" | "number";
+  type: 'text' | 'email' | 'password' | 'tel' | 'url' | 'number';
   name: string;
   label: string;
   placeholder?: string;
@@ -45,7 +49,7 @@ export interface CardProps {
   subtitle?: string;
   content?: string;
   image?: CardImage;
-  variant: "default" | "featured" | "minimal";
+  variant: 'default' | 'featured' | 'minimal';
   className?: string;
   href?: string;
   slots?: CardSlots;
@@ -54,7 +58,7 @@ export interface CardProps {
 export interface CardImage {
   src: string;
   alt: string;
-  loading?: "lazy" | "eager";
+  loading?: 'lazy' | 'eager';
   width?: number;
   height?: number;
 }

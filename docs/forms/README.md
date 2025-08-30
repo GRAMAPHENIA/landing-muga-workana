@@ -24,6 +24,7 @@ src/
 ## Componentes Implementados
 
 ### 1. ContactForm.astro (UI Layer)
+
 - **Ubicación**: `src/ui/components/ContactForm.astro`
 - **Responsabilidad**: Interfaz de usuario y validación client-side
 - **Características**:
@@ -34,6 +35,7 @@ src/
   - Accesibilidad completa (ARIA)
 
 ### 2. ContactFormService (Application Layer)
+
 - **Ubicación**: `src/application/services/ContactFormService.ts`
 - **Responsabilidad**: Orquestación y configuración del servicio
 - **Características**:
@@ -43,6 +45,7 @@ src/
   - Manejo centralizado de errores
 
 ### 3. SubmitContactFormUseCase (Application Layer)
+
 - **Ubicación**: `src/application/usecases/SubmitContactForm.usecase.ts`
 - **Responsabilidad**: Lógica de negocio para envío de formularios
 - **Características**:
@@ -52,6 +55,7 @@ src/
   - Integración con adaptador externo
 
 ### 4. FormspreeAdapter (Infrastructure Layer)
+
 - **Ubicación**: `src/infrastructure/adapters/FormspreeAdapter.ts`
 - **Responsabilidad**: Integración con el servicio externo Formspree
 - **Características**:
@@ -113,25 +117,27 @@ import ContactForm from '../components/ContactForm.astro';
 ## Validación
 
 ### Client-Side (JavaScript)
+
 - Validación en tiempo real
 - Mensajes de error específicos por campo
 - Prevención de envío con datos inválidos
 
 ### Server-Side (Caso de Uso)
+
 - Validación adicional antes del envío
 - Sanitización de datos
 - Validación de formato y longitud
 
 ### Reglas de Validación
 
-| Campo | Requerido | Longitud | Formato |
-|-------|-----------|----------|---------|
-| Nombre | Sí | 2-50 chars | Texto libre |
-| Email | Sí | - | RFC 5322 |
-| Asunto | Sí | 5-100 chars | Texto libre |
-| Mensaje | Sí | 10-1000 chars | Texto libre |
-| Teléfono | No | - | Internacional |
-| Empresa | No | max 100 chars | Texto libre |
+| Campo    | Requerido | Longitud      | Formato       |
+| -------- | --------- | ------------- | ------------- |
+| Nombre   | Sí        | 2-50 chars    | Texto libre   |
+| Email    | Sí        | -             | RFC 5322      |
+| Asunto   | Sí        | 5-100 chars   | Texto libre   |
+| Mensaje  | Sí        | 10-1000 chars | Texto libre   |
+| Teléfono | No        | -             | Internacional |
+| Empresa  | No        | max 100 chars | Texto libre   |
 
 ## Manejo de Errores
 
@@ -151,16 +157,19 @@ import ContactForm from '../components/ContactForm.astro';
 ## Testing
 
 ### Tests Unitarios
+
 ```bash
 pnpm test ContactForm.test.ts --run
 ```
 
 ### Tests de Integración
+
 ```bash
 pnpm test ContactFormService.integration.test.ts --run
 ```
 
 ### Coverage
+
 - Validación de formularios: 100%
 - Casos de uso: 95%
 - Adaptadores: 90%
@@ -187,6 +196,7 @@ console.log('Service Metrics:', metrics);
 ### Logs
 
 El sistema incluye logging detallado para:
+
 - Errores de validación
 - Fallos de conectividad
 - Respuestas del servidor
@@ -195,16 +205,19 @@ El sistema incluye logging detallado para:
 ## Seguridad
 
 ### Sanitización
+
 - Remoción de tags HTML
 - Limitación de longitud
 - Validación de formato
 
 ### Prevención XSS
+
 - Escape de caracteres especiales
 - Validación de entrada
 - Content Security Policy compatible
 
 ### Rate Limiting
+
 - Manejo de respuestas 429
 - Backoff automático
 - Mensajes informativos al usuario
@@ -212,12 +225,14 @@ El sistema incluye logging detallado para:
 ## Performance
 
 ### Optimizaciones
+
 - Lazy loading del componente
 - Validación asíncrona
 - Debounce en validación en tiempo real
 - Compresión de requests
 
 ### Métricas
+
 - Tiempo de respuesta: < 2s promedio
 - Tasa de éxito: > 95%
 - Tiempo de validación: < 100ms
@@ -225,18 +240,21 @@ El sistema incluye logging detallado para:
 ## Extensibilidad
 
 ### Nuevos Campos
+
 1. Añadir al interface `ContactForm`
 2. Actualizar validación en `ContactFormValidator`
 3. Añadir al componente UI
 4. Actualizar tests
 
 ### Nuevos Adaptadores
+
 1. Implementar interface `FormAdapter`
 2. Crear factory method
 3. Configurar en `ContactFormService`
 4. Añadir tests de integración
 
 ### Nuevas Validaciones
+
 1. Extender `ValidationRule` interface
 2. Implementar en `ContactFormValidator`
 3. Añadir tests unitarios
@@ -247,21 +265,25 @@ El sistema incluye logging detallado para:
 ### Problemas Comunes
 
 #### Formulario no envía
+
 - Verificar `FORMSPREE_ENDPOINT` en `.env`
 - Comprobar conectividad de red
 - Revisar logs del navegador
 
 #### Validación no funciona
+
 - Verificar JavaScript habilitado
 - Comprobar errores en consola
 - Validar configuración de reglas
 
 #### Estilos no se aplican
+
 - Verificar TailwindCSS configurado
 - Comprobar purge settings
 - Revisar clases CSS
 
 #### Timeout frecuentes
+
 - Aumentar timeout en configuración
 - Verificar conectividad del servidor
 - Comprobar rate limiting
@@ -288,6 +310,7 @@ pnpm format
 ## Roadmap
 
 ### Próximas Funcionalidades
+
 - [ ] Soporte para archivos adjuntos
 - [ ] Integración con otros servicios (EmailJS, Netlify Forms)
 - [ ] Validación server-side con Astro API routes
@@ -296,6 +319,7 @@ pnpm format
 - [ ] Integración con Captcha
 
 ### Mejoras Planificadas
+
 - [ ] Optimización de bundle size
 - [ ] Mejores animaciones de transición
 - [ ] Soporte para formularios multi-step

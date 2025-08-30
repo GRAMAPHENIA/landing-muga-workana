@@ -22,7 +22,7 @@ export const mockFetch = (response: any, ok = true) => {
  */
 export const mockLocalStorage = () => {
   const store: Record<string, string> = {};
-  
+
   return {
     getItem: vi.fn((key: string) => store[key] || null),
     setItem: vi.fn((key: string, value: string) => {
@@ -42,25 +42,32 @@ export const mockLocalStorage = () => {
 /**
  * Crear un evento mock para testing
  */
-export const createMockEvent = (type: string, properties: Record<string, any> = {}) => {
+export const createMockEvent = (
+  type: string,
+  properties: Record<string, any> = {}
+) => {
   const event = new Event(type, { bubbles: true, cancelable: true });
-  
+
   // Crear un objeto que combine el evento con las propiedades adicionales
   const mockEvent = Object.create(event);
   Object.assign(mockEvent, properties);
-  
+
   return mockEvent;
 };
 
 /**
  * Esperar a que se resuelvan todas las promesas pendientes
  */
-export const flushPromises = () => new Promise(resolve => setTimeout(resolve, 0));
+export const flushPromises = () =>
+  new Promise(resolve => setTimeout(resolve, 0));
 
 /**
  * Crear un elemento DOM mock para testing
  */
-export const createMockElement = (tagName: string, attributes: Record<string, string> = {}) => {
+export const createMockElement = (
+  tagName: string,
+  attributes: Record<string, string> = {}
+) => {
   const element = document.createElement(tagName);
   Object.entries(attributes).forEach(([key, value]) => {
     element.setAttribute(key, value);

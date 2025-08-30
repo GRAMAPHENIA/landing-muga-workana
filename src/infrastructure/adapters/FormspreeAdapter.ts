@@ -4,7 +4,10 @@
  * Requirement: 2.1 - Arquitectura hexagonal con adaptadores externos
  */
 
-import type { ContactForm, FormResponse } from '../../domain/interfaces/forms.interface';
+import type {
+  ContactForm,
+  FormResponse,
+} from '../../domain/interfaces/forms.interface';
 
 export interface FormspreeAdapter {
   submitForm(formData: ContactForm): Promise<FormspreeResponse>;
@@ -30,7 +33,7 @@ export class FormspreeAdapterImpl implements FormspreeAdapter {
 
   constructor(config: FormspreeConfig) {
     this.config = config;
-    
+
     if (!this.validateEndpoint()) {
       throw new Error('Endpoint de Formspree inválido o no configurado');
     }
@@ -43,7 +46,7 @@ export class FormspreeAdapterImpl implements FormspreeAdapter {
     for (let attempt = 1; attempt <= this.config.retryAttempts; attempt++) {
       try {
         const response = await this.makeRequest(formData);
-        
+
         if (response.success) {
           return response;
         }
@@ -53,11 +56,13 @@ export class FormspreeAdapterImpl implements FormspreeAdapter {
           return response;
         }
 
-        lastError = new Error(`HTTP ${response.statusCode}: ${response.message}`);
-        
+        lastError = new Error(
+          `HTTP ${response.statusCode}: ${response.message}`
+        );
       } catch (error) {
-        lastError = error instanceof Error ? error : new Error('Error desconocido');
-        
+        lastError =
+          error instanceof Error ? error : new Error('Error desconocido');
+
         // Si es el último intento, lanzar el error
         if (attempt === this.config.retryAttempts) {
           break;
@@ -69,7 +74,10 @@ export class FormspreeAdapterImpl implements FormspreeAdapter {
     }
 
     // Si llegamos aquí, todos los intentos fallaron
-    throw lastError || new Error('Error al enviar formulario después de múltiples intentos');
+    throw (
+      lastError ||
+      new Error('Error al enviar formulario después de múltiples intentos')
+    );
   }
 
   private async makeRequest(formData: ContactForm): Promise<FormspreeResponse> {
@@ -81,11 +89,11 @@ export class FormspreeAdapterImpl implements FormspreeAdapter {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'User-Agent': 'Astro-Landing-Page/1.0'
+          Accept: 'application/json',
+          'User-Agent': 'Astro-Landing-Page/1.0',
         },
         body: JSON.stringify(this.formatFormData(formData)),
-        signal: controller.signal
+        signal: controller.signal,
       });
 
       clearTimeout(timeoutId);
@@ -97,17 +105,16 @@ export class FormspreeAdapterImpl implements FormspreeAdapter {
         return {
           success: true,
           statusCode: response.status,
-          data: responseData
+          data: responseData,
         };
       } else {
         return {
           success: false,
           message: this.getErrorMessage(response.status, responseData),
           statusCode: response.status,
-          data: responseData
+          data: responseData,
         };
       }
-
     } catch (error) {
       clearTimeout(timeoutId);
 
@@ -124,7 +131,7 @@ export class FormspreeAdapterImpl implements FormspreeAdapter {
 
   private async parseResponse(response: Response): Promise<any> {
     const contentType = response.headers.get('content-type');
-    
+
     if (contentType && contentType.includes('application/json')) {
       try {
         return await response.json();
@@ -213,7 +220,7 @@ export class FormspreeAdapterImpl implements FormspreeAdapter {
         name: 'Test Connection',
         email: 'test@example.com',
         subject: 'Connection Test',
-        message: 'This is a connection test message'
+        message: 'This is a connection test message',
       };
 
       const response = await this.makeRequest(testData);
@@ -229,12 +236,14 @@ export class FormspreeAdapterImpl implements FormspreeAdapter {
  * Factory para crear instancias del adaptador
  */
 export class FormspreeAdapterFactory {
-  static create(config: Partial<FormspreeConfig> & { endpoint: string }): FormspreeAdapter {
+  static create(
+    config: Partial<FormspreeConfig> & { endpoint: string }
+  ): FormspreeAdapter {
     const fullConfig: FormspreeConfig = {
       endpoint: config.endpoint,
       timeout: config.timeout || 10000,
       retryAttempts: config.retryAttempts || 3,
-      retryDelay: config.retryDelay || 1000
+      retryDelay: config.retryDelay || 1000,
     };
 
     return new FormspreeAdapterImpl(fullConfig);
@@ -242,16 +251,18 @@ export class FormspreeAdapterFactory {
 
   static createFromSiteConfig(siteConfig: any): FormspreeAdapter {
     const formspreeConfig = siteConfig.forms?.formspree;
-    
+
     if (!formspreeConfig?.endpoint) {
-      throw new Error('Configuración de Formspree no encontrada en site.config.ts');
+      throw new Error(
+        'Configuración de Formspree no encontrada en site.config.ts'
+      );
     }
 
     return this.create({
       endpoint: formspreeConfig.endpoint,
       timeout: formspreeConfig.timeout || 10000,
       retryAttempts: 3,
-      retryDelay: 1000
+      retryDelay: 1000,
     });
   }
 }
@@ -275,9 +286,10 @@ export class FormspreeUtils {
       name: 'Usuario de Prueba',
       email: 'test@example.com',
       subject: 'Mensaje de prueba',
-      message: 'Este es un mensaje de prueba para verificar la funcionalidad del formulario.',
+      message:
+        'Este es un mensaje de prueba para verificar la funcionalidad del formulario.',
       phone: '+34 600 000 000',
-      company: 'Empresa de Prueba S.L.'
+      company: 'Empresa de Prueba S.L.',
     };
   }
 }

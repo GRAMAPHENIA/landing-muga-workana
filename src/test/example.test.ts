@@ -9,7 +9,7 @@ describe('Configuración de Testing', () => {
   it('debería poder usar utilidades de testing', () => {
     const fetch = mockFetch({ success: true });
     expect(fetch).toBeDefined();
-    
+
     const event = createMockEvent('click');
     expect(event.type).toBe('click');
   });

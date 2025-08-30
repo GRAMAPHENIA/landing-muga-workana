@@ -8,8 +8,8 @@ describe('Input Component', () => {
     const result = await container.renderToString(Input, {
       props: {
         name: 'test-input',
-        label: 'Test Label'
-      }
+        label: 'Test Label',
+      },
     });
 
     expect(result).toContain('Test Label');
@@ -24,8 +24,8 @@ describe('Input Component', () => {
       props: {
         name: 'email',
         label: 'Email',
-        type: 'email'
-      }
+        type: 'email',
+      },
     });
 
     expect(result).toContain('type="email"');
@@ -37,8 +37,8 @@ describe('Input Component', () => {
       props: {
         name: 'test',
         label: 'Test',
-        placeholder: 'Enter text here'
-      }
+        placeholder: 'Enter text here',
+      },
     });
 
     expect(result).toContain('placeholder="Enter text here"');
@@ -50,8 +50,8 @@ describe('Input Component', () => {
       props: {
         name: 'required-input',
         label: 'Required Field',
-        required: true
-      }
+        required: true,
+      },
     });
 
     expect(result).toContain('required');
@@ -65,8 +65,8 @@ describe('Input Component', () => {
       props: {
         name: 'disabled-input',
         label: 'Disabled Field',
-        disabled: true
-      }
+        disabled: true,
+      },
     });
 
     expect(result).toContain('disabled');
@@ -80,8 +80,8 @@ describe('Input Component', () => {
       props: {
         name: 'error-input',
         label: 'Error Field',
-        error: 'This field has an error'
-      }
+        error: 'This field has an error',
+      },
     });
 
     expect(result).toContain('This field has an error');
@@ -97,8 +97,8 @@ describe('Input Component', () => {
       props: {
         name: 'value-input',
         label: 'Value Field',
-        value: 'Initial value'
-      }
+        value: 'Initial value',
+      },
     });
 
     expect(result).toContain('value="Initial value"');
@@ -114,9 +114,9 @@ describe('Input Component', () => {
           pattern: '[A-Za-z]+',
           minLength: 3,
           maxLength: 20,
-          customMessage: 'Custom error message'
-        }
-      }
+          customMessage: 'Custom error message',
+        },
+      },
     });
 
     expect(result).toContain('pattern="[A-Za-z]+"');
@@ -130,8 +130,8 @@ describe('Input Component', () => {
       props: {
         name: 'password',
         label: 'Password',
-        type: 'password'
-      }
+        type: 'password',
+      },
     });
 
     expect(result).toContain('type="password"');
@@ -143,8 +143,8 @@ describe('Input Component', () => {
       props: {
         name: 'phone',
         label: 'Phone',
-        type: 'tel'
-      }
+        type: 'tel',
+      },
     });
 
     expect(result).toContain('type="tel"');
@@ -156,8 +156,8 @@ describe('Input Component', () => {
       props: {
         name: 'website',
         label: 'Website',
-        type: 'url'
-      }
+        type: 'url',
+      },
     });
 
     expect(result).toContain('type="url"');
@@ -169,8 +169,8 @@ describe('Input Component', () => {
       props: {
         name: 'custom-input',
         label: 'Custom Field',
-        className: 'custom-class'
-      }
+        className: 'custom-class',
+      },
     });
 
     expect(result).toContain('custom-class');
@@ -182,8 +182,8 @@ describe('Input Component', () => {
       props: {
         name: 'accessible-input',
         label: 'Accessible Field',
-        error: 'Error message'
-      }
+        error: 'Error message',
+      },
     });
 
     expect(result).toContain('aria-describedby="error-accessible-input"');

@@ -3,32 +3,35 @@
  * Requirement: 6.4 - Validación tipada
  */
 
-import type { ValidationRule, FormFieldError } from '../interfaces/forms.interface';
+import type {
+  ValidationRule,
+  FormFieldError,
+} from '../interfaces/forms.interface';
 
 export class ValidationError extends Error {
   constructor(
     public field: string,
-    message: string,
+    message: string
   ) {
     super(message);
-    this.name = "ValidationError";
+    this.name = 'ValidationError';
   }
 }
 
 export class ConfigurationError extends Error {
   constructor(message: string) {
     super(message);
-    this.name = "ConfigurationError";
+    this.name = 'ConfigurationError';
   }
 }
 
 export class FormSubmissionError extends Error {
   constructor(
     message: string,
-    public statusCode?: number,
+    public statusCode?: number
   ) {
     super(message);
-    this.name = "FormSubmissionError";
+    this.name = 'FormSubmissionError';
   }
 }
 
@@ -55,7 +58,10 @@ export class FormValidator {
     return regex.test(value);
   }
 
-  static validateField(value: string, rules: ValidationRule[]): FormFieldError[] {
+  static validateField(
+    value: string,
+    rules: ValidationRule[]
+  ): FormFieldError[] {
     const errors: FormFieldError[] = [];
 
     for (const rule of rules) {
@@ -82,7 +88,7 @@ export class FormValidator {
       if (!isValid) {
         errors.push({
           field: 'field',
-          message: rule.message
+          message: rule.message,
         });
       }
     }

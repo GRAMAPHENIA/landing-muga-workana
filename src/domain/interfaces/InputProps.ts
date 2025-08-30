@@ -6,7 +6,7 @@ export interface InputValidation {
 }
 
 export interface InputProps {
-  type: "text" | "email" | "password" | "tel" | "url";
+  type: 'text' | 'email' | 'password' | 'tel' | 'url';
   name: string;
   label: string;
   placeholder?: string;

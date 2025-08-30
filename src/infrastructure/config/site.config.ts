@@ -11,10 +11,14 @@ import type { SiteConfig } from '../../domain/interfaces/site.interface';
 const SEOConfigSchema = z.object({
   site: z.object({
     title: z.string().min(1, 'El título del sitio es requerido'),
-    description: z.string().min(10, 'La descripción debe tener al menos 10 caracteres'),
+    description: z
+      .string()
+      .min(10, 'La descripción debe tener al menos 10 caracteres'),
     url: z.string().url('URL del sitio inválida'),
     author: z.string().min(1, 'El autor es requerido'),
-    keywords: z.array(z.string()).min(1, 'Al menos una palabra clave es requerida'),
+    keywords: z
+      .array(z.string())
+      .min(1, 'Al menos una palabra clave es requerida'),
     language: z.string().default('es'),
   }),
   openGraph: z.object({
@@ -30,12 +34,14 @@ const SEOConfigSchema = z.object({
     creator: z.string().min(1),
     image: z.string().url('URL de imagen Twitter inválida'),
   }),
-  structuredData: z.object({
-    '@type': z.enum(['Organization', 'WebSite']),
-    name: z.string().min(1),
-    url: z.string().url(),
-    logo: z.string().url().optional(),
-  }).optional(),
+  structuredData: z
+    .object({
+      '@type': z.enum(['Organization', 'WebSite']),
+      name: z.string().min(1),
+      url: z.string().url(),
+      logo: z.string().url().optional(),
+    })
+    .optional(),
 });
 
 const NavigationItemSchema = z.object({
@@ -56,15 +62,19 @@ const SiteConfigSchema = z.object({
   navigation: z.array(NavigationItemSchema),
   footer: z.object({
     copyright: z.string().min(1),
-    links: z.array(z.object({
-      title: z.string().min(1),
-      links: z.array(z.object({
-        label: z.string().min(1),
-        href: z.string().min(1),
-        external: z.boolean().optional(),
-        ariaLabel: z.string().optional(),
-      })),
-    })),
+    links: z.array(
+      z.object({
+        title: z.string().min(1),
+        links: z.array(
+          z.object({
+            label: z.string().min(1),
+            href: z.string().min(1),
+            external: z.boolean().optional(),
+            ariaLabel: z.string().optional(),
+          })
+        ),
+      })
+    ),
     social: z.array(SocialLinkSchema),
     showVersion: z.boolean().default(true),
   }),
@@ -72,7 +82,9 @@ const SiteConfigSchema = z.object({
     formspree: z.object({
       endpoint: z.string().min(1, 'Endpoint de Formspree es requerido'),
       successMessage: z.string().default('¡Mensaje enviado correctamente!'),
-      errorMessage: z.string().default('Error al enviar el mensaje. Inténtalo de nuevo.'),
+      errorMessage: z
+        .string()
+        .default('Error al enviar el mensaje. Inténtalo de nuevo.'),
       enableValidation: z.boolean().default(true),
       timeout: z.number().default(10000),
     }),
@@ -112,7 +124,8 @@ const siteConfigData: SiteConfig = {
   metadata: {
     site: {
       title: 'Landing Page Profesional',
-      description: 'Una landing page moderna y profesional construida con Astro, TypeScript y TailwindCSS',
+      description:
+        'Una landing page moderna y profesional construida con Astro, TypeScript y TailwindCSS',
       url: getEnvVar('SITE_URL', 'https://mi-landing-page.com'),
       author: 'Tu Nombre',
       keywords: [
@@ -123,14 +136,15 @@ const siteConfigData: SiteConfig = {
         'seo',
         'profesional',
         'moderno',
-        'responsive'
+        'responsive',
       ],
       language: 'es',
     },
     openGraph: {
       title: 'Landing Page Profesional',
-      description: 'Una landing page moderna y profesional construida con Astro, TypeScript y TailwindCSS',
-      image: '/images/og-image.jpg',
+      description:
+        'Una landing page moderna y profesional construida con Astro, TypeScript y TailwindCSS',
+      image: `${getEnvVar('SITE_URL', 'https://mi-landing-page.com')}/images/og-image.jpg`,
       type: 'website',
       locale: 'es_ES',
     },
@@ -138,20 +152,32 @@ const siteConfigData: SiteConfig = {
       card: 'summary_large_image',
       site: '@tu_usuario',
       creator: '@tu_usuario',
-      image: '/images/twitter-card.jpg',
+      image: `${getEnvVar('SITE_URL', 'https://mi-landing-page.com')}/images/twitter-card.jpg`,
     },
     structuredData: {
       '@type': 'Organization',
       name: 'Tu Empresa',
       url: getEnvVar('SITE_URL', 'https://mi-landing-page.com'),
-      logo: '/images/logo.png',
+      logo: `${getEnvVar('SITE_URL', 'https://mi-landing-page.com')}/images/logo.png`,
     },
   },
   navigation: [
     { label: 'Inicio', href: '/', ariaLabel: 'Ir a la página de inicio' },
-    { label: 'Acerca de', href: '/about', ariaLabel: 'Conocer más sobre nosotros' },
-    { label: 'Servicios', href: '/services', ariaLabel: 'Ver nuestros servicios' },
-    { label: 'Contacto', href: '/contact', ariaLabel: 'Contactar con nosotros' },
+    {
+      label: 'Acerca de',
+      href: '/about',
+      ariaLabel: 'Conocer más sobre nosotros',
+    },
+    {
+      label: 'Servicios',
+      href: '/services',
+      ariaLabel: 'Ver nuestros servicios',
+    },
+    {
+      label: 'Contacto',
+      href: '/contact',
+      ariaLabel: 'Contactar con nosotros',
+    },
   ],
   footer: {
     copyright: `© ${new Date().getFullYear()} Tu Empresa. Todos los derechos reservados.`,
@@ -204,7 +230,8 @@ const siteConfigData: SiteConfig = {
     formspree: {
       endpoint: getEnvVar('FORMSPREE_ENDPOINT', ''),
       successMessage: '¡Gracias por tu mensaje! Te responderemos pronto.',
-      errorMessage: 'Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo.',
+      errorMessage:
+        'Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo.',
       enableValidation: true,
       timeout: 10000,
     },
@@ -219,9 +246,7 @@ const siteConfigData: SiteConfig = {
     enableImageOptimization: true,
     enableLazyLoading: true,
     criticalCSSInline: true,
-    preloadFonts: [
-      '/fonts/inter-var.woff2',
-    ],
+    preloadFonts: ['/fonts/inter-var.woff2'],
   },
   logo: {
     src: '/images/logo.svg',
@@ -236,7 +261,12 @@ const siteConfigData: SiteConfig = {
 export const siteConfig = SiteConfigSchema.parse(siteConfigData);
 
 // Exportar esquemas para uso en otros lugares
-export { SiteConfigSchema, SEOConfigSchema, NavigationItemSchema, SocialLinkSchema };
+export {
+  SiteConfigSchema,
+  SEOConfigSchema,
+  NavigationItemSchema,
+  SocialLinkSchema,
+};
 
 // Función helper para validar configuración personalizada
 export function validateSiteConfig(config: unknown): SiteConfig {

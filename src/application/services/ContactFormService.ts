@@ -4,7 +4,10 @@
  * Requirement: 6.2 - Casos de uso para envío de formularios
  */
 
-import type { ContactForm, FormSubmissionResult } from '../../domain/interfaces/forms.interface';
+import type {
+  ContactForm,
+  FormSubmissionResult,
+} from '../../domain/interfaces/forms.interface';
 import type { SubmitContactFormUseCase } from '../usecases/SubmitContactForm.usecase';
 import { SubmitContactFormUseCaseFactory } from '../usecases/SubmitContactForm.usecase';
 import { FormspreeAdapterFactory } from '../../infrastructure/adapters/FormspreeAdapter';
@@ -31,23 +34,26 @@ export class ContactFormServiceImpl implements ContactFormService {
   constructor() {
     try {
       // Crear adaptador desde configuración
-      const formspreeAdapter = FormspreeAdapterFactory.createFromSiteConfig(siteConfig);
-      
+      const formspreeAdapter =
+        FormspreeAdapterFactory.createFromSiteConfig(siteConfig);
+
       // Crear caso de uso
-      this.submitContactFormUseCase = SubmitContactFormUseCaseFactory.create(formspreeAdapter);
-      
+      this.submitContactFormUseCase =
+        SubmitContactFormUseCaseFactory.create(formspreeAdapter);
+
       // Configuración del servicio
       this.configuration = {
         endpoint: siteConfig.forms.formspree.endpoint,
         successMessage: siteConfig.forms.formspree.successMessage,
         errorMessage: siteConfig.forms.formspree.errorMessage,
         timeout: siteConfig.forms.formspree.timeout || 10000,
-        enableValidation: siteConfig.forms.formspree.enableValidation
+        enableValidation: siteConfig.forms.formspree.enableValidation,
       };
-
     } catch (error) {
       console.error('Error initializing ContactFormService:', error);
-      throw new Error('No se pudo inicializar el servicio de formularios. Verifica la configuración.');
+      throw new Error(
+        'No se pudo inicializar el servicio de formularios. Verifica la configuración.'
+      );
     }
   }
 
@@ -58,10 +64,13 @@ export class ContactFormServiceImpl implements ContactFormService {
         return {
           success: false,
           message: 'Configuración del formulario inválida',
-          errors: [{
-            field: 'configuration',
-            message: 'El servicio de formularios no está configurado correctamente'
-          }]
+          errors: [
+            {
+              field: 'configuration',
+              message:
+                'El servicio de formularios no está configurado correctamente',
+            },
+          ],
         };
       }
 
@@ -76,17 +85,18 @@ export class ContactFormServiceImpl implements ContactFormService {
       }
 
       return result;
-
     } catch (error) {
       console.error('Error in ContactFormService.submitForm:', error);
-      
+
       return {
         success: false,
         message: this.configuration.errorMessage,
-        errors: [{
-          field: 'service',
-          message: 'Error interno del servicio'
-        }]
+        errors: [
+          {
+            field: 'service',
+            message: 'Error interno del servicio',
+          },
+        ],
       };
     }
   }
@@ -113,7 +123,6 @@ export class ContactFormServiceImpl implements ContactFormService {
       }
 
       return true;
-
     } catch (error) {
       console.error('Error validating configuration:', error);
       return false;
@@ -133,15 +142,18 @@ export class ContactFormServiceImpl implements ContactFormService {
         name: 'Test Connection',
         email: 'test@example.com',
         subject: 'Connection Test',
-        message: 'This is a connection test'
+        message: 'This is a connection test',
       };
 
       const result = await this.submitContactFormUseCase.execute(testData);
-      
+
       // Considerar exitoso si no hay errores de configuración
       // Fallar si hay errores de red o configuración
-      return result.success || (!result.message?.includes('configuración') && !result.message?.includes('Network error'));
-
+      return (
+        result.success ||
+        (!result.message?.includes('configuración') &&
+          !result.message?.includes('Network error'))
+      );
     } catch (error) {
       console.error('Connection test failed:', error);
       return false;
@@ -195,10 +207,12 @@ export function useContactFormService(): ContactFormService {
  * Utilidades para debugging y testing
  */
 export class ContactFormServiceUtils {
-  static async validateServiceHealth(service: ContactFormService): Promise<ServiceHealthCheck> {
+  static async validateServiceHealth(
+    service: ContactFormService
+  ): Promise<ServiceHealthCheck> {
     const health: ServiceHealthCheck = {
       isHealthy: true,
-      checks: []
+      checks: [],
     };
 
     // Verificar configuración
@@ -206,7 +220,7 @@ export class ContactFormServiceUtils {
     health.checks.push({
       name: 'Configuration',
       status: configValid ? 'pass' : 'fail',
-      message: configValid ? 'Configuración válida' : 'Configuración inválida'
+      message: configValid ? 'Configuración válida' : 'Configuración inválida',
     });
 
     if (!configValid) {
@@ -220,7 +234,7 @@ export class ContactFormServiceUtils {
         health.checks.push({
           name: 'Connectivity',
           status: connectionOk ? 'pass' : 'fail',
-          message: connectionOk ? 'Conectividad OK' : 'Error de conectividad'
+          message: connectionOk ? 'Conectividad OK' : 'Error de conectividad',
         });
 
         if (!connectionOk) {
@@ -230,7 +244,7 @@ export class ContactFormServiceUtils {
         health.checks.push({
           name: 'Connectivity',
           status: 'fail',
-          message: `Error de conectividad: ${error}`
+          message: `Error de conectividad: ${error}`,
         });
         health.isHealthy = false;
       }
@@ -241,12 +255,12 @@ export class ContactFormServiceUtils {
 
   static getServiceMetrics(service: ContactFormService): ServiceMetrics {
     const config = service.getFormConfiguration();
-    
+
     return {
       endpoint: config.endpoint,
       timeout: config.timeout,
       validationEnabled: config.enableValidation,
-      lastHealthCheck: new Date().toISOString()
+      lastHealthCheck: new Date().toISOString(),
     };
   }
 }

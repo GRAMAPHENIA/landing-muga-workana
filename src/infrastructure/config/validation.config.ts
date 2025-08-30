@@ -3,7 +3,10 @@
  * Requirement: 6.4 - Validación tipada
  */
 
-import type { ValidationRule, FormValidation } from '../../domain/interfaces/forms.interface';
+import type {
+  ValidationRule,
+  FormValidation,
+} from '../../domain/interfaces/forms.interface';
 
 // Reglas de validación para el formulario de contacto
 export const contactFormValidation: FormValidation[] = [
@@ -100,7 +103,10 @@ export const validationPatterns = {
 /**
  * Genera un mensaje de validación personalizado
  */
-export function formatValidationMessage(template: string, value?: number | string): string {
+export function formatValidationMessage(
+  template: string,
+  value?: number | string
+): string {
   if (value !== undefined) {
     return template.replace('{value}', String(value));
   }

@@ -1,6 +1,6 @@
 ---
 inclusion: fileMatch
-fileMatchPattern: "*.astro"
+fileMatchPattern: '*.astro'
 ---
 
 # Requisitos SEO para Componentes Astro

@@ -20,7 +20,7 @@ export class SEOManager {
       { name: 'keywords', content: keywords.join(', ') },
       { name: 'author', content: this.config.site.author },
       { name: 'language', content: this.config.site.language },
-      
+
       // OpenGraph
       { property: 'og:title', content: title },
       { property: 'og:description', content: description },
@@ -28,7 +28,7 @@ export class SEOManager {
       { property: 'og:type', content: this.config.openGraph.type },
       { property: 'og:locale', content: this.config.openGraph.locale },
       { property: 'og:url', content: this.config.site.url },
-      
+
       // Twitter Cards
       { name: 'twitter:card', content: this.config.twitter.card },
       { name: 'twitter:site', content: this.config.twitter.site },
@@ -52,11 +52,13 @@ export class SEOManager {
     }
 
     const structuredData = {
-      "@context": "https://schema.org",
-      "@type": this.config.structuredData["@type"],
-      "name": this.config.structuredData.name,
-      "url": this.config.structuredData.url,
-      ...(this.config.structuredData.logo && { "logo": this.config.structuredData.logo })
+      '@context': 'https://schema.org',
+      '@type': this.config.structuredData['@type'],
+      name: this.config.structuredData.name,
+      url: this.config.structuredData.url,
+      ...(this.config.structuredData.logo && {
+        logo: this.config.structuredData.logo,
+      }),
     };
 
     return JSON.stringify(structuredData);
@@ -66,7 +68,7 @@ export class SEOManager {
     if (!pageTitle) {
       return this.config.site.title;
     }
-    
+
     return `${pageTitle} | ${this.config.site.title}`;
   }
 }

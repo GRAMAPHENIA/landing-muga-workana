@@ -1,0 +1,76 @@
+# Robots.txt optimizado para SEO
+# Generado automáticamente para Landing Page Profesional
+
+# Permitir acceso a todos los crawlers principales
+User-agent: *
+Allow: /
+
+# Bloquear acceso a directorios administrativos y privados
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
+Disallow: /_/
+Disallow: /test/
+Disallow: /.well-known/
+
+# Bloquear archivos de configuración y desarrollo
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /*.yml$
+Disallow: /*.yaml$
+Disallow: /*.config.*$
+Disallow: /.*
+
+# Permitir acceso específico a archivos importantes para SEO
+Allow: /sitemap.xml
+Allow: /sitemap-*.xml
+Allow: /robots.txt
+Allow: /favicon.ico
+Allow: /favicon.svg
+Allow: /.well-known/security.txt
+
+# Configuración específica para Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Configuración específica para Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Configuración específica para otros crawlers importantes
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 2
+
+# Bloquear crawlers problemáticos o innecesarios
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MegaIndex
+Disallow: /
+
+# Ubicación del sitemap
+Sitemap: https://mi-landing-page.com/sitemap.xml
+
+# Información adicional
+# Host: mi-landing-page.com
+# Última actualización: 2025-01-30

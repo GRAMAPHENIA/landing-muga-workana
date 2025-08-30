@@ -74,14 +74,14 @@ describe('ContactForm Validation Logic', () => {
       name: 'Juan Pérez',
       email: 'juan@example.com',
       subject: 'Consulta general',
-      message: 'Este es un mensaje de prueba con más de 10 caracteres'
+      message: 'Este es un mensaje de prueba con más de 10 caracteres',
     };
 
     it('debe enviar formulario con datos válidos', async () => {
       // Mock de respuesta exitosa
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: async () => ({ success: true })
+        json: async () => ({ success: true }),
       });
 
       // Simular envío a Formspree
@@ -89,9 +89,9 @@ describe('ContactForm Validation Logic', () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          Accept: 'application/json',
         },
-        body: JSON.stringify(validFormData)
+        body: JSON.stringify(validFormData),
       });
 
       expect(mockFetch).toHaveBeenCalledWith(
@@ -100,9 +100,9 @@ describe('ContactForm Validation Logic', () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            Accept: 'application/json',
           },
-          body: JSON.stringify(validFormData)
+          body: JSON.stringify(validFormData),
         })
       );
       expect(response.ok).toBe(true);
@@ -116,7 +116,7 @@ describe('ContactForm Validation Logic', () => {
         await fetch('https://formspree.io/f/test', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(validFormData)
+          body: JSON.stringify(validFormData),
         });
       } catch (error) {
         expect(error).toBeInstanceOf(Error);
@@ -132,13 +132,13 @@ describe('ContactForm Validation Logic', () => {
         ok: false,
         status: 400,
         statusText: 'Bad Request',
-        json: async () => ({ message: 'Invalid data' })
+        json: async () => ({ message: 'Invalid data' }),
       });
 
       const response = await fetch('https://formspree.io/f/test', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(validFormData)
+        body: JSON.stringify(validFormData),
       });
 
       expect(response.ok).toBe(false);
@@ -161,7 +161,7 @@ describe('ContactForm Validation Logic', () => {
       const formState = {
         isSubmitting: false,
         isSuccess: false,
-        isError: false
+        isError: false,
       };
 
       // Simular inicio de envío
@@ -181,7 +181,7 @@ describe('ContactForm Validation Logic', () => {
       const messages = {
         success: '¡Mensaje enviado correctamente!',
         error: 'Error al enviar el mensaje',
-        loading: 'Enviando...'
+        loading: 'Enviando...',
       };
 
       expect(messages.success).toBe('¡Mensaje enviado correctamente!');
@@ -194,7 +194,7 @@ describe('ContactForm Validation Logic', () => {
         endpoint: 'https://formspree.io/f/test',
         successMessage: '¡Mensaje enviado!',
         errorMessage: 'Error al enviar',
-        timeout: 5000
+        timeout: 5000,
       };
 
       expect(config.endpoint).toBeTruthy();
@@ -210,7 +210,7 @@ describe('ContactForm Validation Logic', () => {
         endpoint: 'https://formspree.io/f/test',
         successMessage: '¡Mensaje enviado!',
         errorMessage: 'Error al enviar',
-        timeout: 5000
+        timeout: 5000,
       };
 
       expect(config.endpoint).toMatch(/^https:\/\/formspree\.io\/f\/.+/);
@@ -224,7 +224,7 @@ describe('ContactForm Validation Logic', () => {
         successMessage: '¡Mensaje enviado correctamente!',
         errorMessage: 'Error al enviar el mensaje. Inténtalo de nuevo.',
         timeout: 10000,
-        enableValidation: true
+        enableValidation: true,
       };
 
       expect(defaultConfig.timeout).toBe(10000);
@@ -240,7 +240,7 @@ describe('ContactForm Validation Logic', () => {
         required: 'Este campo es requerido',
         email: 'Por favor, introduce un email válido',
         minLength: 'El campo debe tener al menos {min} caracteres',
-        maxLength: 'El campo no puede exceder {max} caracteres'
+        maxLength: 'El campo no puede exceder {max} caracteres',
       };
 
       expect(errorMessages.required).toBeTruthy();
@@ -250,8 +250,14 @@ describe('ContactForm Validation Logic', () => {
     });
 
     it('debe manejar diferentes tipos de validación', () => {
-      const validationTypes = ['required', 'email', 'minLength', 'maxLength', 'pattern'];
-      
+      const validationTypes = [
+        'required',
+        'email',
+        'minLength',
+        'maxLength',
+        'pattern',
+      ];
+
       validationTypes.forEach(type => {
         expect(typeof type).toBe('string');
         expect(type.length).toBeGreaterThan(0);
@@ -287,7 +293,7 @@ describe('ContactForm Data Handling', () => {
       name: 'Juan Pérez',
       email: 'juan@example.com',
       subject: 'Consulta',
-      message: 'Mensaje de prueba'
+      message: 'Mensaje de prueba',
     };
 
     // Validaciones básicas

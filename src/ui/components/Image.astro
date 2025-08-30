@@ -1,0 +1,216 @@
+---
+/**
+ * Componente Image optimizado con lazy loading HTML nativo
+ * Requirement: 8.1 - Optimización automática de imágenes
+ */
+
+import type { ImageProps } from '../../domain/interfaces/image.interface';
+
+interface Props extends ImageProps {}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  loading = 'lazy',
+  decoding = 'async',
+  sizes,
+  srcset,
+  className = '',
+  priority = false,
+  quality = 80,
+  format = 'webp',
+  fallbackFormat = 'jpg',
+  aspectRatio,
+  objectFit = 'cover',
+  placeholder = 'blur',
+  blurDataURL,
+  ...rest
+} = Astro.props;
+
+// Generar srcset automáticamente si no se proporciona
+const generateSrcset = (
+  baseSrc: string,
+  widths: number[] = [320, 640, 768, 1024, 1280, 1920]
+) => {
+  if (srcset) return srcset;
+
+  // Si la imagen es externa, no generar srcset automático
+  if (baseSrc.startsWith('http')) return undefined;
+
+  return widths
+    .map(w => {
+      const optimizedSrc = baseSrc.replace(
+        /\.(jpg|jpeg|png|webp)$/i,
+        `_${w}w.${format}`
+      );
+      return `${optimizedSrc} ${w}w`;
+    })
+    .join(', ');
+};
+
+// Generar sizes automáticamente si no se proporciona
+const generateSizes = () => {
+  if (sizes) return sizes;
+
+  // Sizes por defecto responsivos
+  return '(max-width: 320px) 280px, (max-width: 640px) 600px, (max-width: 768px) 728px, (max-width: 1024px) 984px, (max-width: 1280px) 1240px, 1880px';
+};
+
+// Determinar el loading basado en prioridad
+const imageLoading = priority ? 'eager' : loading;
+
+// Generar estilos inline para aspect ratio si se especifica
+const aspectRatioStyle = aspectRatio ? `aspect-ratio: ${aspectRatio};` : '';
+const objectFitStyle = objectFit ? `object-fit: ${objectFit};` : '';
+const combinedStyle = `${aspectRatioStyle} ${objectFitStyle}`.trim();
+
+// Clases CSS para el componente
+const imageClasses = [
+  'transition-opacity duration-300',
+  priority ? 'opacity-100' : 'opacity-0',
+  className,
+]
+  .filter(Boolean)
+  .join(' ');
+
+// Generar fallback src para formatos no soportados
+const fallbackSrc = src.replace(/\.(webp|avif)$/i, `.${fallbackFormat}`);
+---
+
+<picture class="block">
+  <!-- Formato WebP optimizado -->
+  {
+    format === 'webp' && !src.startsWith('http') && (
+      <source
+        srcset={generateSrcset(src)}
+        sizes={generateSizes()}
+        type="image/webp"
+      />
+    )
+  }
+
+  <!-- Formato AVIF si está disponible -->
+  {
+    format === 'avif' && !src.startsWith('http') && (
+      <source
+        srcset={generateSrcset(src.replace(/\.(jpg|jpeg|png|webp)$/i, '.avif'))}
+        sizes={generateSizes()}
+        type="image/avif"
+      />
+    )
+  }
+
+  <!-- Imagen principal con fallback -->
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={imageLoading}
+    decoding={decoding}
+    srcset={generateSrcset(src)}
+    sizes={generateSizes()}
+    class:list={imageClasses}
+    style={combinedStyle}
+    onload="this.style.opacity='1'"
+    onerror={`this.src='${fallbackSrc}'; this.style.opacity='1';`}
+    {...rest}
+  />
+
+  <!-- Placeholder blur si se especifica -->
+  {
+    placeholder === 'blur' && blurDataURL && (
+      <img
+        src={blurDataURL}
+        alt=""
+        aria-hidden="true"
+        class="absolute inset-0 w-full h-full object-cover opacity-50 blur-sm transition-opacity duration-300"
+        style="z-index: -1;"
+      />
+    )
+  }
+</picture>
+
+<script>
+  // Mejorar la experiencia de carga con Intersection Observer
+  if ('IntersectionObserver' in window) {
+    const images = document.querySelectorAll('img[loading="lazy"]');
+
+    const imageObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target as HTMLImageElement;
+
+            // Precargar la imagen
+            if (img.dataset.src) {
+              img.src = img.dataset.src;
+              img.removeAttribute('data-src');
+            }
+
+            // Aplicar fade-in cuando la imagen se carga
+            img.addEventListener('load', () => {
+              img.style.opacity = '1';
+            });
+
+            observer.unobserve(img);
+          }
+        });
+      },
+      {
+        rootMargin: '50px 0px',
+        threshold: 0.01,
+      }
+    );
+
+    images.forEach(img => imageObserver.observe(img));
+  }
+</script>
+
+<style>
+  picture {
+    position: relative;
+    display: block;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Placeholder para imágenes que se están cargando */
+  img[loading='lazy']:not([src]) {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+
+  @keyframes loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  /* Optimizaciones para Core Web Vitals */
+  img[loading='eager'] {
+    content-visibility: auto;
+  }
+
+  /* Soporte para aspect-ratio en navegadores antiguos */
+  @supports not (aspect-ratio: 1) {
+    img[style*='aspect-ratio'] {
+      position: relative;
+    }
+
+    img[style*='aspect-ratio']::before {
+      content: '';
+      display: block;
+      padding-bottom: calc(100% / var(--aspect-ratio, 1));
+    }
+  }
+</style>

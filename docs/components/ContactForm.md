@@ -68,19 +68,20 @@ import ContactForm from '../components/ContactForm.astro';
 
 ## Props del Componente
 
-| Prop | Tipo | Default | Descripción |
-|------|------|---------|-------------|
-| `title` | `string` | `"Contáctanos"` | Título del formulario |
-| `subtitle` | `string` | `"Envíanos un mensaje..."` | Subtítulo descriptivo |
-| `className` | `string` | `""` | Clases CSS adicionales |
-| `showPhone` | `boolean` | `false` | Mostrar campo de teléfono |
-| `showCompany` | `boolean` | `false` | Mostrar campo de empresa |
-| `submitButtonText` | `string` | `"Enviar mensaje"` | Texto del botón de envío |
-| `variant` | `"default" \| "compact" \| "inline"` | `"default"` | Variante de diseño |
+| Prop               | Tipo                                 | Default                    | Descripción               |
+| ------------------ | ------------------------------------ | -------------------------- | ------------------------- |
+| `title`            | `string`                             | `"Contáctanos"`            | Título del formulario     |
+| `subtitle`         | `string`                             | `"Envíanos un mensaje..."` | Subtítulo descriptivo     |
+| `className`        | `string`                             | `""`                       | Clases CSS adicionales    |
+| `showPhone`        | `boolean`                            | `false`                    | Mostrar campo de teléfono |
+| `showCompany`      | `boolean`                            | `false`                    | Mostrar campo de empresa  |
+| `submitButtonText` | `string`                             | `"Enviar mensaje"`         | Texto del botón de envío  |
+| `variant`          | `"default" \| "compact" \| "inline"` | `"default"`                | Variante de diseño        |
 
 ## Variantes de Diseño
 
 ### Default
+
 Formulario estándar con campos en columna única y título/subtítulo incluidos.
 
 ```astro
@@ -88,17 +89,15 @@ Formulario estándar con campos en columna única y título/subtítulo incluidos
 ```
 
 ### Compact
+
 Formulario optimizado para espacios reducidos con campos en grid responsive.
 
 ```astro
-<ContactForm 
-  variant="compact"
-  showPhone={true}
-  showCompany={true}
-/>
+<ContactForm variant="compact" showPhone={true} showCompany={true} />
 ```
 
 ### Inline
+
 Formulario sin título/subtítulo, ideal para integrar en secciones existentes.
 
 ```astro
@@ -252,16 +251,13 @@ El componente maneja automáticamente:
 ### Ejemplo de Personalización
 
 ```astro
-<ContactForm 
-  className="custom-form"
-  variant="compact"
-/>
+<ContactForm className="custom-form" variant="compact" />
 
 <style>
   :global(.custom-form) {
     @apply bg-gradient-to-r from-blue-50 to-purple-50 p-8 rounded-xl;
   }
-  
+
   :global(.custom-form .submit-button) {
     @apply bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700;
   }
@@ -328,17 +324,13 @@ forms: {
 // Extender validación con reglas custom
 const customValidation = {
   phone: {
-    pattern: "^\\+?[1-9]\\d{1,14}$",
-    message: "Formato: +34 600 000 000"
-  }
+    pattern: '^\\+?[1-9]\\d{1,14}$',
+    message: 'Formato: +34 600 000 000',
+  },
 };
 ---
 
-<ContactForm 
-  showPhone={true}
-  showCompany={true}
-  variant="compact"
-/>
+<ContactForm showPhone={true} showCompany={true} variant="compact" />
 ```
 
 ### Integración con Analytics
@@ -350,13 +342,13 @@ const customValidation = {
   // Tracking de eventos de formulario
   document.addEventListener('DOMContentLoaded', () => {
     const forms = document.querySelectorAll('.contact-form');
-    
+
     forms.forEach(form => {
       form.addEventListener('submit', () => {
         // Google Analytics, etc.
         gtag('event', 'form_submit', {
           event_category: 'contact',
-          event_label: 'contact_form'
+          event_label: 'contact_form',
         });
       });
     });

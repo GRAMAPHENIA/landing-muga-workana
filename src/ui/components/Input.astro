@@ -4,7 +4,7 @@ import type { InputProps } from '../../domain/interfaces/InputProps';
 interface Props extends InputProps {}
 
 const {
-  type = "text",
+  type = 'text',
   name,
   label,
   placeholder,
@@ -12,7 +12,7 @@ const {
   disabled = false,
   error,
   value,
-  className = "",
+  className = '',
   validation,
 } = Astro.props;
 
@@ -21,30 +21,31 @@ const inputId = `input-${name}`;
 const errorId = `error-${name}`;
 
 // Clases base del input
-const baseInputClasses = "block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-0 transition-colors";
+const baseInputClasses =
+  'block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-0 transition-colors';
 
 // Clases condicionales según el estado
-const inputStateClasses = error 
-  ? "border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500"
-  : "border-gray-300 text-gray-900 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500";
+const inputStateClasses = error
+  ? 'border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500'
+  : 'border-gray-300 text-gray-900 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500';
 
-const disabledClasses = disabled 
-  ? "bg-gray-50 text-gray-500 cursor-not-allowed"
-  : "bg-white";
+const disabledClasses = disabled
+  ? 'bg-gray-50 text-gray-500 cursor-not-allowed'
+  : 'bg-white';
 
 // Combinar todas las clases del input
 const inputClasses = [
   baseInputClasses,
   inputStateClasses,
   disabledClasses,
-  className
+  className,
 ];
 
 // Clases del label
 const labelClasses = [
-  "block text-sm font-medium mb-1",
-  error ? "text-red-700" : "text-gray-700",
-  disabled ? "text-gray-500" : ""
+  'block text-sm font-medium mb-1',
+  error ? 'text-red-700' : 'text-gray-700',
+  disabled ? 'text-gray-500' : '',
 ];
 
 // Atributos de validación HTML5
@@ -56,14 +57,11 @@ if (required) validationAttrs.required = true;
 ---
 
 <div class="space-y-1">
-  <label 
-    for={inputId}
-    class:list={labelClasses}
-  >
+  <label for={inputId} class:list={labelClasses}>
     {label}
     {required && <span class="text-red-500 ml-1">*</span>}
   </label>
-  
+
   <input
     id={inputId}
     type={type}
@@ -76,31 +74,29 @@ if (required) validationAttrs.required = true;
     aria-invalid={error ? 'true' : 'false'}
     {...validationAttrs}
   />
-  
-  {error && (
-    <p 
-      id={errorId}
-      class="text-sm text-red-600 mt-1"
-      role="alert"
-    >
-      {error}
-    </p>
-  )}
+
+  {
+    error && (
+      <p id={errorId} class="text-sm text-red-600 mt-1" role="alert">
+        {error}
+      </p>
+    )
+  }
 </div>
 
 <script>
   // Validación JavaScript mejorada para UX
   document.addEventListener('DOMContentLoaded', () => {
     const inputs = document.querySelectorAll('input[data-validation]');
-    
+
     inputs.forEach(input => {
       const inputElement = input as HTMLInputElement;
-      
+
       // Validación en tiempo real
       inputElement.addEventListener('blur', () => {
         validateInput(inputElement);
       });
-      
+
       inputElement.addEventListener('input', () => {
         // Limpiar errores mientras el usuario escribe
         if (inputElement.classList.contains('border-red-300')) {
@@ -109,39 +105,47 @@ if (required) validationAttrs.required = true;
       });
     });
   });
-  
+
   function validateInput(input: HTMLInputElement) {
     const errorElement = document.getElementById(`error-${input.name}`);
-    
+
     // Validación HTML5 nativa
     if (!input.validity.valid) {
       showInputError(input, input.validationMessage);
       return false;
     }
-    
+
     // Validaciones personalizadas
     const customMessage = input.dataset.customMessage;
     if (customMessage && !input.checkValidity()) {
       showInputError(input, customMessage);
       return false;
     }
-    
+
     clearInputError(input);
     return true;
   }
-  
+
   function showInputError(input: HTMLInputElement, message: string) {
     // Actualizar clases del input
-    input.classList.remove('border-gray-300', 'focus:ring-blue-500', 'focus:border-blue-500');
-    input.classList.add('border-red-300', 'focus:ring-red-500', 'focus:border-red-500');
-    
+    input.classList.remove(
+      'border-gray-300',
+      'focus:ring-blue-500',
+      'focus:border-blue-500'
+    );
+    input.classList.add(
+      'border-red-300',
+      'focus:ring-red-500',
+      'focus:border-red-500'
+    );
+
     // Mostrar mensaje de error
     const errorElement = document.getElementById(`error-${input.name}`);
     if (errorElement) {
       errorElement.textContent = message;
       errorElement.classList.remove('hidden');
     }
-    
+
     // Actualizar label
     const label = document.querySelector(`label[for="${input.id}"]`);
     if (label) {
@@ -149,18 +153,26 @@ if (required) validationAttrs.required = true;
       label.classList.add('text-red-700');
     }
   }
-  
+
   function clearInputError(input: HTMLInputElement) {
     // Restaurar clases del input
-    input.classList.remove('border-red-300', 'focus:ring-red-500', 'focus:border-red-500');
-    input.classList.add('border-gray-300', 'focus:ring-blue-500', 'focus:border-blue-500');
-    
+    input.classList.remove(
+      'border-red-300',
+      'focus:ring-red-500',
+      'focus:border-red-500'
+    );
+    input.classList.add(
+      'border-gray-300',
+      'focus:ring-blue-500',
+      'focus:border-blue-500'
+    );
+
     // Ocultar mensaje de error
     const errorElement = document.getElementById(`error-${input.name}`);
     if (errorElement) {
       errorElement.classList.add('hidden');
     }
-    
+
     // Restaurar label
     const label = document.querySelector(`label[for="${input.id}"]`);
     if (label) {

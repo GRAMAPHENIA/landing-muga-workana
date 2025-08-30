@@ -28,11 +28,13 @@ pnpm vitest --ui
 ## Configuración
 
 ### Entorno
+
 - **Framework**: Vitest 3.x
 - **Environment**: happy-dom (más rápido que jsdom)
 - **Globals**: Habilitados (describe, it, expect disponibles sin imports)
 
 ### Coverage
+
 - **Provider**: v8
 - **Thresholds**: 80% en todas las métricas
 - **Reportes**: text, json, html
@@ -40,26 +42,31 @@ pnpm vitest --ui
 ### Utilidades Disponibles
 
 #### mockFetch
+
 ```typescript
 const fetch = mockFetch({ success: true });
 ```
 
 #### mockLocalStorage
+
 ```typescript
 const localStorage = mockLocalStorage();
 ```
 
 #### createMockEvent
+
 ```typescript
 const event = createMockEvent('click');
 ```
 
 #### flushPromises
+
 ```typescript
 await flushPromises(); // Espera a que se resuelvan todas las promesas
 ```
 
 #### createMockElement
+
 ```typescript
 const button = createMockElement('button', { type: 'submit' });
 ```
@@ -67,6 +74,7 @@ const button = createMockElement('button', { type: 'submit' });
 ## Escribir Tests
 
 ### Para Componentes Astro
+
 ```typescript
 import { describe, it, expect } from 'vitest';
 
@@ -78,6 +86,7 @@ describe('MiComponente', () => {
 ```
 
 ### Para Servicios de Dominio
+
 ```typescript
 import { describe, it, expect } from 'vitest';
 import { MiServicio } from '@/domain/services/MiServicio';
@@ -92,6 +101,7 @@ describe('MiServicio', () => {
 ```
 
 ### Para Formularios
+
 ```typescript
 import { describe, it, expect } from 'vitest';
 import { mockFetch } from '@/test/utils';
@@ -99,9 +109,9 @@ import { mockFetch } from '@/test/utils';
 describe('ContactForm', () => {
   it('debería enviar formulario correctamente', async () => {
     global.fetch = mockFetch({ success: true });
-    
+
     // Test logic aquí
-    
+
     expect(fetch).toHaveBeenCalledWith(/* parámetros esperados */);
   });
 });

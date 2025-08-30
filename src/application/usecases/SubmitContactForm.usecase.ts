@@ -4,10 +4,10 @@
  * Requirement: 6.2 - Casos de uso para envío de formularios
  */
 
-import type { 
-  ContactForm, 
-  FormSubmissionResult, 
-  FormFieldError 
+import type {
+  ContactForm,
+  FormSubmissionResult,
+  FormFieldError,
 } from '../../domain/interfaces/forms.interface';
 import type { FormspreeAdapter } from '../../infrastructure/adapters/FormspreeAdapter';
 
@@ -29,7 +29,7 @@ export class SubmitContactFormUseCaseImpl implements SubmitContactFormUseCase {
         return {
           success: false,
           message: 'Datos del formulario inválidos',
-          errors: validationResult.errors
+          errors: validationResult.errors,
         };
       }
 
@@ -43,22 +43,21 @@ export class SubmitContactFormUseCaseImpl implements SubmitContactFormUseCase {
       if (result.success) {
         return {
           success: true,
-          message: 'Formulario enviado correctamente'
+          message: 'Formulario enviado correctamente',
         };
       } else {
         return {
           success: false,
-          message: result.message || 'Error al enviar el formulario'
+          message: result.message || 'Error al enviar el formulario',
         };
       }
-
     } catch (error) {
       console.error('Error in SubmitContactFormUseCase:', error);
-      
+
       return {
         success: false,
         message: this.getErrorMessage(error),
-        errors: []
+        errors: [],
       };
     }
   }
@@ -70,7 +69,9 @@ export class SubmitContactFormUseCaseImpl implements SubmitContactFormUseCase {
       subject: this.sanitizeString(formData.subject),
       message: this.sanitizeString(formData.message),
       phone: formData.phone ? this.sanitizePhone(formData.phone) : undefined,
-      company: formData.company ? this.sanitizeString(formData.company) : undefined
+      company: formData.company
+        ? this.sanitizeString(formData.company)
+        : undefined,
     };
   }
 
@@ -95,7 +96,10 @@ export class SubmitContactFormUseCaseImpl implements SubmitContactFormUseCase {
   private getErrorMessage(error: unknown): string {
     if (error instanceof Error) {
       // Mapear errores conocidos a mensajes user-friendly
-      if (error.message.includes('timeout') || error.message.includes('Tiempo de espera')) {
+      if (
+        error.message.includes('timeout') ||
+        error.message.includes('Tiempo de espera')
+      ) {
         return 'Tiempo de espera agotado. Por favor, inténtalo de nuevo.';
       }
       if (error.message.includes('network')) {
@@ -111,7 +115,7 @@ export class SubmitContactFormUseCaseImpl implements SubmitContactFormUseCase {
         return 'Error del servidor. Inténtalo más tarde.';
       }
     }
-    
+
     return 'Error inesperado. Por favor, inténtalo de nuevo.';
   }
 }
@@ -136,7 +140,7 @@ export class ContactFormValidatorImpl implements ContactFormValidator {
     if (!this.isValidName(formData.name)) {
       errors.push({
         field: 'name',
-        message: 'El nombre debe tener entre 2 y 50 caracteres'
+        message: 'El nombre debe tener entre 2 y 50 caracteres',
       });
     }
 
@@ -144,7 +148,7 @@ export class ContactFormValidatorImpl implements ContactFormValidator {
     if (!this.isValidEmail(formData.email)) {
       errors.push({
         field: 'email',
-        message: 'Por favor, introduce un email válido'
+        message: 'Por favor, introduce un email válido',
       });
     }
 
@@ -152,7 +156,7 @@ export class ContactFormValidatorImpl implements ContactFormValidator {
     if (!this.isValidSubject(formData.subject)) {
       errors.push({
         field: 'subject',
-        message: 'El asunto debe tener entre 5 y 100 caracteres'
+        message: 'El asunto debe tener entre 5 y 100 caracteres',
       });
     }
 
@@ -160,7 +164,7 @@ export class ContactFormValidatorImpl implements ContactFormValidator {
     if (!this.isValidMessage(formData.message)) {
       errors.push({
         field: 'message',
-        message: 'El mensaje debe tener entre 10 y 1000 caracteres'
+        message: 'El mensaje debe tener entre 10 y 1000 caracteres',
       });
     }
 
@@ -168,7 +172,7 @@ export class ContactFormValidatorImpl implements ContactFormValidator {
     if (formData.phone && !this.isValidPhone(formData.phone)) {
       errors.push({
         field: 'phone',
-        message: 'Por favor, introduce un teléfono válido'
+        message: 'Por favor, introduce un teléfono válido',
       });
     }
 
@@ -176,13 +180,13 @@ export class ContactFormValidatorImpl implements ContactFormValidator {
     if (formData.company && !this.isValidCompany(formData.company)) {
       errors.push({
         field: 'company',
-        message: 'El nombre de la empresa no puede exceder 100 caracteres'
+        message: 'El nombre de la empresa no puede exceder 100 caracteres',
       });
     }
 
     return {
       isValid: errors.length === 0,
-      errors
+      errors,
     };
   }
 

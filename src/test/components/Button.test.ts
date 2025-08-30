@@ -7,8 +7,8 @@ describe('Button Component', () => {
     const container = await AstroContainer.create();
     const result = await container.renderToString(Button, {
       props: {
-        text: 'Click me'
-      }
+        text: 'Click me',
+      },
     });
 
     expect(result).toContain('Click me');
@@ -22,8 +22,8 @@ describe('Button Component', () => {
     const result = await container.renderToString(Button, {
       props: {
         text: 'Primary Button',
-        variant: 'primary'
-      }
+        variant: 'primary',
+      },
     });
 
     expect(result).toContain('bg-blue-600');
@@ -36,8 +36,8 @@ describe('Button Component', () => {
     const result = await container.renderToString(Button, {
       props: {
         text: 'Secondary Button',
-        variant: 'secondary'
-      }
+        variant: 'secondary',
+      },
     });
 
     expect(result).toContain('bg-gray-600');
@@ -50,8 +50,8 @@ describe('Button Component', () => {
     const result = await container.renderToString(Button, {
       props: {
         text: 'Outline Button',
-        variant: 'outline'
-      }
+        variant: 'outline',
+      },
     });
 
     expect(result).toContain('border border-gray-300');
@@ -64,8 +64,8 @@ describe('Button Component', () => {
     const result = await container.renderToString(Button, {
       props: {
         text: 'Ghost Button',
-        variant: 'ghost'
-      }
+        variant: 'ghost',
+      },
     });
 
     expect(result).toContain('bg-transparent');
@@ -78,8 +78,8 @@ describe('Button Component', () => {
     const result = await container.renderToString(Button, {
       props: {
         text: 'Small Button',
-        size: 'sm'
-      }
+        size: 'sm',
+      },
     });
 
     expect(result).toContain('px-3 py-1.5');
@@ -91,8 +91,8 @@ describe('Button Component', () => {
     const result = await container.renderToString(Button, {
       props: {
         text: 'Large Button',
-        size: 'lg'
-      }
+        size: 'lg',
+      },
     });
 
     expect(result).toContain('px-6 py-3');
@@ -104,8 +104,8 @@ describe('Button Component', () => {
     const result = await container.renderToString(Button, {
       props: {
         text: 'Disabled Button',
-        disabled: true
-      }
+        disabled: true,
+      },
     });
 
     expect(result).toContain('disabled');
@@ -117,8 +117,8 @@ describe('Button Component', () => {
     const result = await container.renderToString(Button, {
       props: {
         text: 'Loading Button',
-        loading: true
-      }
+        loading: true,
+      },
     });
 
     expect(result).toContain('Cargando...');
@@ -131,8 +131,8 @@ describe('Button Component', () => {
     const result = await container.renderToString(Button, {
       props: {
         text: 'Link Button',
-        href: '/test-link'
-      }
+        href: '/test-link',
+      },
     });
 
     expect(result).toContain('<a');
@@ -145,8 +145,8 @@ describe('Button Component', () => {
     const result = await container.renderToString(Button, {
       props: {
         text: 'Submit Button',
-        type: 'submit'
-      }
+        type: 'submit',
+      },
     });
 
     expect(result).toContain('type="submit"');
@@ -157,8 +157,8 @@ describe('Button Component', () => {
     const result = await container.renderToString(Button, {
       props: {
         text: 'Custom Button',
-        className: 'custom-class'
-      }
+        className: 'custom-class',
+      },
     });
 
     expect(result).toContain('custom-class');

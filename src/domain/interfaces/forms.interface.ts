@@ -18,7 +18,7 @@ export interface FormValidation {
 }
 
 export interface ValidationRule {
-  type: "required" | "email" | "minLength" | "maxLength" | "pattern";
+  type: 'required' | 'email' | 'minLength' | 'maxLength' | 'pattern';
   value?: number | string;
   message: string;
 }

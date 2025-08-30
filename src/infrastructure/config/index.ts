@@ -9,9 +9,9 @@ export { siteConfig, validateSiteConfig } from './site.config';
 export { getEnvVars, getEnvVar, isDev, isProd } from './env.config';
 
 // Validación de formularios
-export { 
-  contactFormValidation, 
-  defaultValidationMessages, 
-  validationPatterns, 
-  formatValidationMessage 
+export {
+  contactFormValidation,
+  defaultValidationMessages,
+  validationPatterns,
+  formatValidationMessage,
 } from './validation.config';

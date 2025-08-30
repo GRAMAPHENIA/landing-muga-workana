@@ -1,0 +1,123 @@
+---
+/**
+ * Ejemplos de uso del componente Image optimizado
+ * Requirement: 8.1 - Optimización automática de imágenes
+ */
+
+import Image from '../Image.astro';
+---
+
+<div class="space-y-8 p-8">
+  <h2 class="text-2xl font-bold mb-6">Ejemplos del Componente Image</h2>
+
+  <!-- Imagen básica -->
+  <section>
+    <h3 class="text-lg font-semibold mb-4">Imagen Básica</h3>
+    <Image
+      src="/images/hero.jpg"
+      alt="Imagen hero de ejemplo"
+      width={800}
+      height={600}
+      className="rounded-lg shadow-md"
+    />
+  </section>
+
+  <!-- Imagen de alta prioridad (LCP) -->
+  <section>
+    <h3 class="text-lg font-semibold mb-4">
+      Imagen de Alta Prioridad (Above the fold)
+    </h3>
+    <Image
+      src="/images/hero-priority.jpg"
+      alt="Imagen hero prioritaria"
+      width={1200}
+      height={800}
+      priority={true}
+      className="w-full rounded-lg shadow-lg"
+    />
+  </section>
+
+  <!-- Imagen responsive con aspect ratio -->
+  <section>
+    <h3 class="text-lg font-semibold mb-4">
+      Imagen Responsive con Aspect Ratio
+    </h3>
+    <Image
+      src="/images/responsive.jpg"
+      alt="Imagen responsive"
+      aspectRatio="16/9"
+      objectFit="cover"
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      className="w-full max-w-md rounded-lg"
+    />
+  </section>
+
+  <!-- Imagen con placeholder blur -->
+  <section>
+    <h3 class="text-lg font-semibold mb-4">Imagen con Placeholder Blur</h3>
+    <Image
+      src="/images/with-blur.jpg"
+      alt="Imagen con placeholder blur"
+      width={600}
+      height={400}
+      placeholder="blur"
+      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+      className="rounded-lg shadow-md"
+    />
+  </section>
+
+  <!-- Imagen con formato WebP -->
+  <section>
+    <h3 class="text-lg font-semibold mb-4">Imagen Optimizada WebP</h3>
+    <Image
+      src="/images/optimized.jpg"
+      alt="Imagen optimizada en WebP"
+      width={500}
+      height={300}
+      format="webp"
+      fallbackFormat="jpg"
+      quality={85}
+      className="rounded-lg shadow-md"
+    />
+  </section>
+
+  <!-- Grid de imágenes -->
+  <section>
+    <h3 class="text-lg font-semibold mb-4">Grid de Imágenes</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <Image
+        src="/images/gallery-1.jpg"
+        alt="Imagen de galería 1"
+        aspectRatio="1/1"
+        objectFit="cover"
+        className="w-full rounded-lg shadow-sm hover:shadow-md transition-shadow"
+      />
+      <Image
+        src="/images/gallery-2.jpg"
+        alt="Imagen de galería 2"
+        aspectRatio="1/1"
+        objectFit="cover"
+        className="w-full rounded-lg shadow-sm hover:shadow-md transition-shadow"
+      />
+      <Image
+        src="/images/gallery-3.jpg"
+        alt="Imagen de galería 3"
+        aspectRatio="1/1"
+        objectFit="cover"
+        className="w-full rounded-lg shadow-sm hover:shadow-md transition-shadow"
+      />
+    </div>
+  </section>
+
+  <!-- Imagen externa (sin optimización) -->
+  <section>
+    <h3 class="text-lg font-semibold mb-4">Imagen Externa</h3>
+    <Image
+      src="https://picsum.photos/400/300"
+      alt="Imagen externa de ejemplo"
+      width={400}
+      height={300}
+      className="rounded-lg shadow-md"
+    />
+  </section>
+</div>

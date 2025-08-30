@@ -41,62 +41,65 @@ const {
 } = Astro.props;
 
 // Construir metadatos dinámicos
-const pageTitle = title 
+const pageTitle = title
   ? `${title} | ${siteConfig.metadata.site.title}`
   : siteConfig.metadata.site.title;
 
 const pageDescription = description || siteConfig.metadata.site.description;
 
-const pageKeywords = keywords 
+const pageKeywords = keywords
   ? [...siteConfig.metadata.site.keywords, ...keywords]
   : siteConfig.metadata.site.keywords;
 
 const pageOgImage = ogImage || siteConfig.metadata.openGraph.image;
-const pageCanonicalUrl = canonicalUrl || new URL(Astro.url.pathname, siteConfig.metadata.site.url).href;
+const pageCanonicalUrl =
+  canonicalUrl ||
+  new URL(Astro.url.pathname, siteConfig.metadata.site.url).href;
 
 // Structured Data por defecto
 const defaultStructuredData = {
-  "@context": "https://schema.org",
-  "@type": siteConfig.metadata.structuredData?.['@type'] || "WebSite",
-  "name": siteConfig.metadata.structuredData?.name || siteConfig.metadata.site.title,
-  "url": siteConfig.metadata.site.url,
-  "description": pageDescription,
-  "author": {
-    "@type": "Organization",
-    "name": siteConfig.metadata.site.author
+  '@context': 'https://schema.org',
+  '@type': siteConfig.metadata.structuredData?.['@type'] || 'WebSite',
+  name:
+    siteConfig.metadata.structuredData?.name || siteConfig.metadata.site.title,
+  url: siteConfig.metadata.site.url,
+  description: pageDescription,
+  author: {
+    '@type': 'Organization',
+    name: siteConfig.metadata.site.author,
   },
-  "inLanguage": lang,
-  "copyrightHolder": {
-    "@type": "Organization", 
-    "name": siteConfig.metadata.site.author
-  }
+  inLanguage: lang,
+  copyrightHolder: {
+    '@type': 'Organization',
+    name: siteConfig.metadata.site.author,
+  },
 };
 
 // Combinar structured data personalizado con el por defecto
-const finalStructuredData = structuredData 
+const finalStructuredData = structuredData
   ? { ...defaultStructuredData, ...structuredData }
   : defaultStructuredData;
 
 // Recursos críticos para preload
 const criticalResources = [
   ...siteConfig.performance.preloadFonts,
-  ...preloadResources
+  ...preloadResources,
 ];
 
 // Robots meta tag
 const robotsContent = [
   noindex ? 'noindex' : 'index',
-  nofollow ? 'nofollow' : 'follow'
+  nofollow ? 'nofollow' : 'follow',
 ].join(', ');
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang={lang} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    
+
     <!-- SEO Básico -->
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
@@ -104,84 +107,109 @@ const robotsContent = [
     <meta name="author" content={siteConfig.metadata.site.author} />
     <meta name="robots" content={robotsContent} />
     <link rel="canonical" href={pageCanonicalUrl} />
-    
+
     <!-- OpenGraph -->
     <meta property="og:type" content={ogType} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
-    <meta property="og:image" content={new URL(pageOgImage, siteConfig.metadata.site.url).href} />
+    <meta
+      property="og:image"
+      content={new URL(pageOgImage, siteConfig.metadata.site.url).href}
+    />
     <meta property="og:url" content={pageCanonicalUrl} />
     <meta property="og:site_name" content={siteConfig.metadata.site.title} />
     <meta property="og:locale" content={siteConfig.metadata.openGraph.locale} />
-    
+
     <!-- Twitter Cards -->
     <meta name="twitter:card" content={twitterCard} />
     <meta name="twitter:site" content={siteConfig.metadata.twitter.site} />
-    <meta name="twitter:creator" content={siteConfig.metadata.twitter.creator} />
+    <meta
+      name="twitter:creator"
+      content={siteConfig.metadata.twitter.creator}
+    />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDescription} />
-    <meta name="twitter:image" content={new URL(pageOgImage, siteConfig.metadata.site.url).href} />
-    
+    <meta
+      name="twitter:image"
+      content={new URL(pageOgImage, siteConfig.metadata.site.url).href}
+    />
+
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    
+
     <!-- Preload recursos críticos -->
-    {criticalResources.map((resource) => (
-      <link rel="preload" href={resource} as={resource.endsWith('.woff2') ? 'font' : 'style'} 
-            type={resource.endsWith('.woff2') ? 'font/woff2' : undefined}
-            crossorigin={resource.endsWith('.woff2') ? 'anonymous' : undefined} />
-    ))}
-    
+    {
+      criticalResources.map(resource => (
+        <link
+          rel="preload"
+          href={resource}
+          as={resource.endsWith('.woff2') ? 'font' : 'style'}
+          type={resource.endsWith('.woff2') ? 'font/woff2' : undefined}
+          crossorigin={resource.endsWith('.woff2') ? 'anonymous' : undefined}
+        />
+      ))
+    }
+
     <!-- DNS Prefetch para recursos externos -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
     <link rel="dns-prefetch" href="//formspree.io" />
-    
+
     <!-- Structured Data (JSON-LD) -->
-    <script type="application/ld+json" set:html={JSON.stringify(finalStructuredData)} />
-    
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(finalStructuredData)}
+    />
+
     <!-- Tema y configuración inicial -->
     <meta name="theme-color" content="#1f2937" />
     <meta name="color-scheme" content="light" />
-    
+
     <!-- Performance hints -->
     <meta name="format-detection" content="telephone=no" />
-    
+
     <!-- Seguridad -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="X-Frame-Options" content="DENY" />
     <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
-    
+
     <!-- Slot para metadatos adicionales -->
     <slot name="head" />
   </head>
-  
-  <body class={`min-h-screen bg-white text-gray-900 antialiased ${bodyClass}`}>
+
+  <body
+    class:list={[
+      `min-h-screen bg-white text-gray-900 antialiased`,
+      `${bodyClass}`,
+    ]}
+  >
     <!-- Skip to main content para accesibilidad -->
-    <a href="#main-content" 
-       class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 
-              bg-blue-600 text-white px-4 py-2 rounded-md z-50 
-              focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4
+              bg-blue-600 text-white px-4 py-2 rounded-md z-50
+              focus:outline-none focus:ring-2 focus:ring-blue-500"
+    >
       Saltar al contenido principal
     </a>
-    
+
     <!-- Contenido principal -->
     <div id="app" class="flex flex-col min-h-screen">
       <slot />
     </div>
-    
+
     <!-- Scripts críticos -->
     <script>
       // Detectar soporte de JavaScript y añadir clase
       document.documentElement.classList.add('js-enabled');
-      
+
       // Performance observer para Core Web Vitals (opcional)
       if ('PerformanceObserver' in window) {
         try {
-          const observer = new PerformanceObserver((list) => {
+          const observer = new PerformanceObserver(list => {
             for (const entry of list.getEntries()) {
               // Log de métricas para debugging en desarrollo
               if (import.meta.env.DEV) {
@@ -189,14 +217,14 @@ const robotsContent = [
               }
             }
           });
-          
+
           observer.observe({ entryTypes: ['measure', 'navigation'] });
         } catch (e) {
           // Silently fail si no hay soporte
         }
       }
     </script>
-    
+
     <!-- Slot para scripts adicionales -->
     <slot name="scripts" />
   </body>

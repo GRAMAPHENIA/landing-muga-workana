@@ -52,11 +52,11 @@ src/
 
 ```typescript
 interface ButtonProps {
-  variant: "primary" | "secondary" | "outline" | "ghost";
-  size: "sm" | "md" | "lg";
+  variant: 'primary' | 'secondary' | 'outline' | 'ghost';
+  size: 'sm' | 'md' | 'lg';
   disabled?: boolean;
   loading?: boolean;
-  type?: "button" | "submit" | "reset";
+  type?: 'button' | 'submit' | 'reset';
   text: string;
   href?: string;
   className?: string;
@@ -67,7 +67,7 @@ interface ButtonProps {
 
 ```typescript
 interface InputProps {
-  type: "text" | "email" | "password" | "tel" | "url";
+  type: 'text' | 'email' | 'password' | 'tel' | 'url';
   name: string;
   label: string;
   placeholder?: string;
@@ -96,9 +96,9 @@ interface CardProps {
   image?: {
     src: string;
     alt: string;
-    loading?: "lazy" | "eager";
+    loading?: 'lazy' | 'eager';
   };
-  variant: "default" | "featured" | "minimal";
+  variant: 'default' | 'featured' | 'minimal';
   className?: string;
   // Slots de Astro para contenido flexible
   slots?: {
@@ -158,18 +158,18 @@ interface SEOConfig {
     title: string;
     description: string;
     image: string;
-    type: "website";
+    type: 'website';
     locale: string;
   };
   twitter: {
-    card: "summary_large_image";
+    card: 'summary_large_image';
     site: string;
     creator: string;
     image: string;
   };
   // Structured data para rich snippets
   structuredData?: {
-    "@type": "Organization" | "WebSite";
+    '@type': 'Organization' | 'WebSite';
     name: string;
     url: string;
     logo?: string;
@@ -184,7 +184,7 @@ interface SEOConfig {
 ```typescript
 interface VersionConfig {
   changelogPath: string;
-  displayFormat: "full" | "short" | "semantic";
+  displayFormat: 'full' | 'short' | 'semantic';
   showInFooter: boolean;
   fallbackVersion: string;
 }
@@ -257,7 +257,7 @@ interface VersionInfo {
 interface ChangelogEntry {
   version: string;
   date: string;
-  type: "added" | "changed" | "deprecated" | "removed" | "fixed" | "security";
+  type: 'added' | 'changed' | 'deprecated' | 'removed' | 'fixed' | 'security';
   description: string;
 }
 ```
@@ -278,7 +278,7 @@ interface FormValidation {
 }
 
 interface ValidationRule {
-  type: "required" | "email" | "minLength" | "maxLength";
+  type: 'required' | 'email' | 'minLength' | 'maxLength';
   value?: number;
   message: string;
 }
@@ -293,17 +293,17 @@ interface ValidationRule {
 class ValidationError extends Error {
   constructor(
     public field: string,
-    message: string,
+    message: string
   ) {
     super(message);
-    this.name = "ValidationError";
+    this.name = 'ValidationError';
   }
 }
 
 class ConfigurationError extends Error {
   constructor(message: string) {
     super(message);
-    this.name = "ConfigurationError";
+    this.name = 'ConfigurationError';
   }
 }
 
@@ -311,10 +311,10 @@ class ConfigurationError extends Error {
 class FormSubmissionError extends Error {
   constructor(
     message: string,
-    public statusCode?: number,
+    public statusCode?: number
   ) {
     super(message);
-    this.name = "FormSubmissionError";
+    this.name = 'FormSubmissionError';
   }
 }
 ```
@@ -355,8 +355,8 @@ class FormSubmissionError extends Error {
 // Vitest configuration for Astro
 export default defineConfig({
   test: {
-    environment: "jsdom",
-    setupFiles: ["./src/test/setup.ts"],
+    environment: 'jsdom',
+    setupFiles: ['./src/test/setup.ts'],
     globals: true,
   },
   plugins: [astro()],

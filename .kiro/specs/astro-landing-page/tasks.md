@@ -91,20 +91,20 @@
   - Escribir tests de integración para formularios
   - _Requirements: 2.1, 6.2_
 
-- [ ] 7. Configurar SEO avanzado y archivos estáticos
-- [ ] 7.1 Implementar generación automática de sitemap
+- [x] 7. Configurar SEO avanzado y archivos estáticos
+- [x] 7.1 Implementar generación automática de sitemap
   - Configurar @astrojs/sitemap en astro.config.mjs
   - Implementar generación dinámica basada en páginas
   - Añadir configuración de frecuencia y prioridad
   - _Requirements: 3.2_
 
-- [ ] 7.2 Crear robots.txt optimizado
+- [x] 7.2 Crear robots.txt optimizado
   - Implementar robots.txt estático en carpeta public
   - Configurar reglas para crawlers y sitemap
   - Añadir configuración específica para SEO
   - _Requirements: 3.2_
 
-- [ ] 7.3 Implementar componente Image optimizado
+- [x] 7.3 Implementar componente Image optimizado
   - Crear componente Image.astro reutilizable con lazy loading HTML nativo
   - Implementar responsive images con srcset y sizes
   - Añadir fallbacks y alt text automático con TypeScript

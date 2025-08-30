@@ -16,17 +16,17 @@ export interface SEOConfig {
     title: string;
     description: string;
     image: string;
-    type: "website";
+    type: 'website';
     locale: string;
   };
   twitter: {
-    card: "summary_large_image";
+    card: 'summary_large_image';
     site: string;
     creator: string;
     image: string;
   };
   structuredData?: {
-    "@type": "Organization" | "WebSite";
+    '@type': 'Organization' | 'WebSite';
     name: string;
     url: string;
     logo?: string;

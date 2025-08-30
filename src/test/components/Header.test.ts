@@ -11,10 +11,27 @@ vi.mock('../../infrastructure/config/site.config', () => ({
   siteConfig: {
     navigation: [
       { label: 'Inicio', href: '/', ariaLabel: 'Ir a la página de inicio' },
-      { label: 'Acerca de', href: '/about', ariaLabel: 'Conocer más sobre nosotros' },
-      { label: 'Servicios', href: '/services', ariaLabel: 'Ver nuestros servicios' },
-      { label: 'Contacto', href: '/contact', ariaLabel: 'Contactar con nosotros' },
-      { label: 'GitHub', href: 'https://github.com', external: true, ariaLabel: 'Ver en GitHub' },
+      {
+        label: 'Acerca de',
+        href: '/about',
+        ariaLabel: 'Conocer más sobre nosotros',
+      },
+      {
+        label: 'Servicios',
+        href: '/services',
+        ariaLabel: 'Ver nuestros servicios',
+      },
+      {
+        label: 'Contacto',
+        href: '/contact',
+        ariaLabel: 'Contactar con nosotros',
+      },
+      {
+        label: 'GitHub',
+        href: 'https://github.com',
+        external: true,
+        ariaLabel: 'Ver en GitHub',
+      },
     ],
     logo: {
       src: '/images/logo.svg',
@@ -124,9 +141,9 @@ describe('Header Component Logic', () => {
 
     it('debe cambiar aria-expanded al alternar menú', () => {
       const menuButton = document.getElementById('mobile-menu-button');
-      
+
       expect(menuButton?.getAttribute('aria-expanded')).toBe('false');
-      
+
       // Simular click (cambiaría a true en implementación real)
       menuButton?.setAttribute('aria-expanded', 'true');
       expect(menuButton?.getAttribute('aria-expanded')).toBe('true');
@@ -149,13 +166,19 @@ describe('Header Component Logic', () => {
     });
 
     it('debe construir clases CSS correctamente', () => {
-      const buildHeaderClasses = (transparent: boolean, sticky: boolean, className: string) => {
+      const buildHeaderClasses = (
+        transparent: boolean,
+        sticky: boolean,
+        className: string
+      ) => {
         return [
           'w-full z-50 transition-all duration-300',
           sticky ? 'sticky top-0' : 'relative',
           transparent ? 'bg-transparent' : 'bg-white shadow-sm',
-          className
-        ].filter(Boolean).join(' ');
+          className,
+        ]
+          .filter(Boolean)
+          .join(' ');
       };
 
       const transparentClasses = buildHeaderClasses(true, true, 'custom-class');

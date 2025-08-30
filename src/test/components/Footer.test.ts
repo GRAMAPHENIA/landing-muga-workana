@@ -4,14 +4,18 @@
  */
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { getCurrentVersion, formatVersion, parseChangelog } from '../../infrastructure/utils/changelog-parser';
+import {
+  getCurrentVersion,
+  formatVersion,
+  parseChangelog,
+} from '../../infrastructure/utils/changelog-parser';
 
 // Mock del módulo fs para las pruebas
-vi.mock('fs', async (importOriginal) => {
+vi.mock('fs', async importOriginal => {
   const actual = await importOriginal<typeof import('fs')>();
   return {
     ...actual,
-    readFileSync: vi.fn()
+    readFileSync: vi.fn(),
   };
 });
 
@@ -86,13 +90,13 @@ Versión 2.1.3 - Última actualización
     it('debería parsear correctamente un CHANGELOG completo', async () => {
       // La función lee el archivo real, así que verificamos el contenido real
       const entries = parseChangelog();
-      
+
       expect(entries).toHaveLength(2);
       expect(entries[0].version).toBe('0.1.0');
       expect(entries[0].date).toBe('2025-08-29');
       expect(entries[0].changes.added).toHaveLength(8); // Número real de elementos añadidos
       expect(entries[0].changes.changed).toHaveLength(2); // Número real de elementos cambiados
-      
+
       expect(entries[1].version).toBe('0.0.1');
       expect(entries[1].date).toBe('2025-08-29');
       expect(entries[1].changes.added).toHaveLength(4); // Número real de elementos añadidos
@@ -122,7 +126,7 @@ describe('Footer Component Integration', () => {
 
     const version = getCurrentVersion();
     const formatted = formatVersion(version, 'short');
-    
+
     expect(formatted).toBe('0.1.0');
   });
 });
