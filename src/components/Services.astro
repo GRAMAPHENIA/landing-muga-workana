@@ -21,7 +21,7 @@ const services = [
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 fade-section">
       {services.map(service => (
-        <Card class="text-center" client:idle>
+        <Card class="text-center">
           <div class="flex justify-center mb-4">
             <img
               src={`/icons/${service.icon}.svg`}
@@ -41,7 +41,7 @@ const services = [
     </div>
 
     <div class="text-center fade-section">
-      <Button href="/servicios" variant="outline" size="lg" client:idle>Ver todos los servicios</Button>
+      <Button href="/servicios" variant="outline" size="lg">Ver todos los servicios</Button>
     </div>
   </div>
 </section>
