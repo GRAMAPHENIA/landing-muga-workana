@@ -1,19 +1,29 @@
 export const siteConfig = {
-  name: 'muga',
-  title: 'Desarrollo Web Profesional | Tu Empresa',
+  name: 'TechSolutions Pro',
+  title: 'Desarrollo Web Profesional | TechSolutions Pro',
   description:
-    'Desarrollo de sitios web y aplicaciones para empresas. Soluciones digitales profesionales.',
-  url: 'https://tu-empresa.com',
-  author: 'Tu Empresa',
-  email: 'contacto@tu-empresa.com',
-  phone: '+34 900 123 456',
-  address: 'Tu Dirección, Tu Ciudad',
+    'Agencia de desarrollo web especializada en crear sitios web modernos, aplicaciones web y soluciones digitales para empresas. Diseño responsive, SEO optimizado y resultados medibles.',
+  url: 'https://techsolutions-pro.com',
+  author: 'TechSolutions Pro',
+  email: 'contacto@techsolutions-pro.com',
+  phone: '+34 600 123 456',
+  address: 'Madrid, España',
+
+  // SEO y Analytics
+  seo: {
+    keywords: 'desarrollo web, diseño web, aplicaciones web, e-commerce, SEO, marketing digital',
+    ogImage: '/og-image.jpg',
+    twitterCard: 'summary_large_image',
+    googleAnalytics: 'G-XXXXXXXXXX', // Reemplazar con tu ID de GA4
+    googleTagManager: 'GTM-XXXXXXX', // Reemplazar con tu ID de GTM
+  },
 
   // Redes sociales
   social: {
-    linkedin: 'https://linkedin.com/company/tu-empresa',
-    twitter: 'https://twitter.com/tu_empresa',
-    github: 'https://github.com/tu-empresa',
+    linkedin: 'https://linkedin.com/company/techsolutions-pro',
+    twitter: 'https://twitter.com/techsolutions_pro',
+    github: 'https://github.com/techsolutions-pro',
+    instagram: 'https://instagram.com/techsolutions_pro',
   },
 
   // Configuración de formularios
@@ -26,26 +36,87 @@ export const siteConfig = {
     { name: 'Inicio', href: '#inicio' },
     { name: 'Servicios', href: '#servicios' },
     { name: 'Nosotros', href: '#nosotros' },
+    { name: 'Trabajos', href: '#trabajos' },
     { name: 'Testimonios', href: '#testimonios' },
     { name: 'Contacto', href: '#contacto' },
   ],
 
-  // Servicios principales (opcional - se puede usar en otros componentes)
+  // Servicios principales
   services: [
     {
       title: 'Desarrollo Web',
-      description: 'Sitios web modernos y responsivos',
+      description: 'Sitios web modernos, rápidos y optimizados para SEO',
       icon: 'globe',
     },
     {
       title: 'E-commerce',
-      description: 'Tiendas online completas',
+      description: 'Tiendas online completas con pasarelas de pago',
       icon: 'shopping-cart',
     },
     {
       title: 'Aplicaciones Web',
-      description: 'Sistemas web personalizados',
+      description: 'Sistemas web personalizados para tu negocio',
       icon: 'tablet-smartphone',
+    },
+    {
+      title: 'Consultoría Digital',
+      description: 'Estrategias digitales para crecimiento empresarial',
+      icon: 'trending-up',
+    },
+  ],
+
+  // Estadísticas de la empresa
+  stats: {
+    projects: '50+',
+    satisfaction: '98%',
+    responseTime: '2h',
+    experience: '5+',
+  },
+
+  // Testimonios de clientes
+  testimonials: [
+    {
+      name: 'María García',
+      position: 'CEO, DigitalCorp',
+      content: 'TechSolutions Pro transformó completamente nuestra presencia digital. El nuevo sitio web aumentó nuestras conversiones en un 150%.',
+      rating: 5,
+      avatar: '/testimonials/maria-garcia.jpg',
+    },
+    {
+      name: 'Carlos Rodríguez',
+      position: 'Fundador, StartupXYZ',
+      content: 'Excelente trabajo en nuestra aplicación web. El equipo fue profesional, comunicativo y entregó el proyecto a tiempo.',
+      rating: 5,
+      avatar: '/testimonials/carlos-rodriguez.jpg',
+    },
+    {
+      name: 'Ana Martínez',
+      position: 'Directora de Marketing, RetailPro',
+      content: 'La consultoría digital que recibimos fue invaluable. Nuestras ventas online han crecido un 200% en solo 6 meses.',
+      rating: 5,
+      avatar: '/testimonials/ana-martinez.jpg',
+    },
+  ],
+
+  // Proyectos destacados
+  featuredProjects: [
+    {
+      title: 'E-commerce Fashion',
+      description: 'Tienda online completa con pasarela de pagos',
+      category: 'E-commerce',
+      technologies: ['React', 'Node.js', 'Stripe'],
+    },
+    {
+      title: 'Dashboard Empresarial',
+      description: 'Sistema de gestión integral para empresas',
+      category: 'Aplicación Web',
+      technologies: ['Vue.js', 'Laravel', 'MySQL'],
+    },
+    {
+      title: 'Sitio Web Corporativo',
+      description: 'Landing page moderna con SEO optimizado',
+      category: 'Desarrollo Web',
+      technologies: ['Astro', 'TailwindCSS', 'TypeScript'],
     },
   ],
 };

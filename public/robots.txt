@@ -1,4 +1,23 @@
 User-agent: *
 Allow: /
 
+# Sitemap
 Sitemap: https://techsolutions-pro.com/sitemap-index.xml
+
+# Crawl-delay para evitar sobrecarga
+Crawl-delay: 1
+
+# Bloquear archivos innecesarios
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: /_astro/
+Disallow: /node_modules/
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /*.txt$
+
+# Permitir archivos importantes
+Allow: /favicon.ico
+Allow: /sitemap-index.xml
+Allow: /robots.txt

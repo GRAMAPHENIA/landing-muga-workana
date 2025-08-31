@@ -27,7 +27,9 @@ const currentVersion = getVersionFromChangelog();
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
         <!-- Información de la empresa -->
         <div class="md:col-span-2">
-          <h3 class="text-xl font-bold text-neutral-700 mb-4">{siteConfig.name}</h3>
+          <h3 class="text-xl font-bold text-neutral-700 mb-4">
+            {siteConfig.name}
+          </h3>
           <p class="text-neutral-600 mb-4 max-w-md">
             Creamos soluciones digitales innovadoras para empresas que buscan
             destacar en el mundo digital.
@@ -124,9 +126,7 @@ const currentVersion = getVersionFromChangelog();
             © {new Date().getFullYear()}
             {siteConfig.name}. Todos los derechos reservados.
           </p>
-          <span class="text-neutral-500 text-xs mt-1 md:mt-0">
-            v{currentVersion}
-          </span>
+          <span class="text-xs text-neutral-500">v{currentVersion}</span>
         </div>
         <div class="flex space-x-6 mt-4 md:mt-0">
           <a

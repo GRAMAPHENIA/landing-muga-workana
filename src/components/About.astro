@@ -4,97 +4,119 @@ import Card from './Card.astro';
 
 <section class="section">
   <div class="container">
-    <div class="text-center mb-16">
-      <h2 class="section-title">Sobre Nosotros</h2>
-      <p class="section-subtitle">
-        Somos un equipo de profesionales dedicados a crear soluciones digitales
-        que impulsan el crecimiento de tu negocio.
-      </p>
-    </div>
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="section-title">Sobre Nosotros</h2>
+        <p class="section-subtitle">
+          Somos un equipo de profesionales dedicados a crear soluciones digitales
+          que impulsan el crecimiento de tu negocio.
+        </p>
+      </div>
 
-    <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
-      <!-- Contenido principal -->
-      <div>
-        <h3 class="text-2xl font-bold text-neutral-700 mb-6">
-          Nuestra Misión
-        </h3>
-        <p class="text-neutral-600 mb-6 leading-relaxed">
-          Transformamos ideas en experiencias digitales excepcionales. Con más
-          de 5 años de experiencia en el desarrollo web, hemos ayudado a
-          empresas de todos los tamaños a establecer su presencia online y
-          alcanzar sus objetivos comerciales.
-        </p>
-        <p class="text-neutral-600 mb-8 leading-relaxed">
-          Nos especializamos en crear sitios web modernos, rápidos y optimizados
-          para SEO que no solo se ven increíbles, sino que también convierten
-          visitantes en clientes.
-        </p>
-        
-        <!-- Estadísticas -->
-        <div class="grid grid-cols-3 gap-6">
-          <div class="text-center">
-            <div class="text-2xl font-bold text-neutral-700 mb-1">50+</div>
-            <div class="text-sm text-neutral-600">Proyectos</div>
+      <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+        <!-- Contenido principal -->
+        <div>
+          <h3 class="text-2xl font-bold text-neutral-700 mb-6">Nuestra Misión</h3>
+          <p class="text-neutral-600 mb-6 leading-relaxed">
+            Transformamos ideas en experiencias digitales excepcionales. Con más
+            de 5 años de experiencia en el desarrollo web, hemos ayudado a
+            empresas de todos los tamaños a establecer su presencia online y
+            alcanzar sus objetivos comerciales.
+          </p>
+          <p class="text-neutral-600 mb-8 leading-relaxed">
+            Nos especializamos en crear sitios web modernos, rápidos y optimizados
+            para SEO que no solo se ven increíbles, sino que también convierten
+            visitantes en clientes.
+          </p>
+
+          <!-- Estadísticas -->
+          <div class="grid grid-cols-3 gap-6">
+            <div class="text-center">
+              <div class="text-2xl font-bold text-neutral-700 mb-1">50+</div>
+              <div class="text-sm text-neutral-600">Proyectos</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-bold text-neutral-700 mb-1">5+</div>
+              <div class="text-sm text-neutral-600">Años</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-bold text-neutral-700 mb-1">100%</div>
+              <div class="text-sm text-neutral-600">Satisfacción</div>
+            </div>
           </div>
-          <div class="text-center">
-            <div class="text-2xl font-bold text-neutral-700 mb-1">5+</div>
-            <div class="text-sm text-neutral-600">Años</div>
-          </div>
-          <div class="text-center">
-            <div class="text-2xl font-bold text-neutral-700 mb-1">100%</div>
-            <div class="text-sm text-neutral-600">Satisfacción</div>
+        </div>
+
+        <!-- Imagen o placeholder -->
+        <div class="relative">
+          <div
+            class="aspect-square bg-gradient-to-br from-neutral-100 to-neutral-200 rounded-3xl flex items-center justify-center border border-neutral-200/50"
+          >
+            <img
+              src="/icons/shield-user.svg"
+              alt="Equipo"
+              class="w-32 h-32"
+              style="filter: brightness(0) saturate(100%) invert(25%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(95%);"
+            />
           </div>
         </div>
       </div>
 
-      <!-- Imagen o placeholder -->
-      <div class="relative">
-        <div class="aspect-square bg-gradient-to-br from-neutral-100 to-neutral-200 rounded-3xl flex items-center justify-center border border-neutral-200/50">
-          <img src="/icons/shield-user.svg" alt="Equipo" class="w-32 h-32" style="filter: brightness(0) saturate(100%) invert(25%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(95%);" />
-        </div>
+      <!-- Valores o características del equipo -->
+      <div class="grid md:grid-cols-3 gap-8">
+        <Card class="text-center">
+          <div
+            class="inline-flex items-center justify-center w-16 h-16 bg-neutral-100 rounded-2xl mb-6"
+          >
+            <img
+              src="/icons/zap.svg"
+              alt="Innovación"
+              class="w-8 h-8"
+              style="filter: brightness(0) saturate(100%) invert(25%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(95%);"
+            />
+          </div>
+          <h3 class="text-xl font-semibold text-neutral-700 mb-3">Innovación</h3>
+          <p class="text-neutral-600 leading-relaxed">
+            Utilizamos las últimas tecnologías y mejores prácticas para crear
+            soluciones modernas y eficientes.
+          </p>
+        </Card>
+
+        <Card class="text-center">
+          <div
+            class="inline-flex items-center justify-center w-16 h-16 bg-neutral-100 rounded-2xl mb-6"
+          >
+            <img
+              src="/icons/shield-check.svg"
+              alt="Calidad"
+              class="w-8 h-8"
+              style="filter: brightness(0) saturate(100%) invert(25%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(95%);"
+            />
+          </div>
+          <h3 class="text-xl font-semibold text-neutral-700 mb-3">Calidad</h3>
+          <p class="text-neutral-600 leading-relaxed">
+            Cada proyecto pasa por rigurosos controles de calidad para garantizar
+            resultados excepcionales.
+          </p>
+        </Card>
+
+        <Card class="text-center">
+          <div
+            class="inline-flex items-center justify-center w-16 h-16 bg-neutral-100 rounded-2xl mb-6"
+          >
+            <img
+              src="/icons/target.svg"
+              alt="Puntualidad"
+              class="w-8 h-8"
+              style="filter: brightness(0) saturate(100%) invert(25%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(95%);"
+            />
+          </div>
+          <h3 class="text-xl font-semibold text-neutral-700 mb-3">Puntualidad</h3>
+          <p class="text-neutral-600 leading-relaxed">
+            Cumplimos con los plazos acordados y mantenemos una comunicación
+            constante durante todo el proceso.
+          </p>
+        </Card>
       </div>
-    </div>
-
-    <!-- Valores o características del equipo -->
-    <div class="grid md:grid-cols-3 gap-8">
-      <Card class="text-center">
-        <div class="inline-flex items-center justify-center w-16 h-16 bg-neutral-100 rounded-2xl mb-6">
-          <img src="/icons/zap.svg" alt="Innovación" class="w-8 h-8" style="filter: brightness(0) saturate(100%) invert(25%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(95%);" />
-        </div>
-        <h3 class="text-xl font-semibold text-neutral-700 mb-3">
-          Innovación
-        </h3>
-        <p class="text-neutral-600 leading-relaxed">
-          Utilizamos las últimas tecnologías y mejores prácticas para crear
-          soluciones modernas y eficientes.
-        </p>
-      </Card>
-
-      <Card class="text-center">
-        <div class="inline-flex items-center justify-center w-16 h-16 bg-neutral-100 rounded-2xl mb-6">
-          <img src="/icons/shield-check.svg" alt="Calidad" class="w-8 h-8" style="filter: brightness(0) saturate(100%) invert(25%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(95%);" />
-        </div>
-        <h3 class="text-xl font-semibold text-neutral-700 mb-3">
-          Calidad
-        </h3>
-        <p class="text-neutral-600 leading-relaxed">
-          Cada proyecto pasa por rigurosos controles de calidad para garantizar
-          resultados excepcionales.
-        </p>
-      </Card>
-
-      <Card class="text-center">
-        <div class="inline-flex items-center justify-center w-16 h-16 bg-neutral-100 rounded-2xl mb-6">
-          <img src="/icons/target.svg" alt="Puntualidad" class="w-8 h-8" style="filter: brightness(0) saturate(100%) invert(25%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(95%);" />
-        </div>
-        <h3 class="text-xl font-semibold text-neutral-700 mb-3">
-          Puntualidad
-        </h3>
-        <p class="text-neutral-600 leading-relaxed">
-          Cumplimos con los plazos acordados y mantenemos una comunicación
-          constante durante todo el proceso.
-        </p>
-      </Card>
     </div>
   </div>
 </section>

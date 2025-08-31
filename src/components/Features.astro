@@ -1,5 +1,4 @@
 ---
-
 const features = [
   {
     icon: 'zap',
@@ -36,14 +35,21 @@ const features = [
           features.map(feature => (
             <div class="text-center p-8 rounded-2xl border border-neutral-100">
               <div class="inline-flex items-center justify-center w-16 h-16 bg-neutral-100 rounded-2xl mb-6">
-                <img src={`/icons/${feature.icon}.svg`} alt={feature.title} class="w-8 h-8" style="filter: brightness(0) saturate(100%) invert(44%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(95%);" />
+                <img
+                  src={`/icons/${feature.icon}.svg`}
+                  alt={feature.title}
+                  class="w-8 h-8"
+                  style="filter: brightness(0) saturate(100%) invert(44%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(95%);"
+                />
               </div>
 
               <h3 class="text-xl font-bold text-neutral-700 mb-4">
                 {feature.title}
               </h3>
 
-              <p class="text-neutral-600 leading-relaxed">{feature.description}</p>
+              <p class="text-neutral-600 leading-relaxed">
+                {feature.description}
+              </p>
             </div>
           ))
         }

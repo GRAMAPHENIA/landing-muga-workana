@@ -13,7 +13,7 @@
     "lint:fix": "eslint . --ext .ts,.astro --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "type-check": "astro check",
+    "type-check": "NODE_OPTIONS='--max-old-space-size=4096' astro check",
     "check-all": "pnpm type-check && pnpm lint && pnpm format:check",
     "astro": "astro"
   },

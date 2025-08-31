@@ -1,22 +1,6 @@
-# Dependencias
 node_modules/
-pnpm-lock.yaml
-
-# Build outputs
 dist/
 .astro/
-
-# Logs
-*.log
-
-# Cache
-.cache/
-.vscode/
-.idea/
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Archivos específicos
-CHANGELOG.md
+pnpm-lock.yaml
+*.min.js
+*.min.css

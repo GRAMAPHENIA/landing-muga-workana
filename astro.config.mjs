@@ -71,11 +71,11 @@ export default defineConfig({
         // Páginas secundarias tienen prioridad media
         else {
           item.priority = 0.6;
-          item.changefreq = 'monthly';
+          item.changefreq = 'weekly';
         }
 
-        // Actualizar fecha de modificación
-        item.lastmod = new Date();
+        // Actualizar fecha de modificación como string
+        item.lastmod = new Date().toISOString();
 
         return item;
       },
@@ -83,4 +83,22 @@ export default defineConfig({
   ],
   output: 'static',
   site: SITE_URL,
+  
+  // Optimizaciones para reducir el tamaño del bundle
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            // Separar TailwindCSS en su propio chunk
+            tailwind: ['tailwindcss'],
+          },
+        },
+      },
+    },
+    // Optimizar dependencias
+    optimizeDeps: {
+      exclude: ['vue', '@vue/runtime-core', '@vue/runtime-dom'],
+    },
+  },
 });

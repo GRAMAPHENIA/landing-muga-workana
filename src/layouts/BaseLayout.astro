@@ -6,13 +6,15 @@ export interface Props {
   description?: string;
   image?: string;
   noindex?: boolean;
+  keywords?: string;
 }
 
 const {
   title = siteConfig.title,
   description = siteConfig.description,
-  image = `${siteConfig.url}/og-image.jpg`,
+  image = siteConfig.seo.ogImage,
   noindex = false,
+  keywords = siteConfig.seo.keywords,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -29,6 +31,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <!-- SEO Básico -->
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content={siteConfig.author} />
     <link rel="canonical" href={canonicalURL} />
     {noindex && <meta name="robots" content="noindex" />}
 
@@ -38,16 +42,51 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:locale" content="es_ES" />
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:card" content={siteConfig.seo.twitterCard} />
     <meta property="twitter:url" content={Astro.url} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={image} />
+    <meta property="twitter:creator" content="@techsolutions_pro" />
+
+    <!-- Google Analytics -->
+    {siteConfig.seo.googleAnalytics && siteConfig.seo.googleAnalytics !== 'G-XXXXXXXXXX' && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.seo.googleAnalytics}`}></script>
+        <script is:inline>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '{siteConfig.seo.googleAnalytics}');
+        </script>
+      </>
+    )}
+
+    <!-- Google Tag Manager -->
+    {siteConfig.seo.googleTagManager && siteConfig.seo.googleTagManager !== 'GTM-XXXXXXX' && (
+      <script is:inline>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});const f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?`&l=${l}`:'';j.async=true;j.src=
+        `https://www.googletagmanager.com/gtm.js?id=${i}${dl}`;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','{siteConfig.seo.googleTagManager}');
+      </script>
+    )}
   </head>
 
   <body class="min-h-screen bg-white text-neutral-900 font-sans antialiased">
+    <!-- Google Tag Manager (noscript) -->
+    {siteConfig.seo.googleTagManager && siteConfig.seo.googleTagManager !== 'GTM-XXXXXXX' && (
+      <noscript>
+        <iframe src={`https://www.googletagmanager.com/ns.html?id=${siteConfig.seo.googleTagManager}`}
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+      </noscript>
+    )}
+    
     <slot />
   </body>
 </html>
