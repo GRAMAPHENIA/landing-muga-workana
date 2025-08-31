@@ -36,6 +36,7 @@ const {
     action={siteConfig.formspree.contactForm}
     method="POST"
     class="max-w-2xl mx-auto space-y-6"
+    novalidate
   >
     {/* Nombre y Email */}
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -49,9 +50,14 @@ const {
           name="name"
           required
           aria-required="true"
-          class="input"
+          aria-invalid="false"
+          aria-describedby="name-error"
+          class="input placeholder:text-neutral-500 focus:ring-2 focus:ring-primary-600"
           placeholder="Tu nombre completo"
         />
+        <p id="name-error" class="hidden text-red-700 text-sm mt-1">
+          Por favor ingresa tu nombre completo
+        </p>
       </div>
 
       <div>
@@ -64,9 +70,14 @@ const {
           name="email"
           required
           aria-required="true"
-          class="input"
+          aria-invalid="false"
+          aria-describedby="email-error"
+          class="input placeholder:text-neutral-500 focus:ring-2 focus:ring-primary-600"
           placeholder="tu@email.com"
         />
+        <p id="email-error" class="hidden text-red-700 text-sm mt-1">
+          Por favor ingresa un email válido
+        </p>
       </div>
     </div>
 
@@ -82,9 +93,13 @@ const {
               type="tel"
               id="phone"
               name="phone"
-              class="input"
+              aria-describedby="phone-error"
+              class="input placeholder:text-neutral-500 focus:ring-2 focus:ring-primary-600"
               placeholder="+34 600 000 000"
             />
+            <p id="phone-error" class="hidden text-red-700 text-sm mt-1">
+              Ingresa un teléfono válido
+            </p>
           </div>
         )}
 
@@ -97,9 +112,13 @@ const {
               type="text"
               id="company"
               name="company"
-              class="input"
+              aria-describedby="company-error"
+              class="input placeholder:text-neutral-500 focus:ring-2 focus:ring-primary-600"
               placeholder="Nombre de tu empresa"
             />
+            <p id="company-error" class="hidden text-red-700 text-sm mt-1">
+              Ingresa el nombre de tu empresa
+            </p>
           </div>
         )}
       </div>
@@ -110,7 +129,11 @@ const {
       <label for="project-type" class="block text-sm font-medium text-neutral-900 mb-2">
         Tipo de proyecto
       </label>
-      <select id="project-type" name="project-type" class="input">
+      <select
+        id="project-type"
+        name="project-type"
+        class="input placeholder:text-neutral-500 focus:ring-2 focus:ring-primary-600"
+      >
         <option value="">Selecciona una opción</option>
         <option value="web-development">Desarrollo Web</option>
         <option value="web-app">Aplicación Web</option>
@@ -127,7 +150,11 @@ const {
       <label for="budget" class="block text-sm font-medium text-neutral-900 mb-2">
         Presupuesto estimado
       </label>
-      <select id="budget" name="budget" class="input">
+      <select
+        id="budget"
+        name="budget"
+        class="input placeholder:text-neutral-500 focus:ring-2 focus:ring-primary-600"
+      >
         <option value="">Selecciona un rango</option>
         <option value="under-5k">Menos de 5.000€</option>
         <option value="5k-10k">5.000€ - 10.000€</option>
@@ -148,9 +175,14 @@ const {
         rows="5"
         required
         aria-required="true"
-        class="input resize-none"
+        aria-invalid="false"
+        aria-describedby="message-error"
+        class="input resize-none placeholder:text-neutral-500 focus:ring-2 focus:ring-primary-600"
         placeholder="Describe brevemente tu proyecto y requerimientos..."
       ></textarea>
+      <p id="message-error" class="hidden text-red-700 text-sm mt-1">
+        Ingresa los detalles de tu proyecto
+      </p>
     </div>
 
     {/* Checkbox de privacidad */}
@@ -161,7 +193,8 @@ const {
         name="privacy"
         required
         aria-required="true"
-        class="mt-1 h-4 w-4 text-primary-600 border-neutral-300 rounded focus:ring-primary-600"
+        aria-invalid="false"
+        class="mt-1 h-4 w-4 text-primary-600 border-neutral-300 rounded focus:ring-2 focus:ring-primary-600"
       />
       <label for="privacy" class="ml-3 text-sm text-neutral-900">
         Acepto la{' '}
@@ -189,10 +222,12 @@ const {
 </div>
 
 <script>
-  const form = document.getElementById('contact-form') as HTMLFormElement;
-  const statusDiv = document.getElementById('form-status') as HTMLDivElement;
+const form = document.getElementById('contact-form') as HTMLFormElement | null;
+const statusDiv = document.getElementById('form-status') as HTMLDivElement | null;
 
-  form?.addEventListener('submit', async (e) => {
+// Solo si existen los elementos continuamos
+if (form && statusDiv) {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
     const originalText = submitButton.textContent;
@@ -212,8 +247,7 @@ const {
       if (response.ok) {
         statusDiv.className =
           'text-center p-4 rounded-xl bg-green-50 text-green-800 border border-green-200';
-        statusDiv.textContent =
-          '¡Mensaje enviado correctamente! Te contactaremos pronto.';
+        statusDiv.textContent = '¡Mensaje enviado correctamente! Te contactaremos pronto.';
         form.reset();
       } else {
         throw new Error('Error en el envío');
@@ -221,11 +255,12 @@ const {
     } catch {
       statusDiv.className =
         'text-center p-4 rounded-xl bg-red-50 text-red-800 border border-red-200';
-      statusDiv.textContent =
-        'Error al enviar el mensaje. Por favor, inténtalo de nuevo.';
+      statusDiv.textContent = 'Error al enviar el mensaje. Por favor, inténtalo de nuevo.';
     } finally {
       submitButton.disabled = false;
       submitButton.textContent = originalText;
     }
   });
+}
+
 </script>
