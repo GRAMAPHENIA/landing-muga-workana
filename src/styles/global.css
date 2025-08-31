@@ -16,7 +16,6 @@
   html {
     scroll-behavior: smooth;
     overflow-x: hidden;
-    /* Prevenir layout shift por scrollbar */
     scrollbar-gutter: stable;
   }
 
@@ -33,7 +32,6 @@
     line-height: 1.6;
     overflow-x: hidden;
     min-height: 100vh;
-    /* Prevenir layout shift */
     margin: 0;
     padding: 0;
   }
@@ -42,19 +40,16 @@
     box-sizing: border-box;
   }
 
-  /* Prevenir layout shift en imágenes */
   img {
     max-width: 100%;
     height: auto;
     display: block;
   }
 
-  /* Prevenir layout shift en botones */
   button {
     font-family: inherit;
   }
 
-  /* Prevenir layout shift en inputs */
   input,
   textarea,
   select {
@@ -62,7 +57,6 @@
     font-size: inherit;
   }
 
-  /* Tipografía moderna */
   h1,
   h2,
   h3,
@@ -75,12 +69,10 @@
     margin: 0;
   }
 
-  /* Prevenir layout shift en párrafos */
   p {
     margin: 0;
   }
 
-  /* Prevenir layout shift en listas */
   ul,
   ol {
     margin: 0;
@@ -88,26 +80,35 @@
     list-style: none;
   }
 
-  /* Prevenir layout shift en enlaces */
   a {
     text-decoration: none;
     color: inherit;
   }
+
+  /* ================================
+     H1 base para Lighthouse y deprecated API
+  ================================= */
+  h1,
+  section h1,
+  article h1,
+  aside h1,
+  nav h1 {
+    @apply text-4xl font-bold leading-tight;
+  }
 }
 
+/* ================================
+   Components
+================================ */
 @layer components {
-
-  /* Contenedor principal */
   .container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
     width: 100%;
     max-width: 100vw;
   }
 
-  /* Botones */
   .btn {
     @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2;
-    /* Prevenir layout shift */
     min-height: 48px;
     min-width: 48px;
   }
@@ -124,47 +125,37 @@
     @apply bg-transparent text-neutral-700 border border-neutral-300 hover:border-neutral-400 focus:ring-neutral-500;
   }
 
-  /* Inputs */
   .input {
     @apply w-full px-4 py-3 border border-neutral-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent;
-    /* Prevenir layout shift */
     min-height: 48px;
   }
 
-  /* Cards */
   .card {
     @apply bg-white border border-neutral-200 rounded-2xl p-6 shadow-sm;
-    /* Prevenir layout shift */
     min-height: 200px;
   }
 
-  /* Secciones */
   .section {
     @apply py-8 lg:py-12;
-    /* Prevenir layout shift */
     min-height: 100px;
   }
 
   .section-title {
     @apply text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-4 text-neutral-700;
-    /* Prevenir layout shift */
     min-height: 1.2em;
   }
 
   .section-subtitle {
     @apply text-lg lg:text-xl text-neutral-600 text-center max-w-3xl mx-auto mb-12 leading-relaxed;
-    /* Prevenir layout shift */
     min-height: 1.6em;
   }
 
-  /* Placeholder para imágenes */
   .image-placeholder {
     @apply bg-neutral-600 flex items-center justify-center;
     aspect-ratio: 16/9;
     min-height: 200px;
   }
 
-  /* Prevenir layout shift en grid */
   .grid-stable {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -173,15 +164,15 @@
   }
 }
 
+/* ================================
+   Utilities
+================================ */
 @layer utilities {
-
-  /* Prevenir overflow horizontal */
   .no-overflow {
     overflow-x: hidden;
     max-width: 100vw;
   }
 
-  /* Gradientes personalizados */
   .gradient-text {
     @apply bg-gradient-to-r from-neutral-900 to-neutral-600 bg-clip-text text-transparent;
   }
@@ -190,7 +181,6 @@
     @apply bg-gradient-to-br from-neutral-50 to-white;
   }
 
-  /* Espaciado consistente */
   .space-section {
     @apply py-8 lg:py-12;
   }
@@ -199,17 +189,14 @@
     @apply space-y-6 lg:space-y-8;
   }
 
-  /* Responsive utilities */
   .safe-area {
     @apply w-full max-w-full overflow-x-hidden;
   }
 
-  /* Prevenir layout shift */
   .no-layout-shift {
     contain: layout;
   }
 
-  /* Aspect ratio utilities */
   .aspect-square {
     aspect-ratio: 1 / 1;
   }
@@ -229,6 +216,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -240,21 +228,21 @@
     opacity: 0;
     transform: translateY(40px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* Scroll suave mejorado */
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
   }
 }
 
-/* Mejoras de accesibilidad */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -264,14 +252,12 @@
   }
 }
 
-/* Prevenir layout shift en dispositivos móviles */
 @media (max-width: 768px) {
   .container {
     padding-left: 1rem;
     padding-right: 1rem;
   }
 
-  /* Asegurar que el header no cause layout shift */
   header {
     position: fixed;
     top: 0;
@@ -280,28 +266,12 @@
     z-index: 50;
   }
 
-  /* Ajustar padding para el header fijo */
   main {
     padding-top: 4rem;
   }
 }
 
-/* =============================
-   Headings fijos para Lighthouse y deprecated API
-============================= */
-h1,
-section h1,
-article h1,
-aside h1,
-nav h1 {
-  font-size: 2.5rem; /* Ajustar según tu diseño */
-  font-weight: bold;
-  line-height: 1.2;
-}
-
-/* =============================
-   Fade-in animations
-============================= */
+/* Fade-in animations */
 .fade-section {
   opacity: 0;
   transform: translateY(20px);
@@ -313,9 +283,7 @@ nav h1 {
   transform: translateY(0);
 }
 
-/* =============================
-   Clamp de texto
-============================= */
+/* Clamp de texto */
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
