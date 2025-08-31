@@ -283,7 +283,7 @@
 
 
 /* Secciones con animación de entrada */
-.fade-section {
+/* .fade-section {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s ease, transform 0.6s ease;
@@ -292,4 +292,4 @@
 .fade-section.fade-in {
   opacity: 1;
   transform: translateY(0);
-}
+} */
