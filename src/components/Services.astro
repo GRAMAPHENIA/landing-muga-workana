@@ -46,50 +46,42 @@ const services = [
 ---
 
 <section class="section">
-  <div class="container">
-    <div class="max-w-6xl mx-auto">
-      <!-- Encabezado -->
-      <div class="text-center mb-16">
-        <h2 class="section-title">Servicios</h2>
-        <p class="section-subtitle">
-          Soluciones web adaptadas a las necesidades de tu empresa
-        </p>
-      </div>
+  <div class="container mx-auto max-w-6xl">
+    <!-- Encabezado -->
+    <header class="text-center mb-16">
+      <h2 class="section-title">Servicios</h2>
+      <p class="section-subtitle">
+        Soluciones web adaptadas a las necesidades de tu empresa
+      </p>
+    </header>
 
-      <!-- Grid de servicios -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-        {
-          services.map(service => (
-            <Card class="text-center">
-              <div class="flex justify-center mb-4">
-                <img
-                  src={`/icons/${service.icon}.svg`}
-                  alt={service.title}
-                  class="w-12 h-12"
-                  style="filter: brightness(0) saturate(100%) invert(44%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(95%);"
-                  loading="lazy"
-                  decoding="async"
-                  fetchpriority="low"
-                />
-              </div>
-              <h3 class="text-xl font-semibold text-neutral-700 mb-3">
-                {service.title}
-              </h3>
-              <p class="text-neutral-600 mb-4">{service.description}</p>
-              <div class="text-sm text-neutral-500 font-medium">
-                {service.price}
-              </div>
-            </Card>
-          ))
-        }
-      </div>
+    <!-- Grid de servicios -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+      {services.map(service => (
+        <Card class="text-center">
+          <div class="flex justify-center mb-4">
+            <img
+              src={`/icons/${service.icon}.svg`}
+              alt={service.title}
+              class="w-12 h-12"
+              style="filter: brightness(0) saturate(100%) invert(44%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(95%);"
+              loading="lazy"
+              decoding="async"
+              fetchpriority="low"
+            />
+          </div>
+          <h3 class="text-xl font-semibold text-neutral-700 mb-3">{service.title}</h3>
+          <p class="text-neutral-600 mb-4">{service.description}</p>
+          <div class="text-sm text-neutral-500 font-medium">{service.price}</div>
+        </Card>
+      ))}
+    </div>
 
-      <!-- CTA -->
-      <div class="text-center">
-        <Button href="/servicios" variant="outline" size="lg">
-          Ver todos los servicios
-        </Button>
-      </div>
+    <!-- CTA -->
+    <div class="text-center">
+      <Button href="/servicios" variant="outline" size="lg">
+        Ver todos los servicios
+      </Button>
     </div>
   </div>
 </section>
