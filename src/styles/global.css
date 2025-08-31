@@ -229,7 +229,6 @@
     opacity: 0;
     transform: translateY(20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -241,7 +240,6 @@
     opacity: 0;
     transform: translateY(40px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -257,7 +255,6 @@
 
 /* Mejoras de accesibilidad */
 @media (prefers-reduced-motion: reduce) {
-
   *,
   *::before,
   *::after {
@@ -290,14 +287,15 @@
 }
 
 /* =============================
-   Headings fijos para Lighthouse
+   Headings fijos para Lighthouse y deprecated API
 ============================= */
+h1,
 section h1,
 article h1,
 aside h1,
 nav h1 {
-  font-size: 2.5rem;
-  /* equivalente a text-4xl en Tailwind */
+  font-size: 2.5rem; /* Ajustar según tu diseño */
+  font-weight: bold;
   line-height: 1.2;
 }
 
@@ -330,12 +328,4 @@ nav h1 {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-section h1,
-article h1,
-aside h1,
-nav h1 {
-  font-size: 2rem;
-  font-weight: bold;
 }
