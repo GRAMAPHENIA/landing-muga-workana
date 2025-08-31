@@ -1,4 +1,4 @@
-// ui.js - Refactor moderno y optimizado
+// ui.js - Refactor moderno y optimizado para Astro
 
 document.addEventListener("DOMContentLoaded", () => {
   // --- Menú móvil ---
@@ -27,11 +27,12 @@ document.addEventListener("DOMContentLoaded", () => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add("fade-in");
-        obs.unobserve(entry.target); // deja de observar para optimizar
+        obs.unobserve(entry.target); // optimiza, deja de observar
       }
     });
   }, observerOptions);
 
-  const fadeSections = document.querySelectorAll<HTMLElement>(".fade-section");
+  // Convierte el NodeList en Array real para que forEach siempre funcione
+  const fadeSections = Array.from(document.querySelectorAll(".fade-section"));
   fadeSections.forEach((section) => observer.observe(section));
 });

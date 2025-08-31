@@ -3,62 +3,25 @@ import Card from './Card.astro';
 import Button from './Button.astro';
 
 const services = [
-  {
-    icon: 'globe',
-    title: 'Desarrollo Web',
-    description:
-      'Sitios web modernos y responsivos con las últimas tecnologías.',
-    price: 'Desde 2.500€',
-  },
-  {
-    icon: 'shopping-cart',
-    title: 'E-commerce',
-    description: 'Tiendas online completas con gestión de productos y pagos.',
-    price: 'Desde 4.500€',
-  },
-  {
-    icon: 'tablet-smartphone',
-    title: 'Aplicaciones Web',
-    description: 'Aplicaciones web personalizadas para tu negocio.',
-    price: 'Desde 6.000€',
-  },
-  {
-    icon: 'chart-no-axes-combined',
-    title: 'SEO & Marketing',
-    description:
-      'Optimización para buscadores y estrategias de marketing digital.',
-    price: 'Desde 800€/mes',
-  },
-  {
-    icon: 'cog',
-    title: 'Mantenimiento',
-    description: 'Soporte técnico y actualizaciones para tu sitio web.',
-    price: 'Desde 200€/mes',
-  },
-  {
-    icon: 'lightbulb',
-    title: 'Consultoría',
-    description:
-      'Asesoramiento técnico y estratégico para tu proyecto digital.',
-    price: 'Desde 150€/hora',
-  },
+  { icon: 'globe', title: 'Desarrollo Web', description: 'Sitios web modernos y responsivos con las últimas tecnologías.', price: 'Desde 2.500€' },
+  { icon: 'shopping-cart', title: 'E-commerce', description: 'Tiendas online completas con gestión de productos y pagos.', price: 'Desde 4.500€' },
+  { icon: 'tablet-smartphone', title: 'Aplicaciones Web', description: 'Aplicaciones web personalizadas para tu negocio.', price: 'Desde 6.000€' },
+  { icon: 'chart-no-axes-combined', title: 'SEO & Marketing', description: 'Optimización para buscadores y estrategias de marketing digital.', price: 'Desde 800€/mes' },
+  { icon: 'cog', title: 'Mantenimiento', description: 'Soporte técnico y actualizaciones para tu sitio web.', price: 'Desde 200€/mes' },
+  { icon: 'lightbulb', title: 'Consultoría', description: 'Asesoramiento técnico y estratégico para tu proyecto digital.', price: 'Desde 150€/hora' },
 ];
 ---
 
 <section class="section">
   <div class="container mx-auto max-w-6xl">
-    <!-- Encabezado -->
-    <header class="text-center mb-16">
+    <header class="text-center mb-16 fade-section">
       <h2 class="section-title">Servicios</h2>
-      <p class="section-subtitle">
-        Soluciones web adaptadas a las necesidades de tu empresa
-      </p>
+      <p class="section-subtitle">Soluciones web adaptadas a las necesidades de tu empresa</p>
     </header>
 
-    <!-- Grid de servicios -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 fade-section">
       {services.map(service => (
-        <Card class="text-center">
+        <Card class="text-center" client:idle>
           <div class="flex justify-center mb-4">
             <img
               src={`/icons/${service.icon}.svg`}
@@ -77,11 +40,8 @@ const services = [
       ))}
     </div>
 
-    <!-- CTA -->
-    <div class="text-center">
-      <Button href="/servicios" variant="outline" size="lg">
-        Ver todos los servicios
-      </Button>
+    <div class="text-center fade-section">
+      <Button href="/servicios" variant="outline" size="lg" client:idle>Ver todos los servicios</Button>
     </div>
   </div>
 </section>
