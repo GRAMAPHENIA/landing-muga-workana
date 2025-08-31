@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Paleta de colores reducida */
+:root {
+  --color-primary: #000000;
+  --color-secondary: #ffffff;
+  --color-accent: #6b7280;
+  --color-background: #f9fafb;
+  --color-text: #111827;
+  --color-text-light: #6b7280;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family:
+      'Inter',
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  /* Tipografía moderna */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+  }
+}
+
+@layer components {
+  /* Contenedor principal */
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Botones */
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply bg-neutral-900 hover:bg-neutral-800 text-white focus:ring-neutral-500;
+  }
+
+  .btn-secondary {
+    @apply bg-neutral-300 hover:bg-neutral-200 text-neutral-900 border-2 border-neutral-300 focus:ring-neutral-500;
+  }
+
+  .btn-outline {
+    @apply bg-transparent text-neutral-700 border border-neutral-300 hover:border-neutral-400 focus:ring-neutral-500;
+  }
+
+  /* Inputs */
+  .input {
+    @apply w-full px-4 py-3 border border-neutral-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-white border border-neutral-200 rounded-2xl p-6 shadow-sm;
+  }
+
+  /* Secciones */
+  .section {
+    @apply py-8 lg:py-12;
+  }
+
+  .section-title {
+    @apply text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-4 text-neutral-700;
+  }
+
+  .section-subtitle {
+    @apply text-lg lg:text-xl text-neutral-600 text-center max-w-3xl mx-auto mb-12 leading-relaxed;
+  }
+}
+
+@layer utilities {
+  /* Gradientes personalizados */
+  .gradient-text {
+    @apply bg-gradient-to-r from-neutral-900 to-neutral-600 bg-clip-text text-transparent;
+  }
+
+  .gradient-bg {
+    @apply bg-gradient-to-br from-neutral-50 to-white;
+  }
+
+  /* Espaciado consistente */
+  .space-section {
+    @apply py-8 lg:py-12;
+  }
+
+  .space-content {
+    @apply space-y-6 lg:space-y-8;
+  }
+}
+
+/* Keyframes para animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scroll suave mejorado */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

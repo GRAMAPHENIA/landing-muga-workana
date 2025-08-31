@@ -1,0 +1,63 @@
+---
+
+const features = [
+  {
+    icon: 'zap',
+    title: 'Desarrollo Eficiente',
+    description: 'Entregamos proyectos de calidad en los tiempos acordados.',
+  },
+  {
+    icon: 'target',
+    title: 'Enfoque Comercial',
+    description: 'Diseñamos pensando en los objetivos de tu negocio.',
+  },
+  {
+    icon: 'shield-check',
+    title: 'Soporte Incluido',
+    description: 'Mantenimiento y actualizaciones para tu tranquilidad.',
+  },
+];
+---
+
+<section class="section">
+  <div class="container">
+    <div class="max-w-6xl mx-auto">
+      <!-- Encabezado -->
+      <div class="text-center mb-16">
+        <h2 class="section-title">Nuestro Enfoque</h2>
+        <p class="section-subtitle">
+          Trabajamos con metodología probada para entregar resultados efectivos
+        </p>
+      </div>
+
+      <!-- Grid de características -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {
+          features.map(feature => (
+            <div class="text-center p-8 rounded-2xl border border-neutral-100">
+              <div class="inline-flex items-center justify-center w-16 h-16 bg-neutral-100 rounded-2xl mb-6">
+                <img src={`/icons/${feature.icon}.svg`} alt={feature.title} class="w-8 h-8" style="filter: brightness(0) saturate(100%) invert(44%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(95%);" />
+              </div>
+
+              <h3 class="text-xl font-bold text-neutral-700 mb-4">
+                {feature.title}
+              </h3>
+
+              <p class="text-neutral-600 leading-relaxed">{feature.description}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- CTA adicional -->
+      <div class="text-center mt-16">
+        <div
+          class="inline-flex items-center px-6 py-3 bg-neutral-50 rounded-full text-sm text-neutral-600"
+        >
+          <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+          Experiencia comprobada en múltiples proyectos
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -111,15 +111,15 @@
   - Integrar con optimización de imágenes nativa de Astro
   - _Requirements: 8.1_
 
-- [ ] 8. Crear páginas principales de la landing page
-- [ ] 8.1 Implementar página de inicio (index.astro)
+- [x] 8. Crear páginas principales de la landing page
+- [x] 8.1 Implementar página de inicio (index.astro)
   - Crear estructura de hero section con componentes reutilizables
   - Implementar secciones de features, testimonios y CTA
   - Añadir formulario de contacto integrado
   - Optimizar para Core Web Vitals
   - _Requirements: 3.5, 7.1, 7.2, 7.3, 8.4_
 
-- [ ] 8.2 Implementar páginas adicionales (about, contact)
+- [-] 8.2 Implementar páginas adicionales (about, contact)
   - Crear página about.astro con información de la empresa
   - Implementar página contact.astro con formulario dedicado
   - Añadir breadcrumbs y navegación interna
@@ -141,8 +141,8 @@
   - Añadir service worker básico para caching estático (opcional)
   - _Requirements: 8.1, 8.3, 8.4_
 
-- [ ] 10. Documentación completa del proyecto
-- [ ] 10.1 Crear README.md completo en español
+- [x] 10. Documentación completa del proyecto
+- [x] 10.1 Crear README.md completo en español
   - Escribir instrucciones de instalación paso a paso
   - Documentar comandos de desarrollo y build
   - Añadir guía de configuración y personalización
@@ -156,8 +156,8 @@
   - Añadir docs/components.md documentando componentes reutilizables
   - _Requirements: 5.2, 5.3, 5.5_
 
-- [ ] 11. Testing completo y validación final
-- [ ] 11.1 Implementar suite completa de tests unitarios
+- [x] 11. Testing completo y validación final
+- [x] 11.1 Implementar suite completa de tests unitarios
   - Escribir tests para todos los componentes reutilizables
   - Crear tests para servicios de dominio y aplicación
   - Implementar tests para utilidades y helpers
@@ -171,15 +171,15 @@
   - Configurar CI/CD pipeline para testing automático
   - _Requirements: 2.5, 8.4_
 
-- [ ] 12. Configuración final y scripts de automatización
-- [ ] 12.1 Configurar scripts de package.json para pnpm
+- [x] 12. Configuración final y scripts de automatización
+- [x] 12.1 Configurar scripts de package.json para pnpm
   - Implementar scripts para pnpm dev, build, preview, test
   - Añadir scripts para pnpm lint, format y type-check
   - Crear scripts para deployment y maintenance con pnpm
   - Configurar husky para pre-commit hooks con pnpm
   - _Requirements: 5.4_
 
-- [ ] 12.2 Crear CHANGELOG.md y versionado
+- [x] 12.2 Crear CHANGELOG.md y versionado
   - Implementar CHANGELOG.md con formato estándar
   - Configurar versionado semántico
   - Añadir scripts para release management

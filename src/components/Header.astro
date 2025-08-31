@@ -1,0 +1,94 @@
+---
+import { siteConfig } from '../config/site';
+import Button from './Button.astro';
+---
+
+<header
+  class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-neutral-200"
+>
+  <div class="container">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <a href="/" class="flex items-center space-x-2">
+        <span class="text-2xl font-bold text-neutral-700"
+          >{siteConfig.name}</span
+        >
+      </a>
+
+      <!-- Navegación Desktop -->
+      <nav class="hidden md:flex items-center space-x-8">
+        {
+          siteConfig.navigation.map(item => (
+            <a href={item.href} class="text-neutral-700">
+              {item.name}
+            </a>
+          ))
+        }
+      </nav>
+
+      <!-- CTA Button -->
+      <div class="hidden md:block">
+        <Button href="#contacto" variant="outline"> Contactar </Button>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-button"
+        class="md:hidden p-2 rounded-lg hover:bg-neutral-100"
+        aria-label="Abrir menú"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      class="hidden md:hidden py-4 border-t border-neutral-200"
+    >
+      <nav class="flex flex-col space-y-4">
+        {
+          siteConfig.navigation.map(item => (
+            <a href={item.href} class="text-neutral-700 py-2">
+              {item.name}
+            </a>
+          ))
+        }
+        <div class="pt-4">
+          <Button href="#contacto" variant="primary" class="w-full">
+            Contactar
+          </Button>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  mobileMenuButton?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+
+  // Close mobile menu when clicking on a link
+  const mobileLinks = mobileMenu?.querySelectorAll('a');
+  mobileLinks?.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+    });
+  });
+</script>

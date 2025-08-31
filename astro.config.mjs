@@ -10,7 +10,9 @@ const SITE_URL = 'https://mi-landing-page.com';
 // https://astro.build/config
 export default defineConfig({
   integrations: [
-    tailwind(),
+    tailwind({
+      applyBaseStyles: false, // Usaremos nuestros estilos globales
+    }),
     sitemap({
       // Configuración del sitemap con prioridades dinámicas
       changefreq: 'weekly',

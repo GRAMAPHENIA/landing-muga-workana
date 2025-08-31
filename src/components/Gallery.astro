@@ -1,0 +1,116 @@
+---
+import Icon from './Icon.astro';
+
+const projects = [
+  {
+    title: 'Tienda Online Premium',
+    category: 'E-commerce',
+    description: 'Plataforma de venta online con gestión completa de productos',
+    icon: 'shopping-cart',
+  },
+  {
+    title: 'Sistema de Gestión',
+    category: 'Aplicación Web',
+    description: 'Dashboard administrativo para control empresarial',
+    icon: 'cog',
+  },
+  {
+    title: 'Sitio Corporativo',
+    category: 'Sitio Web',
+    description: 'Página web profesional con diseño moderno',
+    icon: 'globe',
+  },
+  {
+    title: 'Portfolio Creativo',
+    category: 'Sitio Web',
+    description: 'Galería de trabajos con efectos visuales',
+    icon: 'sparkles',
+  },
+  {
+    title: 'App de Reservas',
+    category: 'Aplicación Web',
+    description: 'Sistema de reservas online personalizado',
+    icon: 'tablet-smartphone',
+  },
+  {
+    title: 'Blog Corporativo',
+    category: 'Blog',
+    description: 'Plataforma de contenidos optimizada para SEO',
+    icon: 'lightbulb',
+  },
+];
+---
+
+<section class="section">
+  <div class="container">
+    <div class="max-w-6xl mx-auto">
+      <!-- Encabezado -->
+      <div class="text-center mb-16">
+        <h2 class="section-title">Proyectos Realizados</h2>
+        <p class="section-subtitle">
+          Ejemplos de trabajos desarrollados para diferentes sectores
+        </p>
+      </div>
+
+      <!-- Grid de proyectos -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {
+          projects.map(project => (
+            <div class="group cursor-pointer">
+              <div class="bg-white rounded-2xl overflow-hidden shadow-sm">
+                <div class="aspect-video bg-gradient-to-br from-neutral-200 to-neutral-300 relative overflow-hidden">
+                  <div class="absolute inset-0 bg-neutral-400 flex items-center justify-center">
+                    <Icon
+                      name="image"
+                      size="xl"
+                      variant="medium"
+                    />
+                  </div>
+
+                  <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center">
+                    <div class="text-white text-center">
+                      <div class="text-sm font-medium mb-2">Ver proyecto</div>
+                      <div class="w-8 h-8 border-2 border-white rounded-full flex items-center justify-center mx-auto">
+                        <span class="text-sm">→</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="p-6">
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="text-xs font-medium text-neutral-500 uppercase tracking-wide">
+                      {project.category}
+                    </span>
+                    <div class="w-2 h-2 bg-green-500 rounded-full" />
+                  </div>
+
+                  <h3 class="text-lg font-bold text-neutral-700 mb-2 group-hover:text-neutral-900">
+                    {project.title}
+                  </h3>
+
+                  <p class="text-neutral-600 text-sm leading-relaxed">
+                    {project.description}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- CTA -->
+      <div class="text-center mt-16">
+        <div class="inline-flex flex-col items-center">
+          <p class="text-neutral-600 mb-4">¿Quieres ver más proyectos?</p>
+          <button
+            class="inline-flex items-center px-6 py-3 bg-neutral-900 text-white rounded-full"
+          >
+            Ver portfolio completo
+            <span class="ml-2">→</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

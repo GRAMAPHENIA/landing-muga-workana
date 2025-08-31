@@ -1,86 +1,182 @@
-# Landing Page Profesional con Astro
+# 🚀 Landing Page Empresarial - TechSolutions Pro
 
-Una landing page profesional construida con Astro, TypeScript y TailwindCSS siguiendo arquitectura hexagonal y las mejores prácticas de desarrollo.
+Una landing page profesional y completa construida con **Astro**, **TypeScript** y **TailwindCSS**. Diseño moderno, código optimizado y totalmente responsive.
 
-## 🚀 Características
+## ✨ Características
 
-- **Framework**: Astro 4.x con TypeScript
-- **Estilos**: TailwindCSS con configuración personalizada
-- **Arquitectura**: Hexagonal (Clean Architecture)
-- **SEO**: Configuración completa con metadatos, OpenGraph, Twitter Cards
-- **Formularios**: Integración con Formspree
-- **Versionado**: Automático desde CHANGELOG.md
-- **Testing**: Vitest para pruebas unitarias e integración
-- **Calidad**: ESLint + Prettier configurados
+- **🎯 Landing Page Completa**: Una sola página con todas las secciones necesarias
+- **⚡ Astro 5.x**: Framework moderno y ultra-rápido
+- **🎨 TailwindCSS**: Estilos utilitarios y diseño responsive
+- **📱 100% Responsive**: Optimizado para móviles, tablets y desktop
+- **🔍 SEO Optimizado**: Metadatos, OpenGraph, Twitter Cards y sitemap
+- **📧 Formulario Funcional**: Integración con Formspree
+- **🚀 Performance**: Carga ultra-rápida y Core Web Vitals optimizados
 
-## 📁 Estructura del Proyecto
+## 📋 Secciones Incluidas
+
+1. **Header** - Navegación fija con menú móvil
+2. **Hero** - Propuesta de valor principal con estadísticas
+3. **Servicios** - Grid de servicios con iconos y descripciones
+4. **Sobre Nosotros** - Historia, misión y valores de la empresa
+5. **Testimonios** - Reseñas de clientes con fotos y valoraciones
+6. **Contacto** - Formulario completo + información de contacto
+7. **CTA Final** - Llamada a la acción con fondo oscuro
+8. **Footer** - Enlaces, redes sociales y información legal
+
+## 🏗️ Estructura del Proyecto
 
 ```text
-/
-├── docs/                    # Documentación técnica
-├── public/                  # Assets estáticos
-├── src/
-│   ├── domain/             # Entidades y reglas de negocio
-│   │   ├── entities/       # Modelos de datos
-│   │   ├── interfaces/     # Contratos/puertos
-│   │   └── services/       # Lógica de dominio
-│   ├── application/        # Casos de uso
-│   │   ├── usecases/       # Casos de uso específicos
-│   │   └── dto/            # Data Transfer Objects
-│   ├── infrastructure/     # Adaptadores externos
-│   │   ├── api/            # Clientes API (Formspree, etc.)
-│   │   ├── config/         # Configuraciones
-│   │   └── utils/          # Utilidades técnicas
-│   └── ui/                 # Capa de presentación
-│       ├── components/     # Componentes Astro
-│       ├── layouts/        # Layouts de página
-│       ├── pages/          # Páginas Astro
-│       └── styles/         # Estilos globales
-├── CHANGELOG.md            # Historial de cambios
-└── package.json
+src/
+├── components/          # Componentes reutilizables
+│   ├── Button.astro     # Botón con variantes
+│   ├── Card.astro       # Tarjeta base
+│   ├── ContactForm.astro # Formulario de contacto
+│   ├── CTA.astro        # Llamada a la acción
+│   ├── Footer.astro     # Pie de página
+│   ├── Header.astro     # Cabecera con navegación
+│   ├── Hero.astro       # Sección principal
+│   ├── Services.astro   # Grid de servicios
+│   └── Testimonials.astro # Testimonios de clientes
+├── config/
+│   └── site.ts          # Configuración del sitio
+├── layouts/
+│   └── BaseLayout.astro # Layout base con SEO
+├── pages/
+│   └── index.astro      # Página principal (landing)
+└── styles/
+    └── global.css       # Estilos globales y utilidades
 ```
 
-## 🧞 Comandos
+## 🚀 Inicio Rápido
 
-Todos los comandos se ejecutan desde la raíz del proyecto usando **pnpm**:
+1. **Instalar dependencias**:
 
-| Comando           | Acción                                               |
-| :---------------- | :--------------------------------------------------- |
-| `pnpm install`    | Instala las dependencias                             |
-| `pnpm dev`        | Inicia el servidor de desarrollo en `localhost:4321` |
-| `pnpm build`      | Construye el sitio para producción en `./dist/`      |
-| `pnpm preview`    | Previsualiza la construcción localmente              |
-| `pnpm test`       | Ejecuta las pruebas con Vitest                       |
-| `pnpm lint`       | Ejecuta ESLint para revisar el código                |
-| `pnpm format`     | Formatea el código con Prettier                      |
-| `pnpm type-check` | Verifica los tipos de TypeScript                     |
-
-## 🛠️ Instalación
-
-1. Clona el repositorio
-2. Instala las dependencias:
    ```bash
    pnpm install
    ```
-3. Inicia el servidor de desarrollo:
+
+2. **Configurar Formspree** (opcional):
+   - Edita `src/config/site.ts`
+   - Cambia el endpoint de Formspree por el tuyo
+
+3. **Personalizar contenido**:
+   - Edita `src/config/site.ts` con tu información
+   - Personaliza colores en `src/styles/global.css`
+
+4. **Iniciar desarrollo**:
+
    ```bash
    pnpm dev
    ```
 
-## 📚 Documentación
+5. **Construir para producción**:
+   ```bash
+   pnpm build
+   ```
 
-- [Arquitectura](./docs/architecture.md) - Explicación de la arquitectura hexagonal
-- [Componentes](./docs/components.md) - Documentación de componentes reutilizables
-- [Contribución](./docs/contributing.md) - Guía para contribuir al proyecto
-- [Despliegue](./docs/deployment.md) - Instrucciones de despliegue
+## 🎨 Personalización
 
-## 🎯 Próximos Pasos
+### Cambiar Información de la Empresa
 
-1. Configurar variables de entorno para Formspree
-2. Personalizar la configuración SEO en `src/infrastructure/config/site.config.ts`
-3. Añadir contenido a las páginas principales
-4. Configurar el dominio en `astro.config.mjs`
+Edita `src/config/site.ts`:
+
+```typescript
+export const siteConfig = {
+  name: 'Tu Empresa',
+  title: 'Tu Título SEO',
+  description: 'Tu descripción',
+  email: 'tu@email.com',
+  phone: '+34 600 000 000',
+  // ... más configuraciones
+};
+```
+
+### Modificar Servicios
+
+En `src/config/site.ts`, actualiza el array `services`:
+
+```typescript
+services: [
+  {
+    title: 'Tu Servicio',
+    description: 'Descripción del servicio',
+    icon: '🎯',
+  },
+  // ... más servicios
+];
+```
+
+### Cambiar Colores y Estilos
+
+Edita `src/styles/global.css` para personalizar:
+
+- Colores de botones
+- Tipografías
+- Espaciados
+- Efectos hover
+
+## 📧 Configuración del Formulario
+
+1. Crea una cuenta en [Formspree](https://formspree.io/)
+2. Crea un nuevo formulario
+3. Copia el endpoint y pégalo en `src/config/site.ts`:
+
+```typescript
+formspree: {
+  contactForm: 'https://formspree.io/f/tu-endpoint';
+}
+```
+
+## 🌐 Despliegue
+
+### Netlify
+
+1. Conecta tu repositorio
+2. Build command: `pnpm build`
+3. Publish directory: `dist`
+
+### Vercel
+
+1. Importa tu proyecto
+2. Framework preset: `Astro`
+3. Deploy
+
+### Otros Proveedores
+
+El proyecto genera archivos estáticos en `/dist` que puedes subir a cualquier hosting.
+
+## 🛠️ Comandos Disponibles
+
+| Comando           | Descripción            |
+| ----------------- | ---------------------- |
+| `pnpm dev`        | Servidor de desarrollo |
+| `pnpm build`      | Build de producción    |
+| `pnpm preview`    | Preview del build      |
+| `pnpm lint`       | Linting con ESLint     |
+| `pnpm format`     | Formateo con Prettier  |
+| `pnpm type-check` | Verificación de tipos  |
+
+## 📱 Responsive Design
+
+- **Mobile First**: Diseñado primero para móviles
+- **Breakpoints**: sm (640px), md (768px), lg (1024px), xl (1280px)
+- **Navegación Móvil**: Menú hamburguesa funcional
+- **Imágenes Optimizadas**: Lazy loading nativo
+
+## 🔍 SEO Incluido
+
+- ✅ Meta tags optimizados
+- ✅ Open Graph para redes sociales
+- ✅ Twitter Cards
+- ✅ Sitemap automático
+- ✅ Robots.txt
+- ✅ URLs canónicas
+- ✅ Structured data ready
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+MIT License - Úsalo libremente para proyectos personales y comerciales.
+
+---
+
+**¿Necesitas ayuda?** Abre un issue o contacta con nosotros.

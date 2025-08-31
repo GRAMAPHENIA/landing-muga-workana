@@ -1,0 +1,91 @@
+---
+import Button from './Button.astro';
+---
+
+<section class="section flex items-center">
+  <div class="container">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <!-- Contenido principal -->
+        <div class="text-center lg:text-left">
+          <!-- Título principal -->
+          <h1
+            class="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-700 mb-6 leading-tight"
+          >
+            Desarrollo web profesional
+          </h1>
+
+          <!-- Subtítulo -->
+          <p class="text-xl text-neutral-600 mb-8 leading-relaxed">
+            Creamos sitios web modernos y funcionales para tu empresa
+          </p>
+
+          <!-- CTAs -->
+          <div
+            class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12"
+          >
+            <Button href="#contacto" variant="primary" size="lg">
+              Comenzar ahora
+            </Button>
+            <Button href="#servicios" variant="secondary" size="lg">
+              Ver servicios
+            </Button>
+          </div>
+
+          <!-- Stats rápidas -->
+          <div class="grid grid-cols-3 gap-6 max-w-sm mx-auto lg:mx-0">
+            <div class="text-center lg:text-left">
+              <div class="text-2xl font-bold text-neutral-700">XX+</div>
+              <div class="text-sm text-neutral-600">Proyectos</div>
+            </div>
+            <div class="text-center lg:text-left">
+              <div class="text-2xl font-bold text-neutral-700">XX%</div>
+              <div class="text-sm text-neutral-600">Satisfacción</div>
+            </div>
+            <div class="text-center lg:text-left">
+              <div class="text-2xl font-bold text-neutral-700">XXh</div>
+              <div class="text-sm text-neutral-600">Respuesta</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Imagen central simplificada -->
+        <div class="relative">
+          <div
+            class="bg-neutral-200 rounded-3xl aspect-square flex items-center justify-center"
+          >
+            <!-- Placeholder simple para imagen -->
+            <div class="w-32 h-32 rounded-2xl flex items-center justify-center">
+              <img src="/icons/rocket.svg" alt="Desarrollo web" class="w-40 h-40" style="filter: brightness(0) saturate(100%) invert(44%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(95%);" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Credibilidad: logos de clientes -->
+      <div class="mt-20 text-center">
+        <p class="text-sm text-neutral-500 mb-12">
+          Confían en nosotros
+        </p>
+        <div class="flex justify-center items-center gap-16 md:gap-20">
+          <!-- Logos placeholder simplificados -->
+          <div class="opacity-60 hover:opacity-100 transition-opacity duration-300">
+            <div class="w-24 h-12 bg-neutral-200 rounded-lg flex items-center justify-center">
+              <img src="/icons/globe.svg" alt="Cliente 1" class="w-6 h-6" style="filter: brightness(0) saturate(100%) invert(60%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(95%);" />
+            </div>
+          </div>
+          <div class="opacity-60 hover:opacity-100 transition-opacity duration-300">
+            <div class="w-24 h-12 bg-neutral-200 rounded-lg flex items-center justify-center">
+              <img src="/icons/cpu.svg" alt="Cliente 2" class="w-6 h-6" style="filter: brightness(0) saturate(100%) invert(60%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(95%);" />
+            </div>
+          </div>
+          <div class="opacity-60 hover:opacity-100 transition-opacity duration-300">
+            <div class="w-24 h-12 bg-neutral-200 rounded-lg flex items-center justify-center">
+              <img src="/icons/sparkles.svg" alt="Cliente 3" class="w-6 h-6" style="filter: brightness(0) saturate(100%) invert(60%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(95%);" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

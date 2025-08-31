@@ -1,0 +1,75 @@
+---
+import Button from './Button.astro';
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  primaryButtonText?: string;
+  primaryButtonHref?: string;
+  secondaryButtonText?: string;
+  secondaryButtonHref?: string;
+  background?: 'white' | 'neutral' | 'black';
+}
+
+const {
+  title = '¿Listo para llevar tu negocio al siguiente nivel?',
+  subtitle = 'Contacta con nosotros y descubre cómo podemos ayudarte a alcanzar tus objetivos digitales.',
+  primaryButtonText = 'Contactar',
+  primaryButtonHref = '/contacto',
+  secondaryButtonText = 'Ver servicios',
+  secondaryButtonHref = '/servicios',
+  background = 'black',
+} = Astro.props;
+
+const backgroundClasses = {
+  white: 'bg-white text-neutral-900',
+  neutral: 'bg-neutral-50 text-neutral-900',
+  black: 'bg-neutral-900 text-white',
+};
+
+const buttonVariants = {
+  white: { primary: 'primary' as const, secondary: 'outline' as const },
+  neutral: { primary: 'primary' as const, secondary: 'outline' as const },
+  black: { primary: 'secondary' as const, secondary: 'outline' as const },
+};
+---
+
+<section class={`section ${backgroundClasses[background]}`}>
+  <div class="container">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2
+        class="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-700 mb-6"
+      >
+        {title}
+      </h2>
+
+      <p
+        class={`text-xl mb-12 max-w-2xl mx-auto ${background === 'black' ? 'text-neutral-300' : 'text-neutral-600'}`}
+      >
+        {subtitle}
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <Button
+          href={primaryButtonHref}
+          variant={buttonVariants[background].primary}
+          size="lg"
+        >
+          {primaryButtonText}
+        </Button>
+
+        {
+          secondaryButtonText && (
+            <Button
+              href={secondaryButtonHref}
+              variant={buttonVariants[background].secondary}
+              size="lg"
+            >
+              {secondaryButtonText}
+            </Button>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>

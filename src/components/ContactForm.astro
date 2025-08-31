@@ -1,0 +1,246 @@
+---
+import Button from './Button.astro';
+import { siteConfig } from '../config/site';
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  showPhone?: boolean;
+  showCompany?: boolean;
+  class?: string;
+}
+
+const {
+  title = 'Solicita información',
+  subtitle = 'Completa el formulario y nos pondremos en contacto contigo.',
+  showPhone = true,
+  showCompany = true,
+  class: className = '',
+} = Astro.props;
+---
+
+<div class={`bg-white ${className}`}>
+  {
+    (title || subtitle) && (
+      <div class="text-center mb-8">
+        {title && <h2 class="text-2xl lg:text-3xl font-bold text-neutral-700 mb-4">{title}</h2>}
+        {subtitle && <p class="text-neutral-600 max-w-2xl mx-auto">{subtitle}</p>}
+      </div>
+    )
+  }
+
+  <form
+    id="contact-form"
+    action={siteConfig.formspree.contactForm}
+    method="POST"
+    class="max-w-2xl mx-auto space-y-6"
+  >
+    <!-- Nombre y Email en una fila -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label for="name" class="block text-sm font-medium text-neutral-700 mb-2">
+          Nombre completo *
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          class="input"
+          placeholder="Tu nombre completo"
+        />
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm font-medium text-neutral-700 mb-2">
+          Email *
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          class="input"
+          placeholder="tu@email.com"
+        />
+      </div>
+    </div>
+
+    <!-- Teléfono y Empresa (opcional) -->
+    {
+      (showPhone || showCompany) && (
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {showPhone && (
+            <div>
+              <label
+                for="phone"
+                class="block text-sm font-medium text-neutral-700 mb-2"
+              >
+                Teléfono
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                class="input"
+                placeholder="+34 600 000 000"
+              />
+            </div>
+          )}
+
+          {showCompany && (
+            <div>
+              <label
+                for="company"
+                class="block text-sm font-medium text-neutral-700 mb-2"
+              >
+                Empresa
+              </label>
+              <input
+                type="text"
+                id="company"
+                name="company"
+                class="input"
+                placeholder="Nombre de tu empresa"
+              />
+            </div>
+          )}
+        </div>
+      )
+    }
+
+    <!-- Tipo de proyecto -->
+    <div>
+      <label
+        for="project-type"
+        class="block text-sm font-medium text-neutral-700 mb-2"
+      >
+        Tipo de proyecto
+      </label>
+      <select id="project-type" name="project-type" class="input">
+        <option value="">Selecciona una opción</option>
+        <option value="web-development">Desarrollo Web</option>
+        <option value="web-app">Aplicación Web</option>
+        <option value="ecommerce">E-commerce</option>
+        <option value="seo-marketing">SEO & Marketing</option>
+        <option value="maintenance">Mantenimiento</option>
+        <option value="consulting">Consultoría</option>
+        <option value="other">Otro</option>
+      </select>
+    </div>
+
+    <!-- Presupuesto -->
+    <div>
+      <label for="budget" class="block text-sm font-medium text-neutral-700 mb-2">
+        Presupuesto estimado
+      </label>
+      <select id="budget" name="budget" class="input">
+        <option value="">Selecciona un rango</option>
+        <option value="under-5k">Menos de 5.000€</option>
+        <option value="5k-10k">5.000€ - 10.000€</option>
+        <option value="10k-25k">10.000€ - 25.000€</option>
+        <option value="25k-50k">25.000€ - 50.000€</option>
+        <option value="over-50k">Más de 50.000€</option>
+      </select>
+    </div>
+
+    <!-- Mensaje -->
+    <div>
+      <label for="message" class="block text-sm font-medium text-neutral-700 mb-2">
+        Cuéntanos sobre tu proyecto *
+      </label>
+      <textarea
+        id="message"
+        name="message"
+        rows="5"
+        required
+        class="input resize-none"
+        placeholder="Describe brevemente tu proyecto y requerimientos..."
+      ></textarea>
+    </div>
+
+    <!-- Checkbox de privacidad -->
+    <div class="flex items-start">
+      <input
+        type="checkbox"
+        id="privacy"
+        name="privacy"
+        required
+        class="mt-1 h-4 w-4 text-neutral-900 border-neutral-300 rounded focus:ring-neutral-900"
+      />
+      <label for="privacy" class="ml-3 text-sm text-neutral-600">
+        Acepto la <a href="/privacidad" class="text-neutral-900 hover:underline"
+          >política de privacidad</a
+        >
+        y el tratamiento de mis datos personales. *
+      </label>
+    </div>
+
+    <!-- Botón de envío -->
+    <div class="text-center">
+      <Button
+        type="submit"
+        variant="primary"
+        size="lg"
+        class="w-full md:w-auto"
+      >
+        Enviar
+      </Button>
+    </div>
+
+    <!-- Mensaje de estado -->
+    <div id="form-status" class="hidden text-center p-4 rounded-xl"></div>
+  </form>
+</div>
+
+<script>
+  // Manejo del formulario
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const statusDiv = document.getElementById('form-status') as HTMLDivElement;
+
+  form?.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    const submitButton = form.querySelector(
+      'button[type="submit"]'
+    ) as HTMLButtonElement;
+    const originalText = submitButton.textContent;
+
+    // Estado de carga
+    submitButton.disabled = true;
+    submitButton.textContent = 'Enviando...';
+    statusDiv.className = 'hidden';
+
+    try {
+      const formData = new FormData(form);
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Accept: 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        // Éxito
+        statusDiv.className =
+          'text-center p-4 rounded-xl bg-green-50 text-green-800 border border-green-200';
+        statusDiv.textContent =
+          '¡Mensaje enviado correctamente! Te contactaremos pronto.';
+        form.reset();
+      } else {
+        throw new Error('Error en el envío');
+      }
+    } catch {
+      // Error
+      statusDiv.className =
+        'text-center p-4 rounded-xl bg-red-50 text-red-800 border border-red-200';
+      statusDiv.textContent =
+        'Error al enviar el mensaje. Por favor, inténtalo de nuevo.';
+    } finally {
+      // Restaurar botón
+      submitButton.disabled = false;
+      submitButton.textContent = originalText;
+    }
+  });
+</script>
