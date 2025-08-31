@@ -3,20 +3,22 @@ export interface Props {
   title?: string;
   class?: string;
   href?: string;
+  ariaLabel?: string; // Texto accesible para screen readers
 }
 
-const { title, class: className = '', href } = Astro.props;
+const { title, class: className = '', href, ariaLabel } = Astro.props;
 
 const cardClasses = ['card', className].join(' ');
 ---
 
 {
   href ? (
-    <a href={href} class={cardClasses}>
+    <a href={href} class={cardClasses} aria-label={ariaLabel ?? title}>
       {title && (
         <h3 class="text-xl font-semibold text-neutral-700 mb-3">{title}</h3>
       )}
       <slot />
+      {ariaLabel && <span class="sr-only">{ariaLabel}</span>}
     </a>
   ) : (
     <div class={cardClasses}>

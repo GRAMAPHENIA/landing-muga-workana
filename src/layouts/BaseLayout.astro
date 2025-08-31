@@ -33,12 +33,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
     <meta name="author" content={siteConfig.author} />
-    <link rel="canonical" href={canonicalURL} />
+    <link rel="canonical" href={canonicalURL.href} />
     {noindex && <meta name="robots" content="noindex" />}
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url} />
+    <meta property="og:url" content={Astro.url.href} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
@@ -47,7 +47,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <!-- Twitter -->
     <meta property="twitter:card" content={siteConfig.seo.twitterCard} />
-    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:url" content={Astro.url.href} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={image} />
@@ -61,7 +61,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', '{siteConfig.seo.googleAnalytics}');
+          gtag('config', siteConfig.seo.googleAnalytics);
         </script>
       </>
     )}
@@ -69,11 +69,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <!-- Google Tag Manager -->
     {siteConfig.seo.googleTagManager && siteConfig.seo.googleTagManager !== 'GTM-XXXXXXX' && (
       <script is:inline>
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});const f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?`&l=${l}`:'';j.async=true;j.src=
-        `https://www.googletagmanager.com/gtm.js?id=${i}${dl}`;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','{siteConfig.seo.googleTagManager}');
+        (function(w,d,s,l,i){
+          w[l]=w[l]||[];
+          w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+          const f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),
+                dl=l!='dataLayer'?`&l=${l}`:'';
+          j.async=true;
+          j.src=`https://www.googletagmanager.com/gtm.js?id=${i}${dl}`;
+          f.parentNode.insertBefore(j,f);
+        })(window, document, 'script', 'dataLayer', siteConfig.seo.googleTagManager);
       </script>
     )}
   </head>
@@ -86,7 +91,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
                 height="0" width="0" style="display:none;visibility:hidden"></iframe>
       </noscript>
     )}
-    
+
     <slot />
   </body>
 </html>

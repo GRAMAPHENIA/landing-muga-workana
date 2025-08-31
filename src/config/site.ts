@@ -12,7 +12,7 @@ export const siteConfig = {
   // SEO y Analytics
   seo: {
     keywords: 'desarrollo web, diseño web, aplicaciones web, e-commerce, SEO, marketing digital',
-    ogImage: '/og-image.jpg',
+    ogImage: '/rectangle.svg',
     twitterCard: 'summary_large_image',
     googleAnalytics: 'G-XXXXXXXXXX', // Reemplazar con tu ID de GA4
     googleTagManager: 'GTM-XXXXXXX', // Reemplazar con tu ID de GTM
@@ -80,43 +80,49 @@ export const siteConfig = {
       position: 'CEO, DigitalCorp',
       content: 'TechSolutions Pro transformó completamente nuestra presencia digital. El nuevo sitio web aumentó nuestras conversiones en un 150%.',
       rating: 5,
-      avatar: '/testimonials/maria-garcia.jpg',
+      avatar: '/rectangle.svg',
     },
     {
       name: 'Carlos Rodríguez',
       position: 'Fundador, StartupXYZ',
       content: 'Excelente trabajo en nuestra aplicación web. El equipo fue profesional, comunicativo y entregó el proyecto a tiempo.',
       rating: 5,
-      avatar: '/testimonials/carlos-rodriguez.jpg',
+      avatar: '/rectangle.svg',
     },
     {
       name: 'Ana Martínez',
       position: 'Directora de Marketing, RetailPro',
       content: 'La consultoría digital que recibimos fue invaluable. Nuestras ventas online han crecido un 200% en solo 6 meses.',
       rating: 5,
-      avatar: '/testimonials/ana-martinez.jpg',
+      avatar: '/rectangle.svg',
     },
   ],
 
-  // Proyectos destacados
+  // Proyectos destacados (corregidos con slug e imagen)
   featuredProjects: [
     {
       title: 'E-commerce Fashion',
       description: 'Tienda online completa con pasarela de pagos',
       category: 'E-commerce',
       technologies: ['React', 'Node.js', 'Stripe'],
+      slug: 'e-commerce-fashion',
+      image: '/rectangle.svg',
     },
     {
       title: 'Dashboard Empresarial',
       description: 'Sistema de gestión integral para empresas',
       category: 'Aplicación Web',
       technologies: ['Vue.js', 'Laravel', 'MySQL'],
+      slug: 'dashboard-empresarial',
+      image: '/rectangle.svg',
     },
     {
       title: 'Sitio Web Corporativo',
       description: 'Landing page moderna con SEO optimizado',
       category: 'Desarrollo Web',
       technologies: ['Astro', 'TailwindCSS', 'TypeScript'],
+      slug: 'sitio-web-corporativo',
+      image: '/rectangle.svg',
     },
   ],
 };

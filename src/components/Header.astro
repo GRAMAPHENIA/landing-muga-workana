@@ -4,366 +4,167 @@ import Button from './Button.astro';
 ---
 
 <style>
-  /* Prevenir layout shift global */
-  html {
-    scrollbar-gutter: stable;
-  }
+  html { scrollbar-gutter: stable; }
 
-  /* Animación del icono hamburguesa */
-  .hamburger-line {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: center;
-  }
+  /* Hamburguesa */
+  .hamburger-line { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); transform-origin: center; }
+  .hamburger-active .hamburger-line-1 { transform: translateY(6px) rotate(45deg); }
+  .hamburger-active .hamburger-line-2 { opacity: 0; transform: translateY(-50%) scale(0); }
+  .hamburger-active .hamburger-line-3 { transform: translateY(-6px) rotate(-45deg); }
 
-  /* Estado activo (X) */
-  .hamburger-active .hamburger-line-1 {
-    transform: translateY(6px) rotate(45deg);
-  }
+  .menu-open { overflow: hidden; padding-right: var(--scrollbar-width, 0px); }
 
-  .hamburger-active .hamburger-line-2 {
-    opacity: 0;
-    transform: translateY(-50%) scale(0);
-  }
+  .mobile-nav-link { transition: all 0.3s ease-out; }
 
-  .hamburger-active .hamburger-line-3 {
-    transform: translateY(-6px) rotate(-45deg);
-  }
+  .close-button { position: relative; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 8px; transition: all 0.2s ease; }
+  .close-button:hover { background-color: rgba(0,0,0,0.05); }
+  .close-button svg { width: 20px; height: 20px; stroke-width: 2; }
 
-  /* Prevenir layout shift del body */
-  .menu-open {
-    overflow: hidden;
-    padding-right: var(--scrollbar-width, 0px);
-  }
-
-  /* Animaciones para enlaces móviles */
-  .mobile-nav-link {
-    transition: all 0.3s ease-out;
-  }
-
-  /* Mejorar el botón de cerrar */
-  .close-button {
-    position: relative;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-  }
-
-  .close-button:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-  }
-
-  .close-button svg {
-    width: 20px;
-    height: 20px;
-    stroke-width: 2;
-  }
-
-  /* Prevenir layout shift en el sidebar */
-  .sidebar-content {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  .sidebar-nav {
-    flex: 1;
-    overflow-y: auto;
-    padding-bottom: 80px; /* Espacio para el footer */
-  }
-
-  .sidebar-footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: white;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-  }
+  .sidebar-content { height: 100%; display: flex; flex-direction: column; overflow: hidden; }
+  .sidebar-nav { flex: 1; overflow-y: auto; padding-bottom: 80px; }
+  .sidebar-footer { position: absolute; bottom: 0; left:0; right:0; background: white; border-top:1px solid rgba(0,0,0,0.1); }
 </style>
 
-<header
-  class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-neutral-200"
->
+<header class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-neutral-200">
   <div class="container">
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
       <a href="/" class="flex items-center space-x-2">
-        <span class="text-2xl font-bold text-neutral-700"
-          >{siteConfig.name}</span
-        >
+        <span class="text-2xl font-bold text-neutral-700">{siteConfig.name}</span>
       </a>
 
-      <!-- Navegación Desktop -->
+      <!-- Desktop Nav -->
       <nav class="hidden md:flex items-center space-x-8">
-        {
-          siteConfig.navigation.map(item => (
-            <a href={item.href} class="text-neutral-700">
-              {item.name}
-            </a>
-          ))
-        }
+        {siteConfig.navigation.map(item => (
+          <a href={item.href} class="text-neutral-700">{item.name}</a>
+        ))}
       </nav>
 
-      <!-- CTA Button -->
+      <!-- CTA Desktop -->
       <div class="hidden md:block">
-        <Button href="#contacto" variant="outline"> Contactar </Button>
+        <Button href="#contacto" variant="outline">Contactar</Button>
       </div>
 
       <!-- Mobile Menu Button -->
-      <button
-        id="mobile-menu-button"
-        class="md:hidden p-2 rounded-lg hover:bg-neutral-100 transition-colors duration-200"
-        aria-label="Abrir menú"
-      >
-        <div
-          id="hamburger-icon"
-          class="w-6 h-6 flex flex-col justify-center items-center relative cursor-pointer"
-        >
-          <span
-            class="hamburger-line hamburger-line-1 block w-6 h-0.5 bg-current absolute top-1"
-          ></span>
-          <span
-            class="hamburger-line hamburger-line-2 block w-6 h-0.5 bg-current absolute top-1/2 -translate-y-1/2"
-          ></span>
-          <span
-            class="hamburger-line hamburger-line-3 block w-6 h-0.5 bg-current absolute bottom-1"
-          ></span>
+      <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg hover:bg-neutral-100 transition-colors" aria-label="Abrir menú">
+        <div id="hamburger-icon" class="w-6 h-6 flex flex-col justify-center items-center relative cursor-pointer">
+          <span class="hamburger-line hamburger-line-1 block w-6 h-0.5 bg-current absolute top-1"></span>
+          <span class="hamburger-line hamburger-line-2 block w-6 h-0.5 bg-current absolute top-1/2 -translate-y-1/2"></span>
+          <span class="hamburger-line hamburger-line-3 block w-6 h-0.5 bg-current absolute bottom-1"></span>
         </div>
       </button>
     </div>
   </div>
 </header>
 
-<!-- Mobile Menu Overlay -->
-<div
-  id="mobile-menu-overlay"
-  class="fixed inset-0 z-40 md:hidden opacity-0 invisible transition-all duration-300 ease-in-out"
->
-  <!-- Glassmorphism Background -->
-  <div
-    class="absolute inset-0 bg-black/20 backdrop-blur-sm"
-    id="mobile-menu-backdrop"
-  >
-  </div>
+<!-- Mobile Menu -->
+<div id="mobile-menu-overlay" class="fixed inset-0 z-40 md:hidden opacity-0 invisible transition-all duration-300 ease-in-out">
+  <div class="absolute inset-0 bg-black/20 backdrop-blur-sm" id="mobile-menu-backdrop"></div>
 
-  <!-- Sidebar -->
-  <div
-    id="mobile-menu-sidebar"
-    class="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white/95 backdrop-blur-lg border-l border-neutral-200/50 shadow-2xl transform transition-transform duration-300 ease-out"
-    style="transform: translateX(100%)"
-  >
+  <div id="mobile-menu-sidebar" class="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white/95 backdrop-blur-lg border-l border-neutral-200/50 shadow-2xl transform transition-transform duration-300 ease-out" style="transform: translateX(100%)">
     <div class="sidebar-content">
-      <!-- Header del sidebar -->
-      <div
-        class="flex items-center justify-between p-6 border-b border-neutral-200/50"
-      >
+      <!-- Sidebar Header -->
+      <div class="flex items-center justify-between p-6 border-b border-neutral-200/50">
         <span class="text-xl font-bold text-neutral-700">{siteConfig.name}</span>
-        <button
-          id="mobile-menu-close"
-          class="close-button"
-          aria-label="Cerrar menú"
-        >
-          <svg
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            ></path>
+        <button id="mobile-menu-close" class="close-button" aria-label="Cerrar menú">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
         </button>
       </div>
 
-      <!-- Navegación -->
+      <!-- Sidebar Nav -->
       <nav class="sidebar-nav flex flex-col p-6 space-y-1">
-        {
-          siteConfig.navigation.map((item, index) => (
-            <a
-              href={item.href}
-              class="mobile-nav-link flex items-center px-4 py-3 text-neutral-700 hover:bg-neutral-100 rounded-xl transition-all duration-200 transform translate-x-4 opacity-0"
-              style={`animation-delay: ${(index + 1) * 100}ms`}
-            >
-              <span class="text-lg font-medium">{item.name}</span>
-            </a>
-          ))
-        }
+        {siteConfig.navigation.map((item, index) => (
+          <a
+            href={item.href}
+            class="mobile-nav-link flex items-center px-4 py-3 text-neutral-700 hover:bg-neutral-100 rounded-xl transition-all duration-200 transform translate-x-4 opacity-0"
+            style={`animation-delay: ${(index + 1) * 100}ms`}
+            data-index={index}
+            aria-label={item.name}
+          >
+            <span class="text-lg font-medium">{item.name}</span>
+          </a>
+        ))}
 
-        <!-- CTA Button -->
-        <div
-          class="pt-6 mobile-nav-link transform translate-x-4 opacity-0"
-          style="animation-delay: 600ms"
-        >
-          <Button href="#contacto" variant="primary" class="w-full">
-            Contactar
-          </Button>
+        <!-- CTA Sidebar -->
+        <div class="pt-6 mobile-nav-link transform translate-x-4 opacity-0" style="animation-delay: 600ms">
+          <Button href="#contacto" variant="primary" class="w-full">Contactar</Button>
         </div>
       </nav>
 
-      <!-- Footer del sidebar -->
+      <!-- Footer Sidebar -->
       <div class="sidebar-footer p-6">
-        <p class="text-sm text-neutral-500 text-center">
-          © 2024 {siteConfig.name}
-        </p>
+        <p class="text-sm text-neutral-500 text-center">© {new Date().getFullYear()} {siteConfig.name}</p>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-    const mobileMenuSidebar = document.getElementById('mobile-menu-sidebar');
-    const mobileMenuClose = document.getElementById('mobile-menu-close');
-    const mobileMenuBackdrop = document.getElementById('mobile-menu-backdrop');
-    const hamburgerIcon = document.getElementById('hamburger-icon');
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+document.addEventListener('DOMContentLoaded', () => {
+  const menuButton = document.getElementById('mobile-menu-button');
+  const overlay = document.getElementById('mobile-menu-overlay');
+  const sidebar = document.getElementById('mobile-menu-sidebar');
+  const closeButton = document.getElementById('mobile-menu-close');
+  const backdrop = document.getElementById('mobile-menu-backdrop');
+  const hamburger = document.getElementById('hamburger-icon');
+  const links = document.querySelectorAll('.mobile-nav-link');
 
-    let isMenuOpen = false;
+  let isOpen = false;
 
-    // Calcular ancho del scrollbar al cargar
-    const getScrollbarWidth = () => {
-      return window.innerWidth - document.documentElement.clientWidth;
-    };
+  const getScrollbarWidth = () => window.innerWidth - document.documentElement.clientWidth;
+  const setScrollbarWidth = () => document.documentElement.style.setProperty('--scrollbar-width', `${getScrollbarWidth()}px`);
+  setScrollbarWidth();
 
-    // Establecer CSS variable para el ancho del scrollbar
-    const setScrollbarWidth = () => {
-      const scrollbarWidth = getScrollbarWidth();
-      document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
-    };
+  const openMenu = () => {
+    if (isOpen || !sidebar || !overlay || !hamburger) return;
+    isOpen = true;
 
-    // Inicializar al cargar
     setScrollbarWidth();
+    document.body.classList.add('menu-open');
+    hamburger.classList.add('hamburger-active');
+    overlay.classList.remove('opacity-0', 'invisible');
+    overlay.classList.add('opacity-100', 'visible');
+    sidebar.style.transform = 'translateX(0)';
 
-    // Función para abrir el menú
-    const openMenu = () => {
-      if (isMenuOpen) return;
+    links.forEach((link, i) => setTimeout(() => {
+      link.classList.remove('translate-x-4', 'opacity-0');
+      link.classList.add('translate-x-0', 'opacity-100');
+    }, i * 100));
+  };
 
-      isMenuOpen = true;
+  const closeMenu = () => {
+    if (!isOpen || !sidebar || !overlay || !hamburger) return;
+    isOpen = false;
 
-      // Actualizar ancho del scrollbar antes de abrir
-      setScrollbarWidth();
+    hamburger.classList.remove('hamburger-active');
+    document.body.classList.remove('menu-open');
 
-      // Prevenir scroll del body sin layout shift
-      document.body.classList.add('menu-open');
+    links.forEach((link, i) => setTimeout(() => {
+      link.classList.remove('translate-x-0', 'opacity-100');
+      link.classList.add('translate-x-4', 'opacity-0');
+    }, i * 50));
 
-      // Animar icono del menú a X
-      hamburgerIcon?.classList.add('hamburger-active');
+    setTimeout(() => sidebar.style.transform = 'translateX(100%)', 150);
+    setTimeout(() => {
+      overlay.classList.remove('opacity-100', 'visible');
+      overlay.classList.add('opacity-0', 'invisible');
+    }, 300);
+  };
 
-      // Mostrar overlay
-      mobileMenuOverlay?.classList.remove('opacity-0', 'invisible');
-      mobileMenuOverlay?.classList.add('opacity-100', 'visible');
+  menuButton?.addEventListener('click', e => { e.preventDefault(); isOpen ? closeMenu() : openMenu(); });
+  hamburger?.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); isOpen ? closeMenu() : openMenu(); });
+  closeButton?.addEventListener('click', closeMenu);
+  backdrop?.addEventListener('click', closeMenu);
 
-      // Animar sidebar
-      requestAnimationFrame(() => {
-        if (mobileMenuSidebar) {
-          mobileMenuSidebar.style.transform = 'translateX(0)';
-        }
-      });
-
-      // Animar enlaces con delay
-      setTimeout(() => {
-        mobileNavLinks?.forEach((link, index) => {
-          setTimeout(() => {
-            link.classList.remove('translate-x-4', 'opacity-0');
-            link.classList.add('translate-x-0', 'opacity-100');
-          }, index * 100);
-        });
-      }, 200);
-    };
-
-    // Función para cerrar el menú
-    const closeMenu = () => {
-      if (!isMenuOpen) return;
-
-      isMenuOpen = false;
-
-      // Restaurar icono del menú inmediatamente
-      hamburgerIcon?.classList.remove('hamburger-active');
-      document.body.classList.remove('menu-open');
-
-      // Animar enlaces saliendo
-      mobileNavLinks?.forEach((link, index) => {
-        setTimeout(() => {
-          link.classList.remove('translate-x-0', 'opacity-100');
-          link.classList.add('translate-x-4', 'opacity-0');
-        }, index * 50);
-      });
-
-      // Animar sidebar
-      setTimeout(() => {
-        if (mobileMenuSidebar) {
-          mobileMenuSidebar.style.transform = 'translateX(100%)';
-        }
-      }, 150);
-
-      // Ocultar overlay
-      setTimeout(() => {
-        mobileMenuOverlay?.classList.remove('opacity-100', 'visible');
-        mobileMenuOverlay?.classList.add('opacity-0', 'invisible');
-      }, 300);
-    };
-
-    // Event listeners
-    mobileMenuButton?.addEventListener('click', e => {
-      e.preventDefault();
-      if (isMenuOpen) {
-        closeMenu();
-      } else {
-        openMenu();
-      }
-    });
-
-    // También agregar listener al icono hamburguesa directamente
-    hamburgerIcon?.addEventListener('click', e => {
-      e.preventDefault();
-      e.stopPropagation();
-      if (isMenuOpen) {
-        closeMenu();
-      } else {
-        openMenu();
-      }
-    });
-
-    mobileMenuClose?.addEventListener('click', closeMenu);
-    mobileMenuBackdrop?.addEventListener('click', closeMenu);
-
-    // Cerrar menú al hacer clic en enlaces
-    const mobileLinks = document.querySelectorAll(
-      '.mobile-nav-link a, .mobile-nav-link'
-    );
-    mobileLinks?.forEach(link => {
-      link.addEventListener('click', () => {
-        // Solo cerrar si es un enlace de navegación, no el botón
-        if (link.tagName === 'A' || link.querySelector('a')) {
-          setTimeout(closeMenu, 100); // Pequeño delay para mejor UX
-        }
-      });
-    });
-
-    // Cerrar menú con tecla Escape
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && isMenuOpen) {
-        closeMenu();
-      }
-    });
-
-    // Cerrar menú al cambiar a desktop
-    window.addEventListener('resize', () => {
-      if (window.innerWidth >= 768 && isMenuOpen) {
-        closeMenu();
-      }
-      // Actualizar ancho del scrollbar en resize
-      setScrollbarWidth();
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      if (link.tagName === 'A' || link.querySelector('a')) setTimeout(closeMenu, 100);
     });
   });
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && isOpen) closeMenu(); });
+  window.addEventListener('resize', () => { if (window.innerWidth >= 768 && isOpen) closeMenu(); setScrollbarWidth(); });
+});
 </script>

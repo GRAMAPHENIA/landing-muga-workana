@@ -20,20 +20,14 @@ const {
 ---
 
 <div class={`bg-white ${className}`}>
-  {
-    (title || subtitle) && (
-      <div class="text-center mb-8">
-        {title && (
-          <h2 class="text-2xl lg:text-3xl font-bold text-neutral-700 mb-4">
-            {title}
-          </h2>
-        )}
-        {subtitle && (
-          <p class="text-neutral-600 max-w-2xl mx-auto">{subtitle}</p>
-        )}
-      </div>
-    )
-  }
+  {(title || subtitle) && (
+    <div class="text-center mb-8">
+      {title && (
+        <h2 class="text-2xl lg:text-3xl font-bold text-neutral-700 mb-4">{title}</h2>
+      )}
+      {subtitle && <p class="text-neutral-600 max-w-2xl mx-auto">{subtitle}</p>}
+    </div>
+  )}
 
   <form
     id="contact-form"
@@ -41,13 +35,10 @@ const {
     method="POST"
     class="max-w-2xl mx-auto space-y-6"
   >
-    <!-- Nombre y Email en una fila -->
+    {/* Nombre y Email */}
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div>
-        <label
-          for="name"
-          class="block text-sm font-medium text-neutral-700 mb-2"
-        >
+        <label for="name" class="block text-sm font-medium text-neutral-700 mb-2">
           Nombre completo *
         </label>
         <input
@@ -55,16 +46,14 @@ const {
           id="name"
           name="name"
           required
+          aria-required="true"
           class="input"
           placeholder="Tu nombre completo"
         />
       </div>
 
       <div>
-        <label
-          for="email"
-          class="block text-sm font-medium text-neutral-700 mb-2"
-        >
+        <label for="email" class="block text-sm font-medium text-neutral-700 mb-2">
           Email *
         </label>
         <input
@@ -72,61 +61,39 @@ const {
           id="email"
           name="email"
           required
+          aria-required="true"
           class="input"
           placeholder="tu@email.com"
         />
       </div>
     </div>
 
-    <!-- Teléfono y Empresa (opcional) -->
-    {
-      (showPhone || showCompany) && (
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {showPhone && (
-            <div>
-              <label
-                for="phone"
-                class="block text-sm font-medium text-neutral-700 mb-2"
-              >
-                Teléfono
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                class="input"
-                placeholder="+34 600 000 000"
-              />
-            </div>
-          )}
+    {/* Teléfono y Empresa */}
+    {(showPhone || showCompany) && (
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {showPhone && (
+          <div>
+            <label for="phone" class="block text-sm font-medium text-neutral-700 mb-2">
+              Teléfono
+            </label>
+            <input type="tel" id="phone" name="phone" class="input" placeholder="+34 600 000 000" />
+          </div>
+        )}
 
-          {showCompany && (
-            <div>
-              <label
-                for="company"
-                class="block text-sm font-medium text-neutral-700 mb-2"
-              >
-                Empresa
-              </label>
-              <input
-                type="text"
-                id="company"
-                name="company"
-                class="input"
-                placeholder="Nombre de tu empresa"
-              />
-            </div>
-          )}
-        </div>
-      )
-    }
+        {showCompany && (
+          <div>
+            <label for="company" class="block text-sm font-medium text-neutral-700 mb-2">
+              Empresa
+            </label>
+            <input type="text" id="company" name="company" class="input" placeholder="Nombre de tu empresa" />
+          </div>
+        )}
+      </div>
+    )}
 
-    <!-- Tipo de proyecto -->
+    {/* Tipo de proyecto */}
     <div>
-      <label
-        for="project-type"
-        class="block text-sm font-medium text-neutral-700 mb-2"
-      >
+      <label for="project-type" class="block text-sm font-medium text-neutral-700 mb-2">
         Tipo de proyecto
       </label>
       <select id="project-type" name="project-type" class="input">
@@ -141,12 +108,9 @@ const {
       </select>
     </div>
 
-    <!-- Presupuesto -->
+    {/* Presupuesto */}
     <div>
-      <label
-        for="budget"
-        class="block text-sm font-medium text-neutral-700 mb-2"
-      >
+      <label for="budget" class="block text-sm font-medium text-neutral-700 mb-2">
         Presupuesto estimado
       </label>
       <select id="budget" name="budget" class="input">
@@ -159,12 +123,9 @@ const {
       </select>
     </div>
 
-    <!-- Mensaje -->
+    {/* Mensaje */}
     <div>
-      <label
-        for="message"
-        class="block text-sm font-medium text-neutral-700 mb-2"
-      >
+      <label for="message" class="block text-sm font-medium text-neutral-700 mb-2">
         Cuéntanos sobre tu proyecto *
       </label>
       <textarea
@@ -172,59 +133,52 @@ const {
         name="message"
         rows="5"
         required
+        aria-required="true"
         class="input resize-none"
         placeholder="Describe brevemente tu proyecto y requerimientos..."
       ></textarea>
     </div>
 
-    <!-- Checkbox de privacidad -->
+    {/* Checkbox de privacidad */}
     <div class="flex items-start">
       <input
         type="checkbox"
         id="privacy"
         name="privacy"
         required
+        aria-required="true"
         class="mt-1 h-4 w-4 text-neutral-900 border-neutral-300 rounded focus:ring-neutral-900"
       />
       <label for="privacy" class="ml-3 text-sm text-neutral-600">
-        Acepto la <a href="/privacidad" class="text-neutral-900 hover:underline"
-          >política de privacidad</a
-        >
+        Acepto la{' '}
+        <a href="/privacidad" class="text-neutral-900 hover:underline" aria-label="Política de privacidad">
+          política de privacidad
+        </a>{' '}
         y el tratamiento de mis datos personales. *
       </label>
     </div>
 
-    <!-- Botón de envío -->
+    {/* Botón de envío */}
     <div class="text-center">
-      <Button
-        type="submit"
-        variant="primary"
-        size="lg"
-        class="w-full md:w-auto"
-      >
+      <Button type="submit" variant="primary" size="lg" class="w-full md:w-auto">
         Enviar
       </Button>
     </div>
 
-    <!-- Mensaje de estado -->
-    <div id="form-status" class="hidden text-center p-4 rounded-xl"></div>
+    {/* Mensaje de estado */}
+    <div id="form-status" role="status" class="hidden text-center p-4 rounded-xl"></div>
   </form>
 </div>
 
 <script>
-  // Manejo del formulario
   const form = document.getElementById('contact-form') as HTMLFormElement;
   const statusDiv = document.getElementById('form-status') as HTMLDivElement;
 
-  form?.addEventListener('submit', async e => {
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-
-    const submitButton = form.querySelector(
-      'button[type="submit"]'
-    ) as HTMLButtonElement;
+    const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
     const originalText = submitButton.textContent;
 
-    // Estado de carga
     submitButton.disabled = true;
     submitButton.textContent = 'Enviando...';
     statusDiv.className = 'hidden';
@@ -234,29 +188,20 @@ const {
       const response = await fetch(form.action, {
         method: 'POST',
         body: formData,
-        headers: {
-          Accept: 'application/json',
-        },
+        headers: { Accept: 'application/json' },
       });
 
       if (response.ok) {
-        // Éxito
-        statusDiv.className =
-          'text-center p-4 rounded-xl bg-green-50 text-green-800 border border-green-200';
-        statusDiv.textContent =
-          '¡Mensaje enviado correctamente! Te contactaremos pronto.';
+        statusDiv.className = 'text-center p-4 rounded-xl bg-green-50 text-green-800 border border-green-200';
+        statusDiv.textContent = '¡Mensaje enviado correctamente! Te contactaremos pronto.';
         form.reset();
       } else {
         throw new Error('Error en el envío');
       }
     } catch {
-      // Error
-      statusDiv.className =
-        'text-center p-4 rounded-xl bg-red-50 text-red-800 border border-red-200';
-      statusDiv.textContent =
-        'Error al enviar el mensaje. Por favor, inténtalo de nuevo.';
+      statusDiv.className = 'text-center p-4 rounded-xl bg-red-50 text-red-800 border border-red-200';
+      statusDiv.textContent = 'Error al enviar el mensaje. Por favor, inténtalo de nuevo.';
     } finally {
-      // Restaurar botón
       submitButton.disabled = false;
       submitButton.textContent = originalText;
     }

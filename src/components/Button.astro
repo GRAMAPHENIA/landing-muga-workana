@@ -6,6 +6,7 @@ export interface Props {
   type?: 'button' | 'submit' | 'reset';
   class?: string;
   target?: '_blank' | '_self';
+  ariaLabel?: string; // Para accesibilidad
 }
 
 const {
@@ -15,6 +16,7 @@ const {
   type = 'button',
   class: className = '',
   target = '_self',
+  ariaLabel,
 } = Astro.props;
 
 const baseClasses = 'btn';
@@ -30,22 +32,17 @@ const sizeClasses = {
   lg: 'px-8 py-4 text-lg',
 };
 
-const classes = [
-  baseClasses,
-  variantClasses[variant],
-  sizeClasses[size],
-  className,
-].join(' ');
+const classes = [baseClasses, variantClasses[variant], sizeClasses[size], className].join(' ');
 ---
 
-{
-  href ? (
-    <a href={href} class={classes} target={target}>
-      <slot />
-    </a>
-  ) : (
-    <button type={type} class={classes}>
-      <slot />
-    </button>
-  )
-}
+{href ? (
+  <a href={href} class={classes} target={target} aria-label={ariaLabel}>
+    <slot />
+    {ariaLabel && <span class="sr-only">{ariaLabel}</span>}
+  </a>
+) : (
+  <button type={type} class={classes} aria-label={ariaLabel}>
+    <slot />
+    {ariaLabel && <span class="sr-only">{ariaLabel}</span>}
+  </button>
+)}

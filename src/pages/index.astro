@@ -26,37 +26,37 @@ const pageMetadata = {
 
   <main>
     <!-- Hero Section con imagen central y credibilidad -->
-    <section id="inicio">
+    <section id="inicio" class="fade-section">
       <Hero />
     </section>
 
     <!-- Beneficios/Características: 3 bloques simples -->
-    <section id="beneficios">
+    <section id="beneficios" class="fade-section">
       <Features />
     </section>
 
     <!-- Servicios -->
-    <section id="servicios">
+    <section id="servicios" class="fade-section">
       <Services />
     </section>
 
     <!-- Nosotros -->
-    <section id="nosotros">
+    <section id="nosotros" class="fade-section">
       <About />
     </section>
 
     <!-- Galería: grid minimalista con hover sutil -->
-    <section id="trabajos">
+    <section id="trabajos" class="fade-section">
       <Gallery />
     </section>
 
     <!-- Testimonios: tarjetas con reseñas breves -->
-    <section id="testimonios">
+    <section id="testimonios" class="fade-section">
       <Testimonials />
     </section>
 
     <!-- Contacto -->
-    <section id="contacto" class="section bg-neutral-50">
+    <section id="contacto" class="section bg-neutral-50 fade-section">
       <div class="container">
         <ContactForm
           title="Solicita tu cotización"
@@ -81,67 +81,7 @@ const pageMetadata = {
   <!-- Footer simple: links básicos y redes sociales -->
   <Footer />
 
-  <!-- Script para navegación suave y animaciones -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Navegación suave para enlaces con anclas
-      const links = document.querySelectorAll('a[href^="#"]');
+  <!-- Script externo optimizado -->
+  <script src="/scripts/ui.js" defer></script>
 
-      links.forEach(link => {
-        link.addEventListener('click', e => {
-          e.preventDefault();
-          const targetId = link.getAttribute('href')?.substring(1);
-          const targetElement = document.getElementById(targetId || '');
-
-          if (targetElement) {
-            const headerHeight = 80;
-            const targetPosition = targetElement.offsetTop - headerHeight;
-
-            window.scrollTo({
-              top: targetPosition,
-              behavior: 'smooth',
-            });
-          }
-        });
-      });
-
-      // Cerrar menú móvil al hacer scroll
-      let lastScrollTop = 0;
-      const mobileMenu = document.getElementById('mobile-menu');
-
-      window.addEventListener('scroll', () => {
-        const scrollTop = window.scrollY || document.documentElement.scrollTop;
-
-        if (
-          scrollTop > lastScrollTop &&
-          mobileMenu &&
-          !mobileMenu.classList.contains('hidden')
-        ) {
-          mobileMenu.classList.add('hidden');
-        }
-
-        lastScrollTop = scrollTop;
-      });
-
-      // Animaciones de entrada sutiles (fade-in)
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px',
-      };
-
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in');
-          }
-        });
-      }, observerOptions);
-
-      // Observar secciones para animaciones
-      const sections = document.querySelectorAll('section');
-      sections.forEach(section => {
-        observer.observe(section);
-      });
-    });
-  </script>
 </BaseLayout>

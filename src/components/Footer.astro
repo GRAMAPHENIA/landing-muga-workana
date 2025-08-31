@@ -3,17 +3,13 @@ import { siteConfig } from '../config/site.ts';
 import fs from 'fs';
 import path from 'path';
 
-// Función para extraer la versión del CHANGELOG.md
 function getVersionFromChangelog(): string {
   try {
     const changelogPath = path.join(process.cwd(), 'CHANGELOG.md');
     const changelogContent = fs.readFileSync(changelogPath, 'utf-8');
-
-    // Buscar la primera línea que contenga una versión en formato [x.x.x]
     const versionMatch = changelogContent.match(/## \[(\d+\.\d+\.\d+)\]/);
     return versionMatch ? versionMatch[1] : '1.0.0';
   } catch {
-    // Si no se puede leer el CHANGELOG, usar versión por defecto
     return '1.0.0';
   }
 }
@@ -38,8 +34,9 @@ const currentVersion = getVersionFromChangelog();
             <a
               href={siteConfig.social.linkedin}
               target="_blank"
+              rel="noopener noreferrer"
               class="text-neutral-400 hover:text-neutral-600 transition-colors"
-              aria-label="LinkedIn"
+              aria-label="LinkedIn de TechSolutions Pro"
             >
               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                 <path
@@ -50,8 +47,9 @@ const currentVersion = getVersionFromChangelog();
             <a
               href={siteConfig.social.twitter}
               target="_blank"
+              rel="noopener noreferrer"
               class="text-neutral-400 hover:text-neutral-600 transition-colors"
-              aria-label="Twitter"
+              aria-label="Twitter de TechSolutions Pro"
             >
               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                 <path
@@ -62,8 +60,9 @@ const currentVersion = getVersionFromChangelog();
             <a
               href={siteConfig.social.github}
               target="_blank"
+              rel="noopener noreferrer"
               class="text-neutral-400 hover:text-neutral-600 transition-colors"
-              aria-label="GitHub"
+              aria-label="GitHub de TechSolutions Pro"
             >
               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                 <path
@@ -81,7 +80,10 @@ const currentVersion = getVersionFromChangelog();
             {
               siteConfig.navigation.map(item => (
                 <li>
-                  <a href={item.href} class="text-neutral-600">
+                  <a
+                    href={item.href}
+                    class="text-neutral-600 hover:text-neutral-900 transition-colors"
+                  >
                     {item.name}
                   </a>
                 </li>
@@ -98,6 +100,7 @@ const currentVersion = getVersionFromChangelog();
               <a
                 href={`mailto:${siteConfig.email}`}
                 class="hover:text-neutral-900 transition-colors"
+                aria-label={`Enviar email a ${siteConfig.email}`}
               >
                 {siteConfig.email}
               </a>
@@ -106,13 +109,12 @@ const currentVersion = getVersionFromChangelog();
               <a
                 href={`tel:${siteConfig.phone}`}
                 class="hover:text-neutral-900 transition-colors"
+                aria-label={`Llamar a ${siteConfig.phone}`}
               >
                 {siteConfig.phone}
               </a>
             </li>
-            <li class="text-sm">
-              {siteConfig.address}
-            </li>
+            <li class="text-sm">{siteConfig.address}</li>
           </ul>
         </div>
       </div>
