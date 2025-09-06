@@ -4,167 +4,179 @@ import Button from './Button.astro';
 ---
 
 <style>
-  html { scrollbar-gutter: stable; }
-
-  /* Hamburguesa */
-  .hamburger-line { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); transform-origin: center; }
-  .hamburger-active .hamburger-line-1 { transform: translateY(6px) rotate(45deg); }
-  .hamburger-active .hamburger-line-2 { opacity: 0; transform: translateY(-50%) scale(0); }
-  .hamburger-active .hamburger-line-3 { transform: translateY(-6px) rotate(-45deg); }
-
-  .menu-open { overflow: hidden; padding-right: var(--scrollbar-width, 0px); }
-
-  .mobile-nav-link { transition: all 0.3s ease-out; }
-
-  .close-button { position: relative; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 8px; transition: all 0.2s ease; }
-  .close-button:hover { background-color: rgba(0,0,0,0.05); }
-  .close-button svg { width: 20px; height: 20px; stroke-width: 2; }
-
-  .sidebar-content { height: 100%; display: flex; flex-direction: column; overflow: hidden; }
-  .sidebar-nav { flex: 1; overflow-y: auto; padding-bottom: 80px; }
-  .sidebar-footer { position: absolute; bottom: 0; left:0; right:0; background: white; border-top:1px solid rgba(0,0,0,0.1); }
+  /* Solo mantener estilos que realmente se usan */
 </style>
 
-<header class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-neutral-200">
+<header
+  class="header-critical fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-neutral-200"
+>
   <div class="container">
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
-      <a href="/" class="flex items-center space-x-2">
-        <span class="text-2xl font-bold text-neutral-700">{siteConfig.name}</span>
+      <a href="/" class="flex items-center space-x-2" aria-label="Inicio">
+        <span class="text-2xl font-bold text-neutral-700"
+          >{siteConfig.name}</span
+        >
       </a>
 
-      <!-- Desktop Nav -->
-      <nav class="hidden md:flex items-center space-x-8">
-        {siteConfig.navigation.map(item => (
-          <a href={item.href} class="text-neutral-700">{item.name}</a>
-        ))}
+      <!-- Navegación Desktop -->
+      <nav class="hidden md:flex items-center space-x-8" role="navigation" aria-label="Navegación principal">
+        {
+          siteConfig.navigation.map(item => (
+            <a href={item.href} class="text-neutral-700 hover:text-neutral-900 transition-colors">
+              {item.name}
+            </a>
+          ))
+        }
       </nav>
 
-      <!-- CTA Desktop -->
+      <!-- CTA Button -->
       <div class="hidden md:block">
-        <Button href="#contacto" variant="outline">Contactar</Button>
+        <Button href="#contacto" variant="outline"> Contactar </Button>
       </div>
 
       <!-- Mobile Menu Button -->
-      <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg hover:bg-neutral-100 transition-colors" aria-label="Abrir menú">
-        <div id="hamburger-icon" class="w-6 h-6 flex flex-col justify-center items-center relative cursor-pointer">
-          <span class="hamburger-line hamburger-line-1 block w-6 h-0.5 bg-current absolute top-1"></span>
-          <span class="hamburger-line hamburger-line-2 block w-6 h-0.5 bg-current absolute top-1/2 -translate-y-1/2"></span>
-          <span class="hamburger-line hamburger-line-3 block w-6 h-0.5 bg-current absolute bottom-1"></span>
-        </div>
+      <button
+        id="mobile-menu-button"
+        class="md:hidden p-2 rounded-lg hover:bg-neutral-100 transition-colors duration-200"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
       </button>
     </div>
   </div>
 </header>
 
-<!-- Mobile Menu -->
-<div id="mobile-menu-overlay" class="fixed inset-0 z-40 md:hidden opacity-0 invisible transition-all duration-300 ease-in-out">
+<!-- Mobile Menu Overlay - Simplificado -->
+<div
+  id="mobile-menu-overlay"
+  class="fixed inset-0 z-40 md:hidden opacity-0 invisible transition-all duration-300 ease-in-out"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="mobile-menu-title"
+>
+  <!-- Backdrop -->
   <div class="absolute inset-0 bg-black/20 backdrop-blur-sm" id="mobile-menu-backdrop"></div>
 
-  <div id="mobile-menu-sidebar" class="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white/95 backdrop-blur-lg border-l border-neutral-200/50 shadow-2xl transform transition-transform duration-300 ease-out" style="transform: translateX(100%)">
-    <div class="sidebar-content">
-      <!-- Sidebar Header -->
-      <div class="flex items-center justify-between p-6 border-b border-neutral-200/50">
-        <span class="text-xl font-bold text-neutral-700">{siteConfig.name}</span>
-        <button id="mobile-menu-close" class="close-button" aria-label="Cerrar menú">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
+  <!-- Sidebar -->
+  <div
+    id="mobile-menu-sidebar"
+    class="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white shadow-xl transform transition-transform duration-300 ease-out"
+    style="transform: translateX(100%)"
+  >
+    <!-- Header -->
+    <div class="flex items-center justify-between p-6 border-b border-neutral-200">
+      <span id="mobile-menu-title" class="text-xl font-bold text-neutral-700">{siteConfig.name}</span>
+      <button id="mobile-menu-close" class="p-2 rounded-lg hover:bg-neutral-100" aria-label="Cerrar menú">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
 
-      <!-- Sidebar Nav -->
-      <nav class="sidebar-nav flex flex-col p-6 space-y-1">
-        {siteConfig.navigation.map((item, index) => (
+    <!-- Navigation -->
+    <nav class="p-6" role="navigation" aria-label="Navegación móvil">
+      {
+        siteConfig.navigation.map(item => (
           <a
             href={item.href}
-            class="mobile-nav-link flex items-center px-4 py-3 text-neutral-700 hover:bg-neutral-100 rounded-xl transition-all duration-200 transform translate-x-4 opacity-0"
-            style={`animation-delay: ${(index + 1) * 100}ms`}
-            data-index={index}
-            aria-label={item.name}
+            class="block py-3 px-4 text-lg font-medium text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors"
           >
-            <span class="text-lg font-medium">{item.name}</span>
+            {item.name}
           </a>
-        ))}
-
-        <!-- CTA Sidebar -->
-        <div class="pt-6 mobile-nav-link transform translate-x-4 opacity-0" style="animation-delay: 600ms">
-          <Button href="#contacto" variant="primary" class="w-full">Contactar</Button>
-        </div>
-      </nav>
-
-      <!-- Footer Sidebar -->
-      <div class="sidebar-footer p-6">
-        <p class="text-sm text-neutral-500 text-center">© {new Date().getFullYear()} {siteConfig.name}</p>
+        ))
+      }
+      <div class="mt-6">
+        <Button href="#contacto" variant="primary" class="w-full">
+          Contactar
+        </Button>
       </div>
-    </div>
+    </nav>
   </div>
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const menuButton = document.getElementById('mobile-menu-button');
-  const overlay = document.getElementById('mobile-menu-overlay');
-  const sidebar = document.getElementById('mobile-menu-sidebar');
-  const closeButton = document.getElementById('mobile-menu-close');
-  const backdrop = document.getElementById('mobile-menu-backdrop');
-  const hamburger = document.getElementById('hamburger-icon');
-  const links = document.querySelectorAll('.mobile-nav-link');
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+    const mobileMenuSidebar = document.getElementById('mobile-menu-sidebar');
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
+    const mobileMenuBackdrop = document.getElementById('mobile-menu-backdrop');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
 
-  let isOpen = false;
+    let isMenuOpen = false;
 
-  const getScrollbarWidth = () => window.innerWidth - document.documentElement.clientWidth;
-  const setScrollbarWidth = () => document.documentElement.style.setProperty('--scrollbar-width', `${getScrollbarWidth()}px`);
-  setScrollbarWidth();
+    // Abrir menú
+    const openMenu = () => {
+      if (isMenuOpen) return;
+      isMenuOpen = true;
+      
+      document.body.style.overflow = 'hidden';
+      mobileMenuButton?.setAttribute('aria-expanded', 'true');
+      
+      // Cambiar icono
+      menuIcon?.classList.add('hidden');
+      closeIcon?.classList.remove('hidden');
 
-  const openMenu = () => {
-    if (isOpen || !sidebar || !overlay || !hamburger) return;
-    isOpen = true;
+      // Mostrar overlay
+      mobileMenuOverlay?.classList.remove('opacity-0', 'invisible');
+      mobileMenuOverlay?.classList.add('opacity-100', 'visible');
 
-    setScrollbarWidth();
-    document.body.classList.add('menu-open');
-    hamburger.classList.add('hamburger-active');
-    overlay.classList.remove('opacity-0', 'invisible');
-    overlay.classList.add('opacity-100', 'visible');
-    sidebar.style.transform = 'translateX(0)';
+      // Animar sidebar
+      requestAnimationFrame(() => {
+        if (mobileMenuSidebar) {
+          mobileMenuSidebar.style.transform = 'translateX(0)';
+        }
+      });
+    };
 
-    links.forEach((link, i) => setTimeout(() => {
-      link.classList.remove('translate-x-4', 'opacity-0');
-      link.classList.add('translate-x-0', 'opacity-100');
-    }, i * 100));
-  };
+    // Cerrar menú
+    const closeMenu = () => {
+      if (!isMenuOpen) return;
+      isMenuOpen = false;
 
-  const closeMenu = () => {
-    if (!isOpen || !sidebar || !overlay || !hamburger) return;
-    isOpen = false;
+      document.body.style.overflow = '';
+      mobileMenuButton?.setAttribute('aria-expanded', 'false');
+      
+      // Cambiar icono
+      menuIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
 
-    hamburger.classList.remove('hamburger-active');
-    document.body.classList.remove('menu-open');
+      // Animar sidebar
+      if (mobileMenuSidebar) {
+        mobileMenuSidebar.style.transform = 'translateX(100%)';
+      }
 
-    links.forEach((link, i) => setTimeout(() => {
-      link.classList.remove('translate-x-0', 'opacity-100');
-      link.classList.add('translate-x-4', 'opacity-0');
-    }, i * 50));
+      // Ocultar overlay
+      setTimeout(() => {
+        mobileMenuOverlay?.classList.remove('opacity-100', 'visible');
+        mobileMenuOverlay?.classList.add('opacity-0', 'invisible');
+      }, 300);
+    };
 
-    setTimeout(() => sidebar.style.transform = 'translateX(100%)', 150);
-    setTimeout(() => {
-      overlay.classList.remove('opacity-100', 'visible');
-      overlay.classList.add('opacity-0', 'invisible');
-    }, 300);
-  };
+    // Event listeners
+    mobileMenuButton?.addEventListener('click', () => isMenuOpen ? closeMenu() : openMenu());
+    mobileMenuClose?.addEventListener('click', closeMenu);
+    mobileMenuBackdrop?.addEventListener('click', closeMenu);
 
-  menuButton?.addEventListener('click', e => { e.preventDefault(); isOpen ? closeMenu() : openMenu(); });
-  hamburger?.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); isOpen ? closeMenu() : openMenu(); });
-  closeButton?.addEventListener('click', closeMenu);
-  backdrop?.addEventListener('click', closeMenu);
+    // Cerrar con enlaces
+    document.querySelectorAll('#mobile-menu-sidebar a').forEach(link => {
+      link.addEventListener('click', () => setTimeout(closeMenu, 100));
+    });
 
-  links.forEach(link => {
-    link.addEventListener('click', () => {
-      if (link.tagName === 'A' || link.querySelector('a')) setTimeout(closeMenu, 100);
+    // Cerrar con Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isMenuOpen) closeMenu();
+    });
+
+    // Cerrar en desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768 && isMenuOpen) closeMenu();
     });
   });
-
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && isOpen) closeMenu(); });
-  window.addEventListener('resize', () => { if (window.innerWidth >= 768 && isOpen) closeMenu(); setScrollbarWidth(); });
-});
 </script>

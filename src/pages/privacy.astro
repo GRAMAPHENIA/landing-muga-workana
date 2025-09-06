@@ -1,0 +1,265 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Política de Privacidad';
+const description = 'Política de privacidad y protección de datos personales. Conoce cómo recopilamos, usamos y protegemos tu información.';
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="min-h-screen bg-white">
+    <!-- Header Section -->
+    <section class="pt-24 pb-12 bg-gradient-to-b from-neutral-50 to-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">
+            Política de Privacidad
+          </h1>
+          <p class="text-xl text-neutral-600 leading-relaxed">
+            Última actualización: {new Date().toLocaleDateString('es-ES', { 
+              year: 'numeric', 
+              month: 'long', 
+              day: 'numeric' 
+            })}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="py-16">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <div class="prose prose-lg max-w-none">
+            
+            <!-- Introducción -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">1. Introducción</h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                En <strong>TechSolutions Pro</strong> respetamos tu privacidad y nos comprometemos a proteger tus datos personales. 
+                Esta política de privacidad explica cómo recopilamos, usamos, almacenamos y protegemos tu información cuando 
+                visitas nuestro sitio web y utilizas nuestros servicios.
+              </p>
+              <p class="text-neutral-700 leading-relaxed">
+                Al acceder y utilizar nuestro sitio web, aceptas las prácticas descritas en esta política de privacidad.
+              </p>
+            </div>
+
+            <!-- Información que recopilamos -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">2. Información que Recopilamos</h2>
+              
+              <h3 class="text-xl font-semibold text-neutral-800 mb-4">2.1 Información Personal</h3>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                Recopilamos información que nos proporcionas directamente cuando:
+              </p>
+              <ul class="list-disc pl-6 mb-6 text-neutral-700 space-y-2">
+                <li>Completas formularios de contacto</li>
+                <li>Te suscribes a nuestro newsletter</li>
+                <li>Solicitas información sobre nuestros servicios</li>
+                <li>Participas en encuestas o promociones</li>
+              </ul>
+
+              <h3 class="text-xl font-semibold text-neutral-800 mb-4">2.2 Información Técnica</h3>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                También recopilamos automáticamente cierta información técnica:
+              </p>
+              <ul class="list-disc pl-6 mb-6 text-neutral-700 space-y-2">
+                <li>Dirección IP y ubicación geográfica aproximada</li>
+                <li>Tipo de navegador y sistema operativo</li>
+                <li>Páginas visitadas y tiempo de permanencia</li>
+                <li>Referencia de sitios web que te llevaron a nosotros</li>
+                <li>Cookies y tecnologías similares</li>
+              </ul>
+            </div>
+
+            <!-- Cómo usamos tu información -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">3. Cómo Usamos tu Información</h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                Utilizamos la información recopilada para:
+              </p>
+              <ul class="list-disc pl-6 mb-6 text-neutral-700 space-y-2">
+                <li>Responder a tus consultas y solicitudes de información</li>
+                <li>Proporcionar y mejorar nuestros servicios</li>
+                <li>Enviarte comunicaciones relacionadas con nuestros servicios</li>
+                <li>Personalizar tu experiencia en nuestro sitio web</li>
+                <li>Analizar el uso del sitio web y realizar mejoras</li>
+                <li>Cumplir con obligaciones legales y regulatorias</li>
+                <li>Prevenir fraudes y garantizar la seguridad</li>
+              </ul>
+            </div>
+
+            <!-- Cookies -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">4. Cookies y Tecnologías Similares</h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                Utilizamos cookies y tecnologías similares para mejorar tu experiencia de navegación:
+              </p>
+              
+              <h3 class="text-xl font-semibold text-neutral-800 mb-4">4.1 Tipos de Cookies</h3>
+              <ul class="list-disc pl-6 mb-6 text-neutral-700 space-y-2">
+                <li><strong>Cookies esenciales:</strong> Necesarias para el funcionamiento básico del sitio</li>
+                <li><strong>Cookies analíticas:</strong> Para entender cómo interactúas con nuestro sitio</li>
+                <li><strong>Cookies de funcionalidad:</strong> Para recordar tus preferencias</li>
+                <li><strong>Cookies de marketing:</strong> Para mostrarte contenido relevante</li>
+              </ul>
+
+              <p class="text-neutral-700 leading-relaxed">
+                Puedes gestionar las cookies a través de la configuración de tu navegador. Ten en cuenta que 
+                deshabilitar algunas cookies puede afectar la funcionalidad del sitio.
+              </p>
+            </div>
+
+            <!-- Compartir información -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">5. Compartir tu Información</h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                No vendemos, alquilamos ni compartimos tu información personal con terceros, excepto en las siguientes circunstancias:
+              </p>
+              <ul class="list-disc pl-6 mb-6 text-neutral-700 space-y-2">
+                <li>Con proveedores de servicios que nos ayudan a operar nuestro negocio</li>
+                <li>Cuando sea requerido por ley o autoridades competentes</li>
+                <li>Para proteger nuestros derechos, propiedad o seguridad</li>
+                <li>En caso de fusión, adquisición o venta de activos</li>
+                <li>Con tu consentimiento explícito</li>
+              </ul>
+            </div>
+
+            <!-- Seguridad -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">6. Seguridad de los Datos</h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                Implementamos medidas de seguridad técnicas y organizativas apropiadas para proteger 
+                tu información personal contra acceso no autorizado, alteración, divulgación o destrucción:
+              </p>
+              <ul class="list-disc pl-6 mb-6 text-neutral-700 space-y-2">
+                <li>Cifrado SSL/TLS para la transmisión de datos</li>
+                <li>Servidores seguros y acceso restringido</li>
+                <li>Monitoreo regular de vulnerabilidades</li>
+                <li>Capacitación del personal en protección de datos</li>
+                <li>Auditorías de seguridad periódicas</li>
+              </ul>
+            </div>
+
+            <!-- Retención de datos -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">7. Retención de Datos</h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                Conservamos tu información personal solo durante el tiempo necesario para cumplir con los 
+                propósitos descritos en esta política, a menos que la ley requiera un período de retención más largo.
+              </p>
+              <p class="text-neutral-700 leading-relaxed">
+                Los datos de contacto se conservan hasta que solicites su eliminación o durante un máximo 
+                de 3 años desde la última interacción.
+              </p>
+            </div>
+
+            <!-- Tus derechos -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">8. Tus Derechos</h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                Según la legislación aplicable de protección de datos, tienes los siguientes derechos:
+              </p>
+              <ul class="list-disc pl-6 mb-6 text-neutral-700 space-y-2">
+                <li><strong>Acceso:</strong> Solicitar información sobre qué datos personales tenemos</li>
+                <li><strong>Rectificación:</strong> Corregir datos inexactos o incompletos</li>
+                <li><strong>Eliminación:</strong> Solicitar la eliminación de tus datos personales</li>
+                <li><strong>Limitación:</strong> Restringir el procesamiento de tus datos</li>
+                <li><strong>Portabilidad:</strong> Recibir tus datos en un formato estructurado</li>
+                <li><strong>Oposición:</strong> Oponerte al procesamiento de tus datos</li>
+              </ul>
+              <p class="text-neutral-700 leading-relaxed">
+                Para ejercer estos derechos, contáctanos a través del email: <strong>privacy@techsolutions-pro.com</strong>
+              </p>
+            </div>
+
+            <!-- Menores de edad -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">9. Menores de Edad</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                Nuestros servicios no están dirigidos a menores de 18 años. No recopilamos 
+                intencionalmente información personal de menores de edad. Si tienes conocimiento 
+                de que un menor nos ha proporcionado datos personales, contáctanos inmediatamente.
+              </p>
+            </div>
+
+            <!-- Enlaces a terceros -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">10. Enlaces a Sitios de Terceros</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                Nuestro sitio web puede contener enlaces a sitios web de terceros. No somos responsables 
+                de las prácticas de privacidad de estos sitios. Te recomendamos revisar las políticas 
+                de privacidad de cualquier sitio web de terceros que visites.
+              </p>
+            </div>
+
+            <!-- Cambios en la política -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">11. Cambios en esta Política</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                Podemos actualizar esta política de privacidad ocasionalmente. Te notificaremos sobre 
+                cambios significativos publicando la nueva política en nuestro sitio web con una nueva 
+                fecha de "última actualización". Te recomendamos revisar periódicamente esta política.
+              </p>
+            </div>
+
+            <!-- Contacto -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">12. Contacto</h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                Si tienes preguntas, inquietudes o solicitudes relacionadas con esta política de privacidad 
+                o el tratamiento de tus datos personales, puedes contactarnos:
+              </p>
+              <div class="bg-neutral-50 p-6 rounded-lg">
+                <p class="text-neutral-700"><strong>Email:</strong> privacy@techsolutions-pro.com</p>
+                <p class="text-neutral-700"><strong>Teléfono:</strong> +34 600 123 456</p>
+                <p class="text-neutral-700"><strong>Dirección:</strong> [Tu dirección física]</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- CTA Section -->
+          <div class="mt-16 text-center">
+            <div class="bg-neutral-900 rounded-2xl p-8 text-white">
+              <h3 class="text-2xl font-bold mb-4">¿Tienes preguntas sobre privacidad?</h3>
+              <p class="text-neutral-300 mb-6">
+                Estamos aquí para ayudarte con cualquier consulta sobre el manejo de tus datos.
+              </p>
+              <a 
+                href="#contacto" 
+                class="inline-flex items-center px-6 py-3 bg-white text-neutral-900 font-semibold rounded-lg hover:bg-neutral-100 transition-colors"
+              >
+                Contáctanos
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  /* Estilos específicos para la página de privacidad */
+  .prose h2 {
+    @apply border-b border-neutral-200 pb-2;
+  }
+  
+  .prose h3 {
+    @apply text-neutral-800 font-semibold;
+  }
+  
+  .prose ul {
+    @apply space-y-2;
+  }
+  
+  .prose li {
+    @apply text-neutral-700;
+  }
+  
+  .prose strong {
+    @apply text-neutral-900 font-semibold;
+  }
+</style>

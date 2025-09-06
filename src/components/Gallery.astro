@@ -21,11 +21,9 @@ const projects: Project[] = siteConfig.featuredProjects;
     </header>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {projects.map((project, index) => (
-        <a
-          href={`/projects/${project.slug}`}
-          class="group block flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300"
-          aria-label={`Ver proyecto: ${project.title}`}
+      {projects.map((project) => (
+        <div
+          class="group md:flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300"
         >
           <article>
             <div class="relative aspect-video overflow-hidden bg-neutral-600 group-hover:scale-105 transition-transform duration-300">
@@ -38,8 +36,8 @@ const projects: Project[] = siteConfig.featuredProjects;
               />
               <div class="absolute inset-0 bg-neutral-700/80 opacity-0 flex items-center justify-center transition-opacity duration-500 group-hover:opacity-100">
                 <div class="text-white text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                  <span class="text-sm font-medium mb-2 block">Ver proyecto</span>
-                  <span class="w-8 h-8 border-2 border-white rounded-full flex items-center justify-center mx-auto text-sm">→</span>
+                  <span class="text-sm font-medium mb-2 block">Proyecto destacado</span>
+                  <span class="w-8 h-8 border-2 border-white rounded-full flex items-center justify-center mx-auto text-sm">★</span>
                 </div>
               </div>
             </div>
@@ -61,14 +59,14 @@ const projects: Project[] = siteConfig.featuredProjects;
               </div>
             </div>
           </article>
-        </a>
+        </div>
       ))}
     </div>
 
     <div class="text-center mt-16">
       <p class="text-neutral-600 mb-4">¿Quieres ver más proyectos?</p>
-      <a href="/portfolio" class="inline-flex items-center px-6 py-3 bg-neutral-900 text-white rounded-full hover:bg-neutral-800 transition-colors duration-300 min-h-[48px]" aria-label="Ver portfolio completo">
-        Ver portfolio completo <span class="ml-2">→</span>
+      <a href="#contacto" class="inline-flex items-center px-6 py-3 bg-neutral-900 text-white rounded-full hover:bg-neutral-800 transition-colors duration-300 min-h-[48px]" aria-label="Contactar para portfolio">
+        Contactar para portfolio <span class="ml-2">→</span>
       </a>
     </div>
   </div>

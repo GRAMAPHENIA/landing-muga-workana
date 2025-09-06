@@ -1,0 +1,257 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Términos y Condiciones';
+const description = 'Términos y condiciones de uso de nuestros servicios. Conoce los derechos y responsabilidades al utilizar nuestros servicios.';
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="min-h-screen bg-white">
+    <!-- Header Section -->
+    <section class="pt-24 pb-12 bg-gradient-to-b from-neutral-50 to-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">
+            Términos y Condiciones
+          </h1>
+          <p class="text-xl text-neutral-600 leading-relaxed">
+            Última actualización: {new Date().toLocaleDateString('es-ES', { 
+              year: 'numeric', 
+              month: 'long', 
+              day: 'numeric' 
+            })}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="py-16">
+      <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+          <div class="prose prose-lg max-w-none">
+            
+            <!-- Introducción -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">1. Aceptación de los Términos</h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                Bienvenido a <strong>TechSolutions Pro</strong>. Estos términos y condiciones ("Términos") 
+                rigen tu uso de nuestro sitio web y servicios. Al acceder o utilizar nuestros servicios, 
+                aceptas estar sujeto a estos Términos.
+              </p>
+              <p class="text-neutral-700 leading-relaxed">
+                Si no estás de acuerdo con alguna parte de estos términos, no debes utilizar nuestros servicios.
+              </p>
+            </div>
+
+            <!-- Definiciones -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">2. Definiciones</h2>
+              <ul class="list-disc pl-6 mb-6 text-neutral-700 space-y-2">
+                <li><strong>"Nosotros", "Nuestro":</strong> Se refiere a TechSolutions Pro</li>
+                <li><strong>"Usuario", "Tu":</strong> Se refiere a la persona que utiliza nuestros servicios</li>
+                <li><strong>"Servicios":</strong> Se refiere a todos los servicios proporcionados por TechSolutions Pro</li>
+                <li><strong>"Sitio Web":</strong> Se refiere a nuestro sitio web y todas sus páginas</li>
+              </ul>
+            </div>
+
+            <!-- Servicios -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">3. Descripción de Servicios</h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                TechSolutions Pro proporciona servicios de desarrollo web, consultoría tecnológica y 
+                soporte técnico. Nuestros servicios incluyen:
+              </p>
+              <ul class="list-disc pl-6 mb-6 text-neutral-700 space-y-2">
+                <li>Desarrollo de sitios web y aplicaciones</li>
+                <li>Consultoría en tecnología y transformación digital</li>
+                <li>Soporte técnico y mantenimiento</li>
+                <li>Optimización de performance y SEO</li>
+              </ul>
+            </div>
+
+            <!-- Uso aceptable -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">4. Uso Aceptable</h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                Al utilizar nuestros servicios, te comprometes a:
+              </p>
+              <ul class="list-disc pl-6 mb-6 text-neutral-700 space-y-2">
+                <li>Proporcionar información precisa y actualizada</li>
+                <li>No usar nuestros servicios para actividades ilegales</li>
+                <li>Respetar los derechos de propiedad intelectual</li>
+                <li>No interferir con el funcionamiento de nuestros servicios</li>
+                <li>Mantener la confidencialidad de tus credenciales</li>
+              </ul>
+
+              <h3 class="text-xl font-semibold text-neutral-800 mb-4">4.1 Conductas Prohibidas</h3>
+              <p class="text-neutral-700 leading-relaxed mb-4">No está permitido:</p>
+              <ul class="list-disc pl-6 mb-6 text-neutral-700 space-y-2">
+                <li>Intentar acceder sin autorización a nuestros sistemas</li>
+                <li>Distribuir malware o código malicioso</li>
+                <li>Realizar ingeniería inversa de nuestros servicios</li>
+                <li>Usar nuestros servicios para spam o actividades fraudulentas</li>
+              </ul>
+            </div>
+
+            <!-- Propiedad intelectual -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">5. Propiedad Intelectual</h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                Todo el contenido, código, diseños, logos y materiales en nuestro sitio web y servicios 
+                están protegidos por derechos de autor, marcas registradas y otras leyes de propiedad intelectual.
+              </p>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                Los trabajos desarrollados específicamente para clientes permanecen como propiedad del cliente 
+                una vez completado el pago. Sin embargo, conservamos el derecho a utilizar el conocimiento 
+                general y las técnicas desarrolladas.
+              </p>
+            </div>
+
+            <!-- Privacidad -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">6. Privacidad</h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                Tu privacidad es importante para nosotros. Por favor, revisa nuestra 
+                <a href="/privacy" class="text-blue-600 hover:text-blue-800 underline">Política de Privacidad</a> 
+                para entender cómo recopilamos, usamos y protegemos tu información.
+              </p>
+            </div>
+
+            <!-- Pagos y facturación -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">7. Pagos y Facturación</h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                Para nuestros servicios de pago, se aplicarán los siguientes términos:
+              </p>
+              <ul class="list-disc pl-6 mb-6 text-neutral-700 space-y-2">
+                <li>Los precios están sujetos a cambio con previo aviso</li>
+                <li>Los pagos deben realizarse según los términos acordados</li>
+                <li>Los retrasos en el pago pueden resultar en suspensión del servicio</li>
+                <li>Los reembolsos se manejan caso por caso</li>
+              </ul>
+            </div>
+
+            <!-- Limitación de responsabilidad -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">8. Limitación de Responsabilidad</h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                En la medida máxima permitida por la ley aplicable, TechSolutions Pro no será responsable de:
+              </p>
+              <ul class="list-disc pl-6 mb-6 text-neutral-700 space-y-2">
+                <li>Daños indirectos, incidentales o consecuenciales</li>
+                <li>Pérdida de beneficios, datos o uso</li>
+                <li>Interrupciones del servicio por mantenimiento</li>
+                <li>Acciones de terceros fuera de nuestro control</li>
+              </ul>
+            </div>
+
+            <!-- Disponibilidad del servicio -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">9. Disponibilidad del Servicio</h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                Nos esforzamos por mantener nuestros servicios disponibles 24/7, pero no garantizamos 
+                disponibilidad ininterrumpida. Podemos suspender temporalmente los servicios para:
+              </p>
+              <ul class="list-disc pl-6 mb-6 text-neutral-700 space-y-2">
+                <li>Mantenimiento programado</li>
+                <li>Actualizaciones de seguridad</li>
+                <li>Reparaciones de emergencia</li>
+                <li>Cumplimiento de órdenes legales</li>
+              </ul>
+            </div>
+
+            <!-- Terminación -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">10. Terminación</h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                Podemos suspender o terminar tu acceso a nuestros servicios inmediatamente, sin previo aviso, 
+                si violas estos Términos o por cualquier razón que consideremos apropiada.
+              </p>
+              <p class="text-neutral-700 leading-relaxed">
+                También puedes terminar tu uso de nuestros servicios en cualquier momento discontinuando su uso.
+              </p>
+            </div>
+
+            <!-- Ley aplicable -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">11. Ley Aplicable</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                Estos Términos se rigen por las leyes de [País/Estado] sin dar efecto a ningún principio 
+                de conflictos de ley. Cualquier disputa será resuelta en los tribunales competentes de [Jurisdicción].
+              </p>
+            </div>
+
+            <!-- Modificaciones -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">12. Modificaciones</h2>
+              <p class="text-neutral-700 leading-relaxed">
+                Nos reservamos el derecho de modificar estos Términos en cualquier momento. Las modificaciones 
+                entrarán en vigor inmediatamente después de su publicación en nuestro sitio web. Tu uso 
+                continuado de los servicios constituye aceptación de los términos modificados.
+              </p>
+            </div>
+
+            <!-- Contacto -->
+            <div class="mb-12">
+              <h2 class="text-2xl font-bold text-neutral-900 mb-6">13. Contacto</h2>
+              <p class="text-neutral-700 leading-relaxed mb-4">
+                Si tienes preguntas sobre estos Términos y Condiciones, puedes contactarnos:
+              </p>
+              <div class="bg-neutral-50 p-6 rounded-lg">
+                <p class="text-neutral-700"><strong>Email:</strong> legal@techsolutions-pro.com</p>
+                <p class="text-neutral-700"><strong>Teléfono:</strong> +34 600 123 456</p>
+                <p class="text-neutral-700"><strong>Dirección:</strong> [Tu dirección física]</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- CTA Section -->
+          <div class="mt-16 text-center">
+            <div class="bg-neutral-900 rounded-2xl p-8 text-white">
+              <h3 class="text-2xl font-bold mb-4">¿Tienes dudas legales?</h3>
+              <p class="text-neutral-300 mb-6">
+                Nuestro equipo está disponible para aclarar cualquier aspecto de nuestros términos.
+              </p>
+              <a 
+                href="#contacto" 
+                class="inline-flex items-center px-6 py-3 bg-white text-neutral-900 font-semibold rounded-lg hover:bg-neutral-100 transition-colors"
+              >
+                Contáctanos
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  /* Estilos específicos para términos y condiciones */
+  .prose h2 {
+    @apply border-b border-neutral-200 pb-2;
+  }
+  
+  .prose h3 {
+    @apply text-neutral-800 font-semibold;
+  }
+  
+  .prose ul {
+    @apply space-y-2;
+  }
+  
+  .prose li {
+    @apply text-neutral-700;
+  }
+  
+  .prose strong {
+    @apply text-neutral-900 font-semibold;
+  }
+  
+  .prose a {
+    @apply text-blue-600 hover:text-blue-800 underline;
+  }
+</style>

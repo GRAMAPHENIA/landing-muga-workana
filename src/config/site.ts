@@ -4,6 +4,7 @@ export const siteConfig = {
   description:
     'Agencia de desarrollo web especializada en crear sitios web modernos, aplicaciones web y soluciones digitales para empresas. Diseño responsive, SEO optimizado y resultados medibles.',
   url: 'https://techsolutions-pro.com',
+  domain: 'techsolutions-pro.com',
   author: 'TechSolutions Pro',
   email: 'contacto@techsolutions-pro.com',
   phone: '+34 600 123 456',
@@ -126,3 +127,4 @@ export const siteConfig = {
     },
   ],
 };
+export default siteConfig;

@@ -1,13 +1,7 @@
 ---
-import { siteConfig } from '../config/site';
-
-export interface Props {
-  title?: string;
-  description?: string;
-  image?: string;
-  noindex?: boolean;
-  keywords?: string;
-}
+import '../styles/critical.css';
+import siteConfig from '../config/site';
+import CookieBanner from '../components/CookieBanner.astro';
 
 const {
   title = siteConfig.title,
@@ -17,7 +11,9 @@ const {
   keywords = siteConfig.seo.keywords,
 } = Astro.props;
 
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+// Solo dejar la declaración con fallback a siteConfig
 ---
 
 <!doctype html>
@@ -34,6 +30,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="keywords" content={keywords} />
     <meta name="author" content={siteConfig.author} />
     <link rel="canonical" href={canonicalURL.href} />
+    <link rel="canonical" href={canonicalURL} />
     {noindex && <meta name="robots" content="noindex" />}
 
     <!-- Open Graph -->
@@ -52,6 +49,27 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={image} />
     <meta property="twitter:creator" content="@techsolutions_pro" />
+
+    <!-- Preload recursos críticos -->
+
+    
+    <!-- DNS Prefetch para recursos externos -->
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+
+    <!-- CSS crítico inline -->
+    <style is:inline>
+      :root{--color-primary:#000000;--color-secondary:#ffffff;--color-text:#111827;--color-text-light:#6b7280}
+      html{scroll-behavior:smooth;overflow-x:hidden;scrollbar-gutter:stable}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-feature-settings:'cv02','cv03','cv04','cv11';color:var(--color-text);line-height:1.6;overflow-x:hidden;min-height:100vh;margin:0;padding:0}
+      *{box-sizing:border-box}
+      @media (min-width:768px){body{font-size:1.125rem}}
+      @media (min-width:1024px){body{font-size:1rem}}
+    </style>
+
+    <!-- CSS no crítico con preload -->
+    <link rel="preload" href="/src/styles/global.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/src/styles/global.css"></noscript>
 
     <!-- Google Analytics -->
     {siteConfig.seo.googleAnalytics && siteConfig.seo.googleAnalytics !== 'G-XXXXXXXXXX' && (
@@ -93,5 +111,56 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     )}
 
     <slot />
+
+  <!-- Cookie Banner (comentado) -->
+  {/** <CookieBanner /> */}
+
+    <!-- Scripts optimizados -->
+    <script src="/scripts/performance-optimizer.js" defer></script>
+    <script src="/scripts/image-optimizer.js" defer></script>
+    
+    <script is:inline>
+      // Performance observer para monitorear LCP
+      if (typeof PerformanceObserver !== 'undefined') {
+        const observer = new PerformanceObserver((list) => {
+          for (const entry of list.getEntries()) {
+            if (entry.entryType === 'largest-contentful-paint') {
+              // Optimizar el elemento LCP si es necesario
+              const lcpElement = entry.target || entry.element;
+              if (lcpElement && lcpElement.tagName === 'IMG') {
+                lcpElement.fetchPriority = 'high';
+              }
+            }
+          }
+        });
+        observer.observe({ entryTypes: ['largest-contentful-paint'] });
+      }
+
+      // Prefetch de páginas importantes al hacer hover
+      document.addEventListener('mouseover', function(e) {
+        if (e.target && typeof e.target.closest === 'function') {
+          const link = e.target.closest('a[href^="/"]');
+          if (link && !link.dataset.prefetched) {
+            const href = link.getAttribute('href');
+            if (href && !href.startsWith('#')) {
+              const prefetchLink = document.createElement('link');
+              prefetchLink.rel = 'prefetch';
+              prefetchLink.href = href;
+              document.head.appendChild(prefetchLink);
+              link.dataset.prefetched = 'true';
+            }
+          }
+        }
+      }, { passive: true });
+
+      // Solo cargar WebSocket optimizer si es necesario
+      if (window.location.pathname.includes('/chat') || 
+          window.location.search.includes('realtime=true')) {
+        const script = document.createElement('script');
+        script.src = '/scripts/websocket-optimizer.js';
+        script.defer = true;
+        document.head.appendChild(script);
+      }
+    </script>
   </body>
 </html>

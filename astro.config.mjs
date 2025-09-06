@@ -63,4 +63,25 @@ export default defineConfig({
   ],
   output: 'static',
   site: SITE_URL,
+  vite: {
+    build: {
+      minify: 'terser',
+      rollupOptions: {
+        output: {
+          manualChunks: (id) => {
+            if (id.includes('node_modules')) {
+              if (id.includes('astro') || id.includes('@astrojs')) {
+                return 'astro-vendor';
+              }
+              return 'vendor';
+            }
+          },
+        },
+      },
+    },
+    ssr: {
+      external: ['fsevents'],
+    },
+  },
+  compressHTML: true,
 });
